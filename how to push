@@ -3,3 +3,9 @@ git add .
 git commit -m "hello"
 git remote add origin https://github.com/marloupepito/cpsu-evaluation-system.git
 git push -u origin master
+
+
+
+git checkout -b main
+
+git checkout master
