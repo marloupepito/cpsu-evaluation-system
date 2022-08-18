@@ -2,7 +2,7 @@
 	<div>
 		<!-- BEGIN breadcrumb -->
 		<ol class="breadcrumb float-xl-end">
-			<li class="breadcrumb-item"><a href="javascript:;" >Home</a></li>
+			<li class="breadcrumb-item"><a class="btn btn-xs btn-danger text-white" @click="resetDate">RESET</a></li>
 			<li class="breadcrumb-item active">Evaluation Schedule</li>
 		</ol>
 		<!-- END breadcrumb -->
@@ -72,8 +72,8 @@ export default {
 					end: currentYear + '-'+ currentMonth +'-05',
 					color: '#8753de',
 				}],
-                    eventDrop:this.dropEvent,
-                    eventResize:this.resizeEvent,
+                    eventDrop:this.recordEvent,
+                    eventResize:this.recordEvent,
     	  },
 		}
 	},
@@ -84,7 +84,19 @@ export default {
         events (arg){
             console.log(arg)
         },
-        dropEvent (arg){
+        resetDate(arg){
+		var date = new Date();
+        const a = date.getMonth() + 1
+		const b = date.getDate();
+        const year = date.getFullYear();
+		const month = (a < 10) ? '0' + a : a;
+		const day = (b < 10) ? '0' + b : b;
+        const start = year+'-'+month+'-'+day
+        const end = year+'-'+month+'-'+(day+2)
+        console.log(start)
+        console.log(end)
+        },
+        recordEvent (arg){
         var date = new Date(arg.event._instance.range.start);
         const a = date.getMonth() + 1
 		const b = date.getDate();
@@ -105,9 +117,13 @@ export default {
 
         },
 
-        resizeEvent (arg){
-            console.log(arg)
-        }
+   
     }
 }
 </script>
+
+<style>
+button.fc-dayGridMonth-button.btn.btn-primary.active,button.fc-timeGridWeek-button.btn.btn-primary,button.fc-timeGridDay-button.btn.btn-primary{
+display:none !important;
+}
+</style>

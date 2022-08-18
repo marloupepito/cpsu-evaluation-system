@@ -15,13 +15,105 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('name')->nullable();
+            $table->string('username')->unique()->nullable();
+            $table->string('password')->nullable();
+            $table->string('academic_rank')->nullable();
+            $table->string('year')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
+
+        Schema::create('evaluator', function (Blueprint $table) {
+            $table->id();
+            $table->string('id_number')->unique()->nullable();
+            $table->string('password')->nullable();
+            $table->string('course')->nullable();
+            $table->string('evaluator_rank')->nullable();
+            $table->string('academic_rank')->nullable();
+            $table->string('school_year')->nullable();
+            $table->string('section')->nullable();
+            $table->string('status')->nullable();
+            $table->string('year')->nullable();
+            $table->rememberToken();
+            $table->timestamps();
+        });
+
+
+        Schema::create('faculty', function (Blueprint $table) {
+            $table->id();
+            $table->string('id_number')->unique()->nullable();
+            $table->string('photos')->nullable();
+            $table->string('name')->nullable();
+            $table->string('department')->nullable();
+            $table->string('academic_rank')->nullable();
+            $table->string('status')->nullable();
+            $table->string('year')->nullable();
+            $table->rememberToken();
+            $table->timestamps();
+        });
+
+        Schema::create('questionaire', function (Blueprint $table) {
+            $table->id();
+            $table->string('q1')->nullable();
+            $table->string('q2')->nullable();
+            $table->string('q3')->nullable();
+            $table->string('q4')->nullable();
+            $table->string('q5')->nullable();
+            $table->string('q6')->nullable();
+            $table->string('q7')->nullable();
+            $table->string('q8')->nullable();
+            $table->string('q9')->nullable();
+            $table->string('q10')->nullable();
+            $table->string('q11')->nullable();
+            $table->string('q12')->nullable();
+            $table->string('q13')->nullable();
+            $table->string('q14')->nullable();
+            $table->string('q15')->nullable();
+            $table->string('q16')->nullable();
+            $table->string('q17')->nullable();
+            $table->string('q18')->nullable();
+            $table->string('q19')->nullable();
+            $table->string('q20')->nullable();
+            $table->rememberToken();
+            $table->timestamps();
+        });
+
+        Schema::create('schedule', function (Blueprint $table) {
+            $table->id();
+            $table->string('start')->nullable();
+            $table->string('end')->nullable();
+            $table->string('semester')->nullable();
+            $table->string('status')->nullable();
+            $table->rememberToken();
+            $table->timestamps();
+        });
+
+         Schema::create('results', function (Blueprint $table) {
+            $table->id();
+            $table->string('evaluatee_id')->nullable()->unique();
+            $table->string('evaluator_id')->nullable()->unique();
+            $table->string('commitment')->nullable();
+            $table->string('kos')->nullable();
+            $table->string('til')->nullable();
+            $table->string('mol')->nullable();
+            $table->string('total_commitment')->nullable();
+            $table->string('total_kos')->nullable();
+            $table->string('total_til')->nullable();
+            $table->string('total_mol')->nullable();
+            $table->string('total')->nullable();
+            $table->string('school_year')->nullable();
+            $table->string('section')->nullable();
+            $table->string('semester')->nullable();
+            $table->string('department')->nullable();
+            $table->string('academic_rank')->nullable();
+            $table->string('status')->nullable();
+            $table->string('year')->nullable();
+            $table->rememberToken();
+            $table->timestamps();
+        });
+
+
     }
 
     /**

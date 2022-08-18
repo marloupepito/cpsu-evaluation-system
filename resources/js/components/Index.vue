@@ -3,7 +3,7 @@
 		<div v-if="pathname === '/'">
 			<Home />
 		</div>
-		<div v-if="pathname === '/start-evaluation'">
+		<div v-else-if="pathname === '/start-evaluation'">
 			<EvaluationStart />
 		</div>
 		

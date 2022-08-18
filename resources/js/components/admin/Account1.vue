@@ -24,12 +24,15 @@
         :columns="columns"
         :rows="rows"
         >
-        <template slot="table-row" slot-scope="props">
-            <span v-if="props.column.field == 'age'">
+      <!--    <span v-if="props.column.field == 'qr'">
             <span style="font-weight: bold; color: blue;">{{props.row.age}}</span> 
             </span>
             <span v-else>
             {{props.formattedRow[props.column.field]}}
+            </span> -->
+        <template slot="table-row" slot-scope="props">
+            <span v-if="props.column.field == 'qr'">
+              <a @click="getQR([props.row.id_number,props.row.password])" class="btn btn-primary btn-xs d-block">QR Code</a>
             </span>
         </template>
         </vue-good-table>
@@ -39,8 +42,25 @@
 
 <script>
 import AppOptions from '../assets/config/AppOptions.vue'
-
+import axios from 'axios'
 export default {
+  mounted(){
+    axios.post('/get_evaluators',{
+      evaluator:'Student'
+    })
+    .then(res=>{
+      this.rows = res.data.status
+    })
+  },
+  methods:{
+    getQR (e){
+      console.log(e)
+      this.$swal({
+      imageUrl: "http://api.qrserver.com/v1/create-qr-code/?data=" + e,
+      imageAlt: 'QR CODE'
+    })
+    }
+  },
 	data() {
 		AppOptions.appContentFullHeight = true;
 		AppOptions.appContentClass = 'p-0';
@@ -48,47 +68,31 @@ export default {
 		return { 
             columns: [
         {
-          label: 'Name',
-          field: 'name',
+          label: 'Student ID',
+          field: 'id_number',
         },
         {
-          label: 'Age',
-          field: 'age',
-          type: 'number',
+          label: 'Course',
+          field: 'course',
         },
         {
-          label: 'Created On',
-          field: 'createdAt',
-          type: 'date',
-          dateInputFormat: 'yyyy-MM-dd',
-          dateOutputFormat: 'MMM do yy',
+          label: 'Year',
+          field: 'school_year',
         },
         {
-          label: 'Percent',
-          field: 'score',
-          type: 'percentage',
+          label: 'Section',
+          field: 'section',
+        },
+        {
+          label: 'Status',
+          field: 'status',
+        },
+        {
+          label: 'QR code',
+          field: 'qr',
         },
       ],
-      rows: [
-        { id:1, name:"John", age: 20, createdAt: '',score: 0.03343 },
-        { id:2, name:"Jane", age: 24, createdAt: '2011-10-31', score: 0.03343 },
-        { id:3, name:"Susan", age: 16, createdAt: '2011-10-30', score: 0.03343 },
-        { id:4, name:"Chris", age: 55, createdAt: '2011-10-11', score: 0.03343 },
-        { id:5, name:"Dan", age: 40, createdAt: '2011-10-21', score: 0.03343 },
-        { id:6, name:"John", age: 20, createdAt: '2011-10-31', score: 0.03343 },
-          { id:1, name:"John", age: 20, createdAt: '',score: 0.03343 },
-        { id:2, name:"Jane", age: 24, createdAt: '2011-10-31', score: 0.03343 },
-        { id:3, name:"Susan", age: 16, createdAt: '2011-10-30', score: 0.03343 },
-        { id:4, name:"Chris", age: 55, createdAt: '2011-10-11', score: 0.03343 },
-        { id:5, name:"Dan", age: 40, createdAt: '2011-10-21', score: 0.03343 },
-        { id:6, name:"John", age: 20, createdAt: '2011-10-31', score: 0.03343 },
-          { id:1, name:"John", age: 20, createdAt: '',score: 0.03343 },
-        { id:2, name:"Jane", age: 24, createdAt: '2011-10-31', score: 0.03343 },
-        { id:3, name:"Susan", age: 16, createdAt: '2011-10-30', score: 0.03343 },
-        { id:4, name:"Chris", age: 55, createdAt: '2011-10-11', score: 0.03343 },
-        { id:5, name:"Dan", age: 40, createdAt: '2011-10-21', score: 0.03343 },
-        { id:6, name:"John", age: 20, createdAt: '2011-10-31', score: 0.03343 },
-      ],
+      rows: [],
         }
 	},
 	beforeRouteLeave (to, from, next) {
