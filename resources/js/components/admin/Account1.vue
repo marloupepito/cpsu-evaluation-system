@@ -54,7 +54,6 @@ export default {
   },
   methods:{
     getQR (e){
-      console.log(e)
       this.$swal({
       imageUrl: "http://api.qrserver.com/v1/create-qr-code/?data=" + e,
       imageAlt: 'QR CODE'

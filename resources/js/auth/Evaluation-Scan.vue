@@ -15,7 +15,7 @@
 
 
 <script>
-	
+	import axios from 'axios'
 export default {
 
   data () {
@@ -41,19 +41,28 @@ export default {
 
     async onDecode (content) {
     	this.pause()
-    	const a = "https://www.investopedia.com/terms/q/quick-response-qr-code.asp"
-    	
-    	if(a ===content){
-		      this.unpause()
-		      console.log('success')
-    	}else{
-    		this.verify = true
-    		await this.timeout(1000)
-    		this.verify = false
-    		console.log('errpr')
-    		 this.unpause()
-    	}
-      
+    	const a = content.split(",");
+      const credentials = {
+        username:a[0],
+        password:a[1],
+      }
+
+   
+     this.verify = false
+     axios.post('/scan_qrcode',credentials)
+     .then(res=>{
+        if(res.data.status === 'success'){
+            window.location='/evaluation-form'
+             this.unpause()
+        }else{
+            this.verify = true
+            this.unpause()
+        }
+      })
+      .catch(err=>{
+            this.verify = true  
+            this.unpause()
+        })
     },
 
     unpause () {
