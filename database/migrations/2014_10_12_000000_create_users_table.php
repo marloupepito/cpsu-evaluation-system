@@ -91,17 +91,14 @@ class CreateUsersTable extends Migration
 
          Schema::create('results', function (Blueprint $table) {
             $table->id();
-            $table->string('evaluatee_id')->nullable()->unique();
-            $table->string('evaluator_id')->nullable()->unique();
+            $table->string('evaluatee_id')->nullable();
+            $table->string('evaluator_id')->nullable();
             $table->string('commitment')->nullable();
             $table->string('kos')->nullable();
             $table->string('til')->nullable();
             $table->string('mol')->nullable();
-            $table->string('total_commitment')->nullable();
-            $table->string('total_kos')->nullable();
-            $table->string('total_til')->nullable();
-            $table->string('total_mol')->nullable();
             $table->string('total')->nullable();
+            $table->longText('comment')->nullable();
             $table->string('school_year')->nullable();
             $table->string('section')->nullable();
             $table->string('semester')->nullable();

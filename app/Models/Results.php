@@ -10,9 +10,20 @@ class Results extends Model
     protected $table = 'results';
     use HasFactory;
     protected $fillable = [
-        'start',
-	    'end',
-	    'semester',
-	    'status',
+        'evaluatee_id',
+        'evaluator_id',
+        'commitment',
+        'kos',
+        'til',
+        'mol',
+        'total',
+        'comment',
+        'school_year',
+        'section',
+        'semester',
+        'department',
+        'academic_rank',
+        'status',
+        'year',
     ];
 }

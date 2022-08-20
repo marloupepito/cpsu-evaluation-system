@@ -44,13 +44,32 @@ class EvaluatorController extends Controller
         ->get();
         if(count($users) !== 0){
             return response()->json([
-                'status' => 'success'
+                'status' => 'success',
+                'id' => $users[0]->id_number
             ]);
         }else{
              return response()->json([
                 'status' => 'error'
             ]);
         }
+    }
+
+    public function logout_evaluator(Request $request){
+
+        $request->session()->forget('username');
+        $request->session()->forget('password');
+
+        if($request->session()->get('username') === null && $request->session()->get('password') === null){
+          return response()->json([
+                    'status' => 'success'
+          ]);
+        }else{
+          return response()->json([
+                    'status' => 'error'
+          ]);
+        }
+        
+
     }
     
 }

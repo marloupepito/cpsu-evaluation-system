@@ -2,7 +2,7 @@
     <div class="col-xl-6 col-lg-6 offset-md-3" >
 		<div class="card border-0 mb-3 bg-white text-dark">
 			<div class="card-body">
-				<table class="table">
+				<table class="table table-bordered">
 					  <thead>
 					    <tr class="table-secondary">
 					      <th width="5%">Scale</th>
@@ -12,34 +12,36 @@
 					  </thead>
 					  <tbody>
 					    <tr>
-					      <td class="center">5</td>
-					      <td>Outstanding</td>
+					      <td class="align-middle text-center">5</td>
+					      <td class="align-middle">Outstanding</td>
 					      <td>The performance must be exceeds the job requirments. The faculty is exceptional role model.</td>
 					    </tr>
 					    <tr>
-					      <td class="center">4</td>
-					      <td>Very Satisfactory</td>
+					      <td class="align-middle text-center">4</td>
+					      <td class="align-middle">Very Satisfactory</td>
 					      <td>The performance meets and often exceeds tde job requirments.</td>
 					    </tr>
 					    <tr>
-					      <td class="center">3</td>
-					      <td>Satisfactory</td>
+					      <td class="align-middle text-center">3</td>
+					      <td class="align-middle">Satisfactory</td>
 					      <td>The performance meets tde job requirments</td>
 					    </tr>
 					    <tr>
-					      <td class="center">2</td>
-					      <td>Fair</td>
+					      <td class="align-middle text-center">2</td>
+					      <td class="align-middle">Fair</td>
 					      <td>The performance need some developement to meet job requirments</td>
 					    </tr>
 					    <tr>
-					      <td class="center">1</td>
-					      <td>Poor</td>
+					      <td class="align-middle text-center">1</td>
+					      <td class="align-middle">Poor</td>
 					      <td>The faculty fails the jobs requirments.</td>
 					    </tr>
 					  </tbody>
 				</table>
 
-<form @submit="submitForm">
+<form @submit="submitForm" id='myForm'>
+<b>Select Evaluatee</b>
+<v-select :options="faculty" v-model="facultyValue" required @input="selectEvaluatee"></v-select><br />
 				<table class="table table-bordered">
 					  <thead>
 					    <tr class="table-secondary">
@@ -483,10 +485,15 @@
 					     </td>
 					    </tr>
 					  </tbody>
-				</table><br />
-
+				</table>
+<b>Comment </b>(Optional)
+				<textarea v-model="comment" class="form-control" rows="3"></textarea>
+				<br /><br />
 				<div class="fixed-bottom">
-				<button type="submit" @submit="submitForm" style="z-index:-1 !important" class=" btn btn-primary btn-sm d-block col-md-12 w-50 offset-md-3">SUBMIT</button>
+
+				<notifications group="top-center" class="align-middle text-center" position="top center" :speed="500" />
+				
+				<button type="submit" @submit="submitForm" :disabled="disable" style="z-index:-1 !important" class="what btn btn-primary btn-sm  d-block col-md-12 col-xs-12 col-sm-12 offset-md-3">SUBMIT</button>
 				</div>
 
 </form>
@@ -501,6 +508,11 @@ import axios from 'axios'
 	export default {
 		data () {
 		    return {
+		    	comment:null,
+		    	disable:true,
+		      faculty:[],
+		      evaluator_id:[],
+		      facultyValue:null,
 		      question: null,
 		      q1:null,
 		      q2:null,
@@ -527,7 +539,76 @@ import axios from 'axios'
 		  methods:{
 		  	submitForm (e){
 		  		e.preventDefault();
-		  		console.log(this.q1)
+		  		const form = {
+		  			  comment:this.comment,
+		  			  evaluator:this.evaluator_id,
+		  			  evaluatee:this.facultyValue,
+		  			  commitment:(parseInt(this.q1)+parseInt(this.q2)+parseInt(this.q3)+parseInt(this.q4)+parseInt(this.q5)) / 5,
+		  			  kos:(parseInt(this.q6)+parseInt(this.q7)+parseInt(this.q8)+parseInt(this.q9)+parseInt(this.q10)) / 5,
+		  			  til:(parseInt(this.q11)+parseInt(this.q12)+parseInt(this.q13)+parseInt(this.q14)+parseInt(this.q15)) / 5,
+		  			  mol:(parseInt(this.q16)+parseInt(this.q17)+parseInt(this.q18)+parseInt(this.q19)+parseInt(this.q20)) / 5,
+		  		}
+		  		axios.post('/submit_form',form)
+		  		.then(res=>{
+		  					this.$swal({
+		  					 allowOutsideClick: false,
+							  title: 'Do you want to conduct another evaluation?',
+							  text: "If YES, you can proceed to evaluation; If NO, you can logout.",
+							  icon: 'warning',
+							  showCancelButton: true,
+							  confirmButtonColor: '#3085d6',
+							  cancelButtonColor: '#d33',
+							  cancelButtonText: 'No!',
+							  confirmButtonText: 'Yes!'
+							}).then((result) => {
+							  if (result.isConfirmed) {
+							    axios.post('/get_all_faculty')
+							     .then(res=>{
+							     	this.faculty = res.data.status.map(a =>a.name)
+							     })
+							      this.$swal.close()
+							      this.disable=true
+							      document.getElementById("myForm").reset();
+							  }else{
+							  	axios.post('/logout_evaluator')
+							     .then(res=>{
+							       	if(res.data.status === 'success'){
+							       		window.location = '/'
+							       	}else{
+										console.log('error')
+							       	}
+							      })
+							  }
+							})
+		  			})
+		  		.catch(err=>{
+
+		  			})
+		  	},
+		  	selectEvaluatee(e){
+		  		this.facultyValue =e
+		  		axios.post('/verify_evaluate',{
+		  			evaluator:this.evaluator_id,
+		  			evaluatee:e
+		  			})
+		  		.then(res=>{
+		  				if(res.data.status === 'success'){
+		  					this.disable=false
+
+		  				}else{
+		  					this.disable=true
+		  					const text = `You have completed your evaluation with ${e}`;
+		  					const group = 'top-center';
+		  					const type = 'error';
+		  					this.$notify({
+					          group,
+					          title: `error`,
+					          text,
+					          type,
+					        })
+		  				}
+		  			})
+
 		  	}
 		  },
 		mounted(){
@@ -535,8 +616,9 @@ import axios from 'axios'
 		     .then(res=>{
 		        if(res.data.status === 'success'){
 		            console.log(res.data.status)
+		            this.evaluator_id = res.data.id
 		        }else{
-		           console.log(res.data.status)
+		           window.location='/'
 		        }
 		      })
 
@@ -544,10 +626,23 @@ import axios from 'axios'
 		     .then(res=>{
 		     	this.question = res.data.status[0];
 		     })
+
+		     axios.post('/get_all_faculty')
+		     .then(res=>{
+		     	this.faculty = res.data.status.map(a =>a.name)
+		     })
 		}
 	}
 </script>
 
 
 <style>
+.what {
+   width: 50% !important;
+  }
+@media only screen and (max-width: 600px) {
+  .what {
+   width: 100% !important;
+  }
+}
 </style>

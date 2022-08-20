@@ -16,4 +16,10 @@ class FacultyController extends Controller
             'status' => $users
         ]);
     }
+     public function get_all_faculty(){
+        $users = Faculty::all();
+        return response()->json([
+            'status' => $users
+        ]);
+    }
 }
