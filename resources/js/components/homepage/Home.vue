@@ -62,9 +62,15 @@
 								
 								</div>
 								<div class="text-gray-500 small mb-15px text-truncate">
-									<b class="text-danger">The Evaluation is not available</b>
+									{{timerStatus}}<br />
+									<b class="text-danger">
+									{{timerCount}}
+									</b>
+									<b :class="hide">
+									{{timerCount2}}
+									</b>
 								</div>
-								<a href="/start-evaluation" class="btn btn-xs btn-danger fs-10px ps-2 pe-2">Click Me!</a>
+								<button href="/start-evaluation" :disabled="buttonDisable" class="btn btn-xs btn-danger fs-10px ps-2 pe-2">Click Me!</button>
 							</div>
 							<!-- END col-8 -->
 						</div>
@@ -104,8 +110,108 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
+	const countDownDate = new Date("2022-08-22 6:17:00 pm").getTime();
+	const countDownDate2 = new Date("2022-08-24 6:18:00 pm").getTime();
+ 
 export default {
-    
+	data() {
+		return { 
+			timerCount: '',
+			timerCount2: '',
+			timerStatus:'',
+			buttonDisable:null,
+			hide:'text-black d-none',
+			start:'',
+			end:''
+			}
+	},
+	mounted(){
+		axios.post('get_schedule')
+		.then(res=>{
+				localStorage.setItem("start", new Date(res.data.status[0].start+" 6:00:00 am").getTime())
+			localStorage.setItem("end", new Date(res.data.status[0].end+" 6:00:00 am").getTime())
+			})
+
+	},
+    watch: {
+            timerCount: {
+                handler(value) {
+
+				function aaaa(n){
+			  	  return 1/(n*0)===1/0
+				} 
+
+					  const now = new Date().getTime();
+					  const distance = localStorage.getItem("start") - now;
+					  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+					  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+					  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+					  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+
+			                   
+				      const aaa = setTimeout(() => {
+				            this.timerCount=days+"Days "+hours+"h "+minutes+"m "+seconds+"s";
+				      },1000);
+
+					
+
+                  
+	   				if (aaaa(seconds) === false) {
+	   					this.hide ="text-black"
+	   					this.timerStatus = 'The evaluation will end in'
+	   					 this.timerCount='';
+	   					 this.buttonDisable=false
+			    		clearInterval(aaa)
+		               }else{
+		               	this.hide ="text-black d-none"
+		               	this.buttonDisable=true
+		               	this.timerStatus ='The evaluation will start in'
+		               }
+
+                },
+
+                immediate: true // This ensures the watcher is triggered upon creation
+            },
+            timerCount2: {
+                handler(value) {
+
+				function aaaa(n){
+			  	  return 1/(n*0)===1/0
+				} 
+
+			  const now = new Date().getTime();
+			  const distance2 = localStorage.getItem("end") - now;
+			  const distance1 = localStorage.getItem("start") - now;
+
+			  const days2 = Math.floor(distance2 / (1000 * 60 * 60 * 24));
+			  const hours2 = Math.floor((distance2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			  const minutes2 = Math.floor((distance2 % (1000 * 60 * 60)) / (1000 * 60));
+			  const seconds2 = Math.floor((distance2 % (1000 * 60)) / 1000);
+	                   
+		    
+  					const bbb = setTimeout(() => {
+			            	this.timerCount2=days2+"Days "+hours2+"h "+minutes2+"m "+seconds2+"s"
+
+			      },1000);
+		      
+				  if (aaaa(seconds2) === false) {
+				 		 	this.buttonDisable=true
+			    			clearInterval(bbb)
+			    			console.log('end')
+			    			this.timerStatus ='The Evaluation is not available!'
+	               }
+		      
+     			
+	   				
+
+                },
+
+                immediate: true // This ensures the watcher is triggered upon creation
+            }
+
+        }
 }
 </script>
 <style lang="">

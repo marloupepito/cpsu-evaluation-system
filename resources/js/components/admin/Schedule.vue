@@ -7,7 +7,7 @@
 		</ol>
 		<!-- END breadcrumb -->
 		<!-- BEGIN page-header -->
-		<h1 class="page-header">Evaluation Schedule <small><select @change="changeSem" class="form-select">
+		<h1 class="page-header">Evaluation Schedule <small><select v-model="semester" @change="changeSem" class="form-select">
 			<option selected disabled>Please Select Semester</option>
 			<option value="1st Semester">1st Semester</option>
 			<option value="2nd Semester">2nd Semester</option>
@@ -29,6 +29,7 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import listPlugin from '@fullcalendar/list'
 import bootstrapPlugin from '@fullcalendar/bootstrap'
+import axios from 'axios'
 
 export default {
 	components: {
@@ -41,7 +42,7 @@ export default {
 				currentMonth = (currentMonth < 10) ? '0' + currentMonth : currentMonth;
 		
 		return {
-            
+            semester:'',
 			calendarOptions: {
 			contentHeight: 410,
         plugins: [ dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin, bootstrapPlugin ],
@@ -67,9 +68,9 @@ export default {
 					}
 				},
 				events: [{
-					title: 'Trip to London',
-					start: currentYear + '-'+ currentMonth +'-01',
-					end: currentYear + '-'+ currentMonth +'-05',
+					title: 'Evaluation Schedule',
+					start: '',
+					end: '',
 					color: '#8753de',
 				}],
                     eventDrop:this.recordEvent,
@@ -77,9 +78,22 @@ export default {
     	  },
 		}
 	},
+	mounted(){
+		axios.post('/get_schedule')
+		.then(res=>{
+			this.calendarOptions.events[0].start = res.data.status[0].start
+			this.calendarOptions.events[0].end = res.data.status[0].end
+			this.semester = res.data.status[0].semester
+		})
+	},
     methods: {
     changeSem(e){
-    console.log(e.target.value)
+   		 axios.put('/change_sem',{
+   		 	semester:e.target.value
+   		 	})
+		.then(res=>{
+			this.semester = res.data.status[0].semester
+		})
     },
         events (arg){
             console.log(arg)
@@ -93,8 +107,17 @@ export default {
 		const day = (b < 10) ? '0' + b : b;
         const start = year+'-'+month+'-'+day
         const end = year+'-'+month+'-'+(day+2)
-        console.log(start)
-        console.log(end)
+			axios.put('/update_schedule',{
+        		start:start,
+        		end:end
+        		})
+			.then(res=>{
+				this.calendarOptions.events[0].start = res.data.status[0].start
+				this.calendarOptions.events[0].end = res.data.status[0].end
+			})
+			.catch(err=>{
+
+			})
         },
         recordEvent (arg){
         var date = new Date(arg.event._instance.range.start);
@@ -112,8 +135,17 @@ export default {
 		const month2 = (aa < 10) ? '0' + aa : aa;
 		const day2 = (bb < 10) ? '0' + bb : bb;
         const end = year2+'-'+month2+'-'+day2
-        console.log(start)
-        console.log(end)
+        	axios.put('/update_schedule',{
+        		start:start,
+        		end:end
+        		})
+			.then(res=>{
+				this.calendarOptions.events[0].start = res.data.status[0].start
+				this.calendarOptions.events[0].end = res.data.status[0].end
+			})
+			.catch(err=>{
+
+			})
 
         },
 

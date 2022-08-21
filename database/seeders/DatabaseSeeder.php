@@ -27,6 +27,13 @@ class DatabaseSeeder extends Seeder
  		$user->year = date('Y');
         $user->save();
 
+
+        $user = new Schedule;
+        $user->start = date("Y"."-"."m"."-"."d");
+        $user->end = date("Y"."-"."m"."-"."d", strtotime('+ 2 days'));
+ 		$user->semester = '2nd Semester';
+        $user->save();
+
         for ($i=0; $i < 5; $i++) { 
         	$user = new Evaluator;
 	        $user->id_number = 'Faculty CPSU'.$i;
