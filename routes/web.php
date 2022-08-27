@@ -6,6 +6,7 @@ use App\http\Controllers\FacultyController;
 use App\http\Controllers\QuestionaireController;
 use App\http\Controllers\ResultsController;
 use App\http\Controllers\ScheduleController;
+use App\http\Controllers\UsersController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,11 +17,22 @@ use App\http\Controllers\ScheduleController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
+Route::middleware('auth:sanctum')->get('/authenticated', function () {
+    return true;
+});
+Route::post('/logout','UsersController@logout');
 Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/start-evaluation', function () {
+    return view('welcome');
+});
+
+Route::get('/login', function () {
     return view('welcome');
 });
 
@@ -45,11 +57,15 @@ Route::put('/edit_questionaire4','QuestionaireController@edit_questionaire4');
 
 Route::post('/submit_form','ResultsController@submit_form');
 Route::post('/verify_evaluate','ResultsController@verify_evaluate');
+Route::post('/get_all_results','ResultsController@get_all_results');
+Route::post('/goto_overall','ResultsController@goto_overall');
+Route::post('/get_all_overall','ResultsController@get_all_overall');
 
 Route::post('/get_schedule','ScheduleController@get_schedule');
 Route::put('/update_schedule','ScheduleController@update_schedule');
 Route::put('/change_sem','ScheduleController@change_sem');
 
+Route::post('/user_login','UsersController@user_login');
 Route::get('/{vue?}',function(){
     return view('welcome');
 })->where('vue','[\/\w\.-]*');

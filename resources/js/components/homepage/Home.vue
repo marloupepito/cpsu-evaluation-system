@@ -70,7 +70,7 @@
 									{{timerCount2}}
 									</b>
 								</div>
-								<button href="/start-evaluation" :disabled="buttonDisable" class="btn btn-xs btn-danger fs-10px ps-2 pe-2">Click Me!</button>
+								<button @click="startEvaluation" :disabled="buttonDisable" class="btn btn-xs btn-danger fs-10px ps-2 pe-2">Click Me!</button>
 							</div>
 							<!-- END col-8 -->
 						</div>
@@ -133,6 +133,11 @@ export default {
 			localStorage.setItem("end", new Date(res.data.status[0].end+" 6:00:00 am").getTime())
 			})
 
+	},
+	methods:{
+		startEvaluation(){
+			window.location='/start-evaluation';
+		}
 	},
     watch: {
             timerCount: {

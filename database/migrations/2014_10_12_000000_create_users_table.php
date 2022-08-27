@@ -98,6 +98,11 @@ class CreateUsersTable extends Migration
             $table->string('til')->nullable();
             $table->string('mol')->nullable();
             $table->string('total')->nullable();
+            $table->string('a')->nullable();
+            $table->string('b')->nullable();
+            $table->string('c')->nullable();
+            $table->string('d')->nullable();
+            $table->string('e')->nullable();
             $table->longText('comment')->nullable();
             $table->string('school_year')->nullable();
             $table->string('section')->nullable();

@@ -78,19 +78,75 @@ import Result1 from '../../admin/Result1.vue'
 import Result2 from '../../admin/Result2.vue'
 import Result3 from '../../admin/Result3.vue'
 import Schedule from '../../admin/Schedule.vue'
-const routes = [
-	{ path: '*', component: ExtraError },
-  { path: '/dashboard', component: Dashboard },
-  { path: '/accounts/students', component: Account1 },
-  { path: '/accounts/faculty', component: Account2 },
-  { path: '/faculty/regular', component: Faculty1 },
-  { path: '/faculty/casual', component: Faculty2 },
-  { path: '/results/allresults', component: Result1 },
-  { path: '/results/regular', component: Result2 },
-  { path: '/results/casual', component: Result3 },
-  { path: '/schedule', component: Schedule },
-  { path: '/questionaire', component: Questionaire },
-  ]
+import Administrator from  '../../admin/Administrator.vue'
+import Overall from '../../admin/Overall.vue'
 
+
+import axios from 'axios'
+
+
+const routes = [
+            { path: '*', component: ExtraError},
+            { path: '/login', component: ExtraError},
+              { path: '/adminstrator', 
+                component: Administrator,
+                 beforeEnter: (to, from, next) => {
+                    axios.get('/authenticated')
+                    .then(res=>{
+                      next()
+                    })
+                    .catch(err=>{
+                      return next({ path: '/login'})
+                    })
+                  },
+                children: 
+                [
+                  {
+                    path: '/adminstrator/dashboard',
+                    component: Dashboard,
+                  },
+                  {
+                    path: '/adminstrator/accounts/students',
+                    component: Account1,
+                  },
+                  {
+                    path: '/adminstrator/accounts/faculty',
+                    component: Account2,
+                  },
+                  {
+                    path: '/adminstrator/faculty/regular',
+                    component: Faculty1,
+                  },
+                  {
+                    path: '/adminstrator/faculty/casual',
+                    component: Faculty2,
+                  },
+                  {
+                    path: '/adminstrator/results/allresults',
+                    component: Result1,
+                  },
+                   {
+                    path: '/adminstrator/results/overall',
+                    component: Overall,
+                  },
+                  {
+                    path: '/adminstrator/results/regular',
+                    component: Result2,
+                  },
+                  {
+                    path: '/adminstrator/results/casual',
+                    component: Result3,
+                  },
+                  {
+                    path: '/adminstrator/schedule',
+                    component: Schedule,
+                  },
+                  {
+                    path: '/adminstrator/questionaire',
+                    component: Questionaire,
+                  },
+                ],
+             }, 
+          ]
 export default routes;
 </script>

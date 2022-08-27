@@ -9,6 +9,9 @@
 		<div v-else-if="pathname === '/evaluation-form'">
 			<EvaluationForm />
 		</div>
+		<div v-else-if="pathname === '/login'">
+			<Login />
+		</div>
 		
 		<div v-else>
 			<div class="app" v-if="!appOptions.appEmpty" v-bind:class="{
@@ -60,6 +63,7 @@ import ScrollTopBtn from './assets/components/scroll-top-btn/ScrollTopBtn.vue'
 import AppOptions from './assets/config/AppOptions.vue'
 import Home from './homepage/Home.vue'
 import EvaluationStart from './../auth/Evaluation-Scan.vue'
+import Login from './../auth/Login.vue'
 import EvaluationForm from './homepage/Evaluation-Form.vue'
 const path = window.location.pathname
 export default {
@@ -68,6 +72,7 @@ export default {
 		Sidebar,
 		SidebarRight,
 		Header,
+		Login,
 		TopMenu,
 		ThemePanel,
 		ScrollTopBtn,

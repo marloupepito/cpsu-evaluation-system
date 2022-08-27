@@ -125,15 +125,9 @@
 						<img src="/assets/img/user/user-13.jpg" alt="" /> 
 						<span class="d-none d-md-inline">Adam Schwartz</span> <b class="caret"></b>
 					</template>
-					<a href="javascript:;" class="dropdown-item">Edit Profile</a>
-					<a href="javascript:;" class="dropdown-item d-flex align-items-center">
-						Inbox
-						<span class="badge bg-danger rounded-pill ms-auto pb-4px">2</span>
-					</a>
-					<a href="javascript:;" class="dropdown-item">Calendar</a>
-					<a href="javascript:;" class="dropdown-item">Setting</a>
+				
 					<div class="dropdown-divider"></div>
-					<a href="javascript:;" class="dropdown-item">Log Out</a>
+					<a href="javascript:;" class="dropdown-item" @click="logout">Log Out</a>
 				</b-nav-item-dropdown>
 				<div class="navbar-divider d-none d-md-block" v-if="appOptions.appSidebarTwo"></div>
 				<div class="navbar-item d-none d-md-block" v-if="appOptions.appSidebarTwo">
@@ -151,7 +145,7 @@
 <script>
 import AppOptions from '../../config/AppOptions.vue'
 import HeaderMegaMenu from './HeaderMegaMenu.vue'
-
+import axios from 'axios'
 export default {
   name: 'Header',
 	components: {
@@ -163,6 +157,15 @@ export default {
 		}
   },
 	methods: {
+		logout(){
+			axios.post('/logout')
+			.then(res=>{
+				window.location='/login'
+			})
+		},
+		home(){
+			window.location='/'
+		},
 		toggleSidebarMobile() {
 			this.appOptions.appSidebarMobileToggled = !this.appOptions.appSidebarMobileToggled;
 		},
