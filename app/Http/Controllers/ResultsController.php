@@ -9,6 +9,7 @@ use App\Models\Schedule;
 class ResultsController extends Controller
 {
      public function submit_form(Request $request){
+        $date = date('Y');
          $request->validate([
             'evaluator'=>['required'],
             'evaluatee'=>['required'],
@@ -43,6 +44,15 @@ class ResultsController extends Controller
        
 
         if($user){
+        $ccs = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Computer Study'],['year','=',$date]])->sum('total');
+
+         $cte = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Teachers Education'],['year','=',$date]])->sum('total');
+
+         $cbm = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Business Management'],['year','=',$date]])->sum('total');
+         $caf = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Agriculture and Forestry'],['year','=',$date]])->sum('total');
+
+         $ccje = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Criminal Justice Education'],['year','=',$date]])->sum('total');
+
         $a = Results::where('evaluatee_id','=',$request->evaluatee)->sum('commitment');
         $b = Results::where('evaluatee_id','=',$request->evaluatee)->sum('kos');
         $c = Results::where('evaluatee_id','=',$request->evaluatee)->sum('til');
@@ -51,17 +61,35 @@ class ResultsController extends Controller
 
         $f = Results::where('evaluatee_id','=',$request->evaluatee)->get();
 
+        $count1 = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Computer Study'],['year','=',$date],['semester','=',$zz->semester]])->get();
+         $count2 = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Teachers Education'],['year','=',$date],['semester','=',$zz->semester]])->get();
+
+        $count3 = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Business Management'],['year','=',$date],['semester','=',$zz->semester]])->get();
+
+        $count4 = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Agriculture and Forestry'],['year','=',$date],['semester','=',$zz->semester]])->get();
+
+        $count5 = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Criminal Justice Education'],['year','=',$date],['semester','=',$zz->semester]])->get();
+
         Results::where('evaluatee_id','=',$request->evaluatee)
       ->update([
         'a' => $a / count($f),
         'b' => $b / count($f),
         'c' => $c / count($f),
         'd' => $d / count($f),
-        'e' => $e / count($f)
+        'e' => $e / count($f),
+        'ccs' => $ccs !== 0 && count($count1) !== 0? $ccs / count($count1):null,
+        'cte' => $cte !== 0 && count($count2) !== 0? $cte / count($count2):null,
+        'cbm' => $cbm !== 0 && count($count3) !== 0? $cbm / count($count3):null,
+        'caf' => $caf !== 0 && count($count4) !== 0? $caf / count($count4):null,
+        'ccje' =>$ccje !== 0 && count($count5) !== 0? $ccje / count($count5):null,
+
         ]);
 
             return response()->json([
-                'status' => 'success'
+                'status' => 'success',
+                'x1' => count($count5),
+                'x2' => $ccje,
+                'x3' => $ccs
             ]);
         }else{
             return response()->json([
@@ -90,11 +118,13 @@ class ResultsController extends Controller
     }
 
     public function get_all_results(Request $request){
+        $date = date('Y');
         $request->validate([
             'status'=>['required'],
         ]);
 
-        $users = Results::select('evaluatee_id','a','b','c','d','e','year','semester')->distinct()->get();
+        $users = Results::where('year','=',$date)
+        ->select('evaluatee_id','a','b','c','d','e','year','semester')->distinct()->get();
         return response()->json([
                 'status' => $users
             ]);
@@ -107,16 +137,39 @@ class ResultsController extends Controller
         $request->session()->put('evaluateeid', $request->id);
     }
      public function get_all_overall(Request $request){
-
+        $date = date('Y');
 
        $users = Results::where('evaluatee_id', '=' ,$request->session()->get('evaluateeid'))
         ->get();
-        $users2 = Results::where('evaluatee_id', '=' ,$request->session()->get('evaluateeid'))
+        $users2 = Results::where([['evaluatee_id', '=' ,$request->session()->get('evaluateeid')],['year' , '=' , $date]])
         ->select('evaluatee_id','a','b','c','d','e','year','semester')->distinct()->first();
+
+
+
+        $ccs = Results::where([['evaluatee_id', '=' ,$request->session()->get('evaluateeid')],['department', '=' ,'College of Computer Study'],['semester','=',$users2->semester]])
+        ->select('ccs')->distinct()->get();
+
+        $cte = Results::where([['evaluatee_id', '=' ,$request->session()->get('evaluateeid')],['department', '=' ,'College of Teachers Education'],['semester','=',$users2->semester]])
+        ->select('cte')->distinct()->get();
+        
+        $cbm = Results::where([['evaluatee_id', '=' ,$request->session()->get('evaluateeid')],['department', '=' ,'College of Business Management'],['semester','=',$users2->semester]])
+        ->select('cbm')->distinct()->get();
+
+        $caf = Results::where([['evaluatee_id', '=' ,$request->session()->get('evaluateeid')],['department', '=' ,'College of Agriculture and Forestry'],['semester','=',$users2->semester]])
+        ->select('caf')->distinct()->get();
+
+        $ccje = Results::where([['evaluatee_id', '=' ,$request->session()->get('evaluateeid')],['department', '=' ,'College of Criminal Justice Education'],['semester','=',$users2->semester]])
+        ->select('ccje')->distinct()->get();
+
 
          return response()->json([
                 'status' => $users,
-                'status2' => $users2
+                'status2' => $users2,
+                'ccs' => $ccs,
+                'cte' => $cte,
+                'cbm' => $cbm,
+                'caf' => $caf,
+                'ccje' => $ccje,
             ]);
     }
 }

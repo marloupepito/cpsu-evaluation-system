@@ -103,6 +103,11 @@ class CreateUsersTable extends Migration
             $table->string('c')->nullable();
             $table->string('d')->nullable();
             $table->string('e')->nullable();
+            $table->string('ccs')->nullable();
+            $table->string('cte')->nullable();
+            $table->string('cbm')->nullable();
+            $table->string('caf')->nullable();
+            $table->string('ccje')->nullable();
             $table->longText('comment')->nullable();
             $table->string('school_year')->nullable();
             $table->string('section')->nullable();

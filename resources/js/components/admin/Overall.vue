@@ -2,12 +2,13 @@
 	<div>
 		<!-- BEGIN breadcrumb -->
 		<ol class="breadcrumb hidden-print float-xl-end">
-			<li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+			<li class="breadcrumb-item"><a href="javascript:;">Dashboard</a></li>
 			<li class="breadcrumb-item active">Overall</li>
 		</ol>
 		<!-- END breadcrumb -->
 		<!-- BEGIN page-header -->
-		<h1 class="page-header hidden-print">Overall Results <small>This is full information of the results...</small></h1>
+		<h1 class="page-header hidden-print"><!-- Overall Results --> <small>
+		This is full information of the results...</small></h1>
 		<!-- END page-header -->
 		<!-- BEGIN invoice -->
 		<div class="invoice">
@@ -17,101 +18,132 @@
 					<a href="javascript:;" class="btn btn-sm btn-white mb-10px me-2"><i class="fa fa-file-pdf t-plus-1 text-danger fa-fw fa-lg"></i> Export as PDF</a>
 					<a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-white mb-10px"><i class="fa fa-print t-plus-1 fa-fw fa-lg"></i> Print</a>
 				</span>
-				Company Name, Inc
+				Overall Results from Evaluators
 			</div>
 			<!-- END invoice-company -->
 			<!-- BEGIN invoice-header -->
 			<div class="invoice-header">
-				<div class="invoice-from">
-					<small>from</small>
-					<address class="mt-5px mb-5px">
-						<strong class="text-dark">Twitter, Inc.</strong><br />
-						Street Address<br />
-						City, Zip Code<br />
-						Phone: (123) 456-7890<br />
-						Fax: (123) 456-7890
-					</address>
+				<div class="row">
+						<div class="col-md-9 col-8">
+								<div class="invoice-from">
+
+							<div class="date text-dark mt-3px">August 3,2021</div>
+									<address class="mt-3 mb-5px">
+										<strong class="text-dark">{{info1.evaluatee_id}}</strong><br />
+										Faculty<br />
+										Central Philippine State University<br />
+										DJVV San Carlos Campus<br />
+									</address>
+								</div>
+						</div>
+						<div class="col-md-3 col-4">
+								<img class="mt-2 mb-2" src="/images/a.jpg" width="100%" />
+						</div>
 				</div>
+		
 				
-				<div class="invoice-date">
-					<small>Invoice / July period</small>
-					<div class="date text-dark mt-5px">August 3,2021</div>
-					<div class="invoice-detail">
-						#0000123DSS<br />
-						Services Product
-					</div>
-				</div>
 			</div>
 			<!-- END invoice-header -->
 			<!-- BEGIN invoice-content -->
 			<div class="invoice-content">
 				<!-- BEGIN table-responsive -->
 				<div class="table-responsive">
-					<table class="table table-invoice">
+					<table class="table table-striped">
 						<thead>
 							<tr>
-								<th>TASK DESCRIPTION</th>
-								<th class="text-center" width="10%">RATE</th>
-								<th class="text-center" width="10%">HOURS</th>
-								<th class="text-end" width="20%">LINE TOTAL</th>
+								<th width="50%"><h5>TOTAL</h5></th>
+								<th class="text-center" width="25%"><h5>MAIN</h5></th>
+								<th class="text-center" width="25%"><h5>INTERPRETATION</h5></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td>
-									<span class="text-dark">Website design &amp; development</span><br />
-									<small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id sagittis arcu.</small>
+									<b>A. Commitment</b>
 								</td>
-								<td class="text-center">$50.00</td>
-								<td class="text-center">50</td>
-								<td class="text-end">$2,500.00</td>
+								<td class="text-center">{{info1.a}}</td>
+								<td class="text-center">
+									{{
+										info1.a <= 1 && info1.a <= 2?"Poor":
+										info1.a <= 2 && info1.a <= 3?"Fair":
+										info1.a <= 3 && info1.a <= 4?"Satisfactory":
+										info1.a <= 4 && info1.a <= 5?"Very Satisfactory":
+										info1.a <= 5 && info1.a <= 6?"Outstanding":""	
+									}}
+								</td>
 							</tr>
 							<tr>
 								<td>
-									<span class="text-dark">Branding</span><br />
-									<small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id sagittis arcu.</small>
+										<b>B. Knowledge of Subject</b>
 								</td>
-								<td class="text-center">$50.00</td>
-								<td class="text-center">40</td>
-								<td class="text-end">$2,000.00</td>
+								<td class="text-center">{{info1.b}}</td>
+								<td class="text-center">
+									{{
+										info1.b <= 1 && info1.b <= 2?"Poor":
+										info1.b <= 2 && info1.b <= 3?"Fair":
+										info1.b <= 3 && info1.b <= 4?"Satisfactory":
+										info1.b <= 4 && info1.b <= 5?"Very Satisfactory":
+										info1.b <= 5 && info1.b <= 6?"Outstanding":""	
+									}}
+								</td>
 							</tr>
 							<tr>
 								<td>
-									<span class="text-dark">Redesign Service</span><br />
-									<small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id sagittis arcu.</small>
+										<b>C. Teaching for Independent Learning</b>
 								</td>
-								<td class="text-center">$50.00</td>
-								<td class="text-center">50</td>
-								<td class="text-end">$2,500.00</td>
+								<td class="text-center">{{info1.c}}</td>
+								<td class="text-center">
+									{{
+										info1.c <= 1 && info1.c <= 2?"Poor":
+										info1.c <= 2 && info1.c <= 3?"Fair":
+										info1.c <= 3 && info1.c <= 4?"Satisfactory":
+										info1.c <= 4 && info1.c <= 5?"Very Satisfactory":
+										info1.c <= 5 && info1.c <= 6?"Outstanding":""	
+									}}</td>
+							</tr>
+							<tr>
+								<td>
+										<b>D. Management of Learning</b>
+								</td>
+								<td class="text-center">{{info1.d}}</td>
+								<td class="text-center">
+										{{
+										info1.d <= 1 && info1.d <= 2?"Poor":
+										info1.d <= 2 && info1.d <= 3?"Fair":
+										info1.d <= 3 && info1.d <= 4?"Satisfactory":
+										info1.d <= 4 && info1.d <= 5?"Very Satisfactory":
+										info1.d <= 5 && info1.d <= 6?"Outstanding":""	
+									}}
+								</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 				<!-- END table-responsive -->
-				<!-- BEGIN invoice-price -->
-				<div class="invoice-price">
-					<div class="invoice-price-left">
-						<div class="invoice-price-row">
-							<div class="sub-price">
-								<small>SUBTOTAL</small>
-								<span class="text-dark">$4,500.00</span>
-							</div>
-							<div class="sub-price">
-								<i class="fa fa-plus text-muted"></i>
-							</div>
-							<div class="sub-price">
-								<small>PAYPAL FEE (5.4%)</small>
-								<span class="text-dark">$108.00</span>
-							</div>
-						</div>
-					</div>
-					<div class="invoice-price-right">
-						<small>TOTAL</small> <span class="fw-bold">$4508.00</span>
-					</div>
-				</div>
+				
+				<table class="table table-striped">
+						<thead>
+							<tr>
+								<th width="50%"><h3>TOTAL</h3></th>
+								<th class="text-center" width="25%"><h3>{{info1.e}}</h3></th>
+								<th class="text-center" width="25%"><h3>
+										{{
+										info1.e <= 1 && info1.e <= 2?"Poor":
+										info1.e <= 2 && info1.e <= 3?"Fair":
+										info1.e <= 3 && info1.e <= 4?"Satisfactory":
+										info1.e <= 4 && info1.e <= 5?"Very Satisfactory":
+										info1.e <= 5 && info1.e <= 6?"Outstanding":""	
+									}}
+								</h3></th>
+							</tr>
+						</thead>
+					</table>
+
 				<!-- END invoice-price -->
 			</div>
 			<!-- END invoice-content -->
+			<apexchart type="bar" :options="columnChart.options" :series="columnChart.series">
+</apexchart>
 			<!-- BEGIN invoice-note -->
 			<div class="invoice-note">
 				* Make all cheques payable to [Your Company Name]<br />
@@ -142,18 +174,76 @@ import axios from 'axios'
 
 export default {
 
-  mounted(){
-		axios.post('/get_all_overall')
+  async mounted(){
+		await axios.post('/get_all_overall')
 		.then(res=>{
-			console.log(res.data.status2)
+			this.info1 = res.data.status2
+			localStorage.setItem("year",res.data.ccs.map(a=>a.year)); 
+			
+			console.log(res.data.ccs)
+			console.log(res.data.cte)
+			console.log(res.data.cbm)
+			console.log(res.data.caf)
+			console.log(res.data.ccje)
+			localStorage.setItem("ccs",res.data.ccs.map(a=>a.ccs));
+			localStorage.setItem("cte",res.data.cte.map(a=>a.cte)); 
+			localStorage.setItem("cbm",res.data.cbm.map(a=>a.cbm)); 
+		  localStorage.setItem("caf",res.data.caf.map(a=>a.caf)); 
+			localStorage.setItem("ccje",res.data.ccje.map(a=>a.ccje)); 
+	
 		})
 		.catch(err=>{
 
 		})
   },
 	data() {
+		const year = localStorage.getItem("year");
+		const ccs = localStorage.getItem("ccs");
+		const cte = localStorage.getItem("cte");
+		const cbm = localStorage.getItem("cbm");
+		const caf = localStorage.getItem("caf");
+		const ccje = localStorage.getItem("ccje");
+	
 		return{
-			
+			info1:'',
+			ccs:'',
+			cbm:'',
+			caf:'',
+			cte:'',
+			ccje:'',
+			columnChart: {
+        options: {
+          chart: {
+            height: 350,
+            type: 'bar'
+          },
+          xaxis: {
+          categories:year.split(",")
+      	  }
+        },
+
+        series: [{
+          name: 'College of Teachers Education',
+          data: cte.split(",")
+        }, {
+          name: 'College of Agriculture and Forestry',
+          data: caf.split(",")
+        }, 
+        {
+          name: 'College of Business Management',
+          data: cbm.split(",")
+        }, 
+        {
+          name: 'College of Criminology Justice Education',
+          data: ccje.split(",")
+        },
+        {
+          name: 'College of Computer Study',
+          data: ccs.split(",")
+        },
+
+        ]
+      },
 		}
 	}
 }

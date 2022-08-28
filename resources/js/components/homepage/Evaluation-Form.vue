@@ -550,6 +550,12 @@ import axios from 'axios'
 		  		}
 		  		axios.post('/submit_form',form)
 		  		.then(res=>{
+		  			//0
+		  				console.log(res.data.x1)
+		  				//.38
+						console.log(res.data.x2)
+						//0
+						console.log(res.data.x3)
 		  					this.$swal({
 		  					 allowOutsideClick: false,
 							  title: 'Do you want to conduct another evaluation?',
