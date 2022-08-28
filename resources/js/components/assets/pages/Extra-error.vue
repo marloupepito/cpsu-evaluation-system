@@ -20,6 +20,9 @@
 import AppOptions from '../config/AppOptions.vue'
 
 export default {
+	mounted(){
+		window.location='/login'
+	},
 	created() {
 		AppOptions.appEmpty = true;
 	},

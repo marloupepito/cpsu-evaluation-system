@@ -80,14 +80,13 @@ import Result3 from '../../admin/Result3.vue'
 import Schedule from '../../admin/Schedule.vue'
 import Administrator from  '../../admin/Administrator.vue'
 import Overall from '../../admin/Overall.vue'
-
+import Login from '../../../auth/Login.vue'
 
 import axios from 'axios'
 
 
 const routes = [
             { path: '*', component: ExtraError},
-            { path: '/login', component: ExtraError},
               { path: '/adminstrator', 
                 component: Administrator,
                  beforeEnter: (to, from, next) => {

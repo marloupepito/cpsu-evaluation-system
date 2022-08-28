@@ -60,8 +60,11 @@
 
 <script>
 import axios from 'axios'
-export default {
 
+export default {
+	mounted(){
+			
+		},
 	data() {
 		return {
 			incorrect:null,

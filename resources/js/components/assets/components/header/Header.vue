@@ -91,6 +91,9 @@ export default {
 	components: {
 		HeaderMegaMenu
 	},
+	mounted(){
+			
+		},
   data() {
 		return {
 			appOptions: AppOptions

@@ -69,7 +69,7 @@ export default {
 		return { 
             columns: [
         {
-          label: 'Student ID',
+          label: 'Faculty ID',
           field: 'id_number',
         },
         {

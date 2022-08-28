@@ -24,5 +24,12 @@
             <root-app></root-app>
         </div>
     </body>
+    <script>
+        
+             function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+        
+    </script>
     
 </html>
