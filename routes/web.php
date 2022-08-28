@@ -62,8 +62,10 @@ Route::put('/edit_questionaire4','QuestionaireController@edit_questionaire4');
 Route::post('/submit_form','ResultsController@submit_form');
 Route::post('/verify_evaluate','ResultsController@verify_evaluate');
 Route::post('/get_all_results','ResultsController@get_all_results');
+Route::post('/get_all_results2','ResultsController@get_all_results2');
 Route::post('/goto_overall','ResultsController@goto_overall');
 Route::post('/get_all_overall','ResultsController@get_all_overall');
+Route::post('/counting_data','ResultsController@counting_data');
 
 Route::post('/get_schedule','ScheduleController@get_schedule');
 Route::put('/update_schedule','ScheduleController@update_schedule');

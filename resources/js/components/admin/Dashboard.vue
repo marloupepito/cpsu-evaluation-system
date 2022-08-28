@@ -15,27 +15,27 @@
 			<!-- BEGIN col-3 -->
 			<div class="col-xl-3 col-md-6">
 				<div class="widget widget-stats bg-blue">
-					<div class="stats-icon"><i class="fa fa-desktop"></i></div>
+					<div class="stats-icon"><i class="fa fa-users"></i></div>
 					<div class="stats-info">
-						<h4>TOTAL VISITORS</h4>
-						<p>3,291,922</p>	
+						<h4>Number of Evaluator</h4>
+						<p>{{evaluator.length}}</p>	
 					</div>
 					<div class="stats-link">
-						<a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+						<router-link to='/adminstrator/accounts/students'>View Detail <i class="fa fa-arrow-alt-circle-right"></i></router-link>
 					</div>
 				</div>
 			</div>
 			<!-- END col-3 -->
 			<!-- BEGIN col-3 -->
 			<div class="col-xl-3 col-md-6">
-				<div class="widget widget-stats bg-info">
-					<div class="stats-icon"><i class="fa fa-link"></i></div>
+				<div class="widget widget-stats bg-success">
+					<div class="stats-icon"><i class="fa fa-users"></i></div>
 					<div class="stats-info">
-						<h4>BOUNCE RATE</h4>
-						<p>20.44%</p>	
+						<h4>Number of Evaluatee</h4>
+						<p>{{evaluatee.length}}</p>	
 					</div>
 					<div class="stats-link">
-						<a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+						<router-link to='/adminstrator/faculty/regular'>View Detail <i class="fa fa-arrow-alt-circle-right"></i></router-link>
 					</div>
 				</div>
 			</div>
@@ -45,11 +45,11 @@
 				<div class="widget widget-stats bg-orange">
 					<div class="stats-icon"><i class="fa fa-users"></i></div>
 					<div class="stats-info">
-						<h4>UNIQUE VISITORS</h4>
-						<p>1,291,922</p>	
+						<h4>Number of Not Evaluator</h4>
+						<p>{{active.length}}</p>	
 					</div>
 					<div class="stats-link">
-						<a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+						<router-link to='/adminstrator/accounts/students'>View Detail <i class="fa fa-arrow-alt-circle-right"></i></router-link>
 					</div>
 				</div>
 			</div>
@@ -57,13 +57,13 @@
 			<!-- BEGIN col-3 -->
 			<div class="col-xl-3 col-md-6">
 				<div class="widget widget-stats bg-red">
-					<div class="stats-icon"><i class="fa fa-clock"></i></div>
+					<div class="stats-icon"><i class="fa fa-users"></i></div>
 					<div class="stats-info">
-						<h4>AVG TIME ON SITE</h4>
-						<p>00:12:23</p>	
+						<h4>Number of Not Active Evaluator</h4>
+						<p>{{notactive.length}}</p>	
 					</div>
 					<div class="stats-link">
-						<a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+						<router-link to='/adminstrator/accounts/students'>View Detail <i class="fa fa-arrow-alt-circle-right"></i></router-link>
 					</div>
 				</div>
 			</div>
@@ -521,8 +521,19 @@
 import LineChart from '../assets/components/vue-chartjs/LineChart'
 import DoughnutChart from '../assets/components/vue-chartjs/DoughnutChart'
 import AppOptions from '../assets/config/AppOptions.vue'
-
+import axios  from 'axios'
 export default {
+	mounted(){
+		axios.post('/counting_data')
+		.then(res=>{
+			this.evaluator = res.data.evaluators
+			this.evaluatee = res.data.evaluatee
+			this.active = res.data.active
+			this.notactive = res.data.notactive
+			console.log(res.data.active)
+			console.log(res.data.notactive)
+			})
+		},
 	components: {
 		LineChart,
 		DoughnutChart
@@ -553,6 +564,11 @@ export default {
 		}]
 		
 		return {
+
+		evaluator:[],
+		evaluatee:[],
+		active:[],
+		notactive:[],
 			lineChart: {
 				data: {
 					labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],

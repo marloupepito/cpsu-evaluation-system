@@ -12,12 +12,13 @@ const sidebarMenu = [
       { path: '/adminstrator/faculty/regular', title: 'Regular Employee' },
       { path: '/adminstrator/faculty/casual', title: 'Casual Employee' },
     ]
-  },{ path: '/adminstrator/results', icon: 'fa fa-chart-pie bg-red', title: 'Results',
-    children: [
-      { path: '/adminstrator/results/allresults', title: 'All Results' },
-      { path: '/adminstrator/results/regular', title: 'Regular Employee Results' },
-      { path: '/adminstrator/results/casual', title: 'Casual Employee Results' }
-    ]
+  },{ 
+   path: '/adminstrator/results/allresults', icon: 'fa fa-chart-pie bg-red', title: 'Results',
+    // children: [
+    //   { path: '/adminstrator/results/allresults', title: 'All Results' },
+    //   { path: '/adminstrator/results/regular', title: 'Regular Employee Results' },
+    //   { path: '/adminstrator/results/casual', title: 'Casual Employee Results' }
+    // ]
   },
    { path: '/adminstrator/schedule', icon: 'fa fa-calendar bg-indigo', title: 'Schedule'},
   { path: '/adminstrator/questionaire', icon: 'fa fa-pen bg-blue', title: 'Questionaire'},

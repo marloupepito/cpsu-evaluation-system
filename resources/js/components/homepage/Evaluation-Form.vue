@@ -599,6 +599,7 @@ import axios from 'axios'
 		  			})
 		  		.then(res=>{
 		  				if(res.data.status === 'success'){
+		  					
 		  					this.disable=false
 
 		  				}else{

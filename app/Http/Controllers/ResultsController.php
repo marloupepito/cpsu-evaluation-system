@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Results;
 use App\Models\Evaluator;
 use App\Models\Schedule;
+use App\Models\faculty;
 class ResultsController extends Controller
 {
      public function submit_form(Request $request){
@@ -129,6 +130,18 @@ class ResultsController extends Controller
                 'status' => $users
             ]);
     }
+       public function get_all_results2(Request $request){
+        $date = date('Y');
+        $request->validate([
+            'status'=>['required'],
+        ]);
+
+        $users = Results::where('year','=',$date)
+        ->select('evaluatee_id','a','b','c','d','e','year','semester')->distinct()->get();
+        return response()->json([
+                'status' => $users
+            ]);
+    }
 
      public function goto_overall(Request $request){
         $request->validate([
@@ -172,4 +185,32 @@ class ResultsController extends Controller
                 'ccje' => $ccje,
             ]);
     }
+
+     public function counting_data(){
+          $schedule = Schedule::where('id', '=' ,1)->first();
+
+          $date = date('Y');
+
+           $active = Evaluator::where([['status', '=' ,'active'],['year','=',$date]])
+        ->get();
+
+        $notactive = Evaluator::where([['status', '=' ,null],['year','=',$date]])
+        ->get();
+
+        $evaluators = Evaluator::where('year','=',$date)
+        ->get();
+
+         $evaluatee = Faculty::where('year','=',$date)
+        ->get();
+
+
+        return response()->json([
+                'evaluators' => $evaluators,
+                'evaluatee' => $evaluatee,
+                'active' => $active,
+                'notactive' => $notactive,
+                // 'caf' => $caf,
+                // 'ccje' => $ccje,
+            ]);
+     }
 }

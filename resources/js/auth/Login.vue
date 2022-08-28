@@ -12,6 +12,7 @@
 			<!-- BEGIN login-container -->
 			<div class="login-container">
 				<!-- BEGIN login-header -->
+				<a href="/" class="text-white btn text-left w-100" style="text-align: left !important;padding:0px !important;">
 				<div class="login-header">
 					<div class="brand">
 						<div class="d-flex align-items-center">
@@ -23,6 +24,7 @@
 						<i class="fa fa-lock"></i>
 					</div>
 				</div>
+				</a>
 				<!-- END login-header -->
 				<div class="text-danger p-2 text-center align-middle">
 <b >{{incorrect}}</b>

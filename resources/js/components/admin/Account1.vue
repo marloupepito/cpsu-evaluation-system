@@ -7,10 +7,10 @@
 				<div class="btn-toolbar"> &nbsp;
                     <h3>Student Records</h3>&nbsp;&nbsp;
 					<div class="btn-group me-2">
-						<a href="javascript:;" class="btn btn-white btn-sm"><i class="fa fa-fw fa-file"></i>CSV FILE</a>
+						<a href="javascript:;" class="btn btn-white btn-xs mt-2"><i class="fa fa-fw fa-file"></i>CSV FILE</a>
 					</div>
 					<div class="btn-group me-2">
-						<a href="javascript:;" class="btn btn-white btn-sm"><i class="fa fa-fw fa-archive"></i>ID NUMBER</a>
+						<a href="javascript:;" class="btn btn-white btn-xs mt-2"><i class="fa fa-fw fa-archive"></i>ID NUMBER</a>
 					</div>&nbsp;
 				</div>
 			</div>

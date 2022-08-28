@@ -93,7 +93,7 @@
 							<!-- END col-4 -->
 							<!-- BEGIN col-8 -->
 							<div class="col-8">
-								<div class="mb-2px text-truncate h5">My Account</div>
+								<div class="mb-2px text-truncate h5">Account</div>
 								<div class="d-flex align-items-center mb-2px">
 									<div class="flex-grow-1">
 										<div class="progress h-5px rounded-pill bg-white bg-opacity-10">

@@ -7,10 +7,10 @@
 				<div class="btn-toolbar"> &nbsp;
                     <h3>Student Records</h3>&nbsp;&nbsp;
 					<div class="btn-group me-2">
-						<a href="javascript:;" class="btn btn-white btn-sm"><i class="fa fa-fw fa-file"></i>CSV FILE</a>
+						<a href="javascript:;" class="btn btn-white btn-xs mt-2"><i class="fa fa-fw fa-file"></i>CSV FILE</a>
 					</div>
 					<div class="btn-group me-2">
-						<a href="javascript:;" class="btn btn-white btn-sm"><i class="fa fa-fw fa-archive"></i>ID NUMBER</a>
+						<a href="javascript:;" class="btn btn-white btn-xs mt-2"><i class="fa fa-fw fa-archive"></i>ID NUMBER</a>
 					</div>&nbsp;
 				</div>
 			</div>
@@ -32,7 +32,7 @@
             </span> -->
         <template slot="table-row" slot-scope="props">
             <span v-if="props.column.field == 'action'">
-              <a @click="actionFaculty([props.row.id_number,props.row.password])" class="btn btn-primary btn-xs d-block">Action</a>
+              <a @click="actionFaculty([props.row.id_number,props.row.password])" class="btn btn-primary btn-xs d-block">QR CODE</a>
             </span>
         </template>
         </vue-good-table>
@@ -89,12 +89,10 @@ export default {
           field: 'academic_rank',
         },
         {
-          label: 'Status',
+          label: 'Type of Employee',
           field: 'status',
-        },{
-          label: 'Action',
-          field: 'action',
         },
+
       ],
       rows: [],
         }
