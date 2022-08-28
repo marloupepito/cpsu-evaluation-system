@@ -36,6 +36,10 @@ Route::get('/login', function () {
     return view('welcome');
 });
 
+Route::get('/how-to-evaluate', function () {
+    return view('welcome');
+});
+
 Route::get('/evaluation-form', function () {
     return view('welcome');
 });

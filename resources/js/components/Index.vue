@@ -9,6 +9,9 @@
 		<div v-else-if="pathname === '/evaluation-form'">
 			<EvaluationForm />
 		</div>
+		<div v-else-if="pathname === '/how-to-evaluate'">
+			<HowToEvaluate />
+		</div>
 		<div v-else-if="pathname === '/login'">
 			<Login />
 		</div>
@@ -65,6 +68,7 @@ import Home from './homepage/Home.vue'
 import EvaluationStart from './../auth/Evaluation-Scan.vue'
 import Login from './../auth/Login.vue'
 import EvaluationForm from './homepage/Evaluation-Form.vue'
+import HowToEvaluate from './homepage/How-to-evaluate.vue'
 const path = window.location.pathname
 export default {
 	name: 'app',
@@ -78,7 +82,8 @@ export default {
 		ScrollTopBtn,
 		Home,
 		EvaluationStart,
-		EvaluationForm
+		EvaluationForm,
+		HowToEvaluate
 	},
 	data() {
 		return {

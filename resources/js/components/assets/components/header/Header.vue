@@ -123,7 +123,7 @@
 				<b-nav-item-dropdown right menu-class="me-1" class="navbar-item navbar-user dropdown" toggle-class="navbar-link dropdown-toggle d-flex align-items-center" no-caret>
 					<template slot="button-content">
 						<img src="/assets/img/user/user-13.jpg" alt="" /> 
-						<span class="d-none d-md-inline">Adam Schwartz</span> <b class="caret"></b>
+						<span class="d-none d-md-inline">Adminstrator</span> <b class="caret"></b>
 					</template>
 				
 					<div class="dropdown-divider"></div>
