@@ -1,6 +1,12 @@
 <template>
     <div class="col-xl-6 col-lg-6 offset-md-3" >
 <!-- BEGIN card -->
+<div :class="hidden" v-if="path === '/'">
+<div id="loading"/>
+	
+<div class="cpsu"/>
+
+</div>
 				<div class="card border-0 mb-3 bg-white text-dark" style="height:100vh !important;">
 					<!-- BEGIN card-body -->
 					<div class="card-body">
@@ -96,9 +102,9 @@
 									</div>
 								</div>
 								<div class="text-gray-500 small mb-15px text-truncate">
-										Login your account to show your records.
+										For administrative only!
 								</div>
-								<a href="/my-account" class="btn btn-xs btn-blue fs-10px ps-2 pe-2">Click Me!</a>
+								<a href="/login" class="btn btn-xs btn-blue fs-10px ps-2 pe-2">Click Me!</a>
 							</div>
 							<!-- END col-8 -->
 						</div>
@@ -113,17 +119,21 @@
 import axios from 'axios';
 	const countDownDate = new Date("2022-08-22 6:17:00 pm").getTime();
 	const countDownDate2 = new Date("2022-08-24 6:18:00 pm").getTime();
- 
+ 	const path = window.location.pathname
+
 export default {
 	data() {
 		return { 
+			path:path,
 			timerCount: '',
 			timerCount2: '',
 			timerStatus:'',
 			buttonDisable:null,
 			hide:'text-black d-none',
 			start:'',
-			end:''
+			end:'',
+			hidden:'',
+			timeHide:8
 			}
 	},
 	mounted(){
@@ -140,6 +150,18 @@ export default {
 		}
 	},
     watch: {
+    		timeHide:{
+    			handler(value){
+    				 if (value > 0) {
+                        setTimeout(() => {
+                            this.timeHide--;
+                        }, 1000);
+                    }else{
+                    	this.hidden ='d-none'
+                    }
+    			},
+    			immediate: true
+    		},
             timerCount: {
                 handler(value) {
 
@@ -219,6 +241,30 @@ export default {
         }
 }
 </script>
-<style lang="">
-    
+<style>
+    #loading {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  background-image: url("/images/loading.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.cpsu{
+display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("/images/logo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
 </style>

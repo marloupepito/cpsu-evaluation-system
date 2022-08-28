@@ -13,6 +13,10 @@
             body {
                 font-family: 'Nunito', sans-serif;
             }
+            div.menu-profile-cover{
+                background-image: url('/images/background.jpeg') !important;
+
+                }
         </style>
     </head>
     <body>

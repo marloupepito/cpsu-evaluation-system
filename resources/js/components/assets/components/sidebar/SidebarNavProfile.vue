@@ -2,18 +2,18 @@
 	<div class="menu">
 		<div class="menu-profile">
 			<a href="javascript:;" class="menu-profile-link" v-on:click="expand()">
-				<div class="menu-profile-cover with-shadow"></div>
+				<div class="menu-profile-cover"></div>
 				<div class="menu-profile-image">
-					<img src="/assets/img/user/user-13.jpg" alt="" />
+					<img src="images/background.jpeg" alt="" />
 				</div>
 				<div class="menu-profile-info">
 					<div class="d-flex align-items-center">
 						<div class="flex-grow-1">
-							Sean Ngu
+							<b>CPSU</b>
 						</div>
 						<div class="menu-caret ms-auto"></div>
 					</div>
-					<small>Front end developer</small>
+					<small>Administrator</small>
 				</div>
 			</a>
 		</div>
@@ -59,3 +59,7 @@ export default {
   }
 }
 </script>
+
+<style>
+
+</style>
