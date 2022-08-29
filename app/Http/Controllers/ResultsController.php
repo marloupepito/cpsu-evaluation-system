@@ -45,20 +45,20 @@ class ResultsController extends Controller
        
 
         if($user){
-        $ccs = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Computer Study'],['year','=',$date]])->sum('total');
+        $ccs = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Computer Study'],['year','=',$date]])->get()->sum('total');
 
-         $cte = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Teachers Education'],['year','=',$date]])->sum('total');
+         $cte = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Teachers Education'],['year','=',$date]])->get()->sum('total');
 
-         $cbm = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Business Management'],['year','=',$date]])->sum('total');
-         $caf = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Agriculture and Forestry'],['year','=',$date]])->sum('total');
+         $cbm = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Business Management'],['year','=',$date]])->get()->sum('total');
+         $caf = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Agriculture and Forestry'],['year','=',$date]])->get()->sum('total');
 
-         $ccje = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Criminal Justice Education'],['year','=',$date]])->sum('total');
+         $ccje = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Criminal Justice Education'],['year','=',$date]])->get()->sum('total');
 
-        $a = Results::where('evaluatee_id','=',$request->evaluatee)->sum('commitment');
-        $b = Results::where('evaluatee_id','=',$request->evaluatee)->sum('kos');
-        $c = Results::where('evaluatee_id','=',$request->evaluatee)->sum('til');
-        $d = Results::where('evaluatee_id','=',$request->evaluatee)->sum('mol');
-        $e = Results::where('evaluatee_id','=',$request->evaluatee)->sum('total');
+        $a = Results::where('evaluatee_id','=',$request->evaluatee)->get()->sum('commitment');
+        $b = Results::where('evaluatee_id','=',$request->evaluatee)->get()->sum('kos');
+        $c = Results::where('evaluatee_id','=',$request->evaluatee)->get()->sum('til');
+        $d = Results::where('evaluatee_id','=',$request->evaluatee)->get()->sum('mol');
+        $e = Results::where('evaluatee_id','=',$request->evaluatee)->get()->sum('total');
 
         $f = Results::where('evaluatee_id','=',$request->evaluatee)->get();
 
