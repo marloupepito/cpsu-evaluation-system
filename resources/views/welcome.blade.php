@@ -17,6 +17,9 @@
                 background-image: url('/images/background.jpeg') !important;
 
                 }
+                span.logo{
+                    background-image: url('/images/logo.png') !important;
+                }
         </style>
     </head>
     <body>

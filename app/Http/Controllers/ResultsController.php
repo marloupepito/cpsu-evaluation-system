@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Results;
 use App\Models\Evaluator;
 use App\Models\Schedule;
-use App\Models\faculty;
+use App\Models\Faculty;
 class ResultsController extends Controller
 {
      public function submit_form(Request $request){
