@@ -45,7 +45,7 @@
 				<div class="widget widget-stats bg-orange">
 					<div class="stats-icon"><i class="fa fa-users"></i></div>
 					<div class="stats-info">
-						<h4>Number of Not Evaluator</h4>
+						<h4>Number of Active Evaluator</h4>
 						<p>{{active.length}}</p>	
 					</div>
 					<div class="stats-link">

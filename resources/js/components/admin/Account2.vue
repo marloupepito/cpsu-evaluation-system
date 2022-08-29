@@ -5,7 +5,7 @@
         <div class="mailbox-content card">
             <div class="mailbox-content-header pt-2 pb-1 bg-white">
                 <div class="btn-toolbar"> &nbsp;
-                    <h3>Student Records</h3>&nbsp;&nbsp;
+                    <h3>Faculty Records</h3>&nbsp;&nbsp;
                     <div class="btn-group me-2">
                         <a href="javascript:;" class="btn btn-white btn-xs mt-2"><i class="fa fa-fw fa-file"></i>CSV FILE</a>
                     </div>
@@ -67,7 +67,7 @@ export default {
         return { 
             columns: [
         {
-          label: 'Student ID',
+          label: 'Faculty ID',
           field: 'id_number',
         },
         {

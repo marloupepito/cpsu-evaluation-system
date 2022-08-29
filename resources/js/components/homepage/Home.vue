@@ -133,7 +133,7 @@ export default {
 			start:'',
 			end:'',
 			hidden:'',
-			timeHide:8
+			timeHide:3
 			}
 	},
 	mounted(){

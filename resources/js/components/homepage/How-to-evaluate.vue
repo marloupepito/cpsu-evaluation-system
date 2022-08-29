@@ -285,6 +285,8 @@
 							</div>
 						</div>
 					</div>
+
+				</div>
 					<!-- END timeline-body -->
 				</div>
 				<!-- END timeline-content -->
@@ -337,7 +339,24 @@
 					      <img src="/images/how/3.6.png" width="100%"/>
 					    </div>
 					  </b-modal>
-			<!-- END timeline-item pb-0 -->
+			<!-- END timeline-item pb-0 --><br /><br />
+				<div class="fixed-bottom">
+				
+				<a href="/" style="z-index:-1 !important" class="what btn btn-primary btn-md  d-block col-md-12 col-xs-12 col-sm-12 offset-md-3">Back to Homepage</a>
+				</div>
 		</div>
+
     </div>
-</template>
+</template
+
+
+<style>
+.what {
+   width: 100% !important;
+  }
+@media only screen and (max-width: 600px) {
+  .what {
+   width: 100% !important;
+  }
+}
+</style>
