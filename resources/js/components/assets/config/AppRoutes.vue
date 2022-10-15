@@ -49,8 +49,12 @@ import Irregular2 from '../../admin/IrregularStudent2.vue'
 
 import axios from 'axios'
  let routes;
+ const academic = localStorage.getItem("academic_rank") === null?'null':localStorage.getItem("academic_rank");
 
-switch (localStorage.getItem("academic_rank")) {
+switch (academic) {
+  case 'null':
+    routes = [{ path: '/' }];
+    break;
   case 'Main Administrator Campus':
     routes = [
             { path: '*', component: ExtraError},

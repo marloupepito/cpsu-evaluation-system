@@ -1,7 +1,11 @@
 <script>
 
 let sidebarMenu;
-switch (localStorage.getItem("academic_rank")) {
+const academic = localStorage.getItem("academic_rank") === null?'null':localStorage.getItem("academic_rank");
+switch (academic) {
+  case 'null':
+    sidebarMenu = [ ];
+    break;
   case 'Main Administrator Campus':
     sidebarMenu = [
             { path: '/adminstrator/main/dashboard', icon: 'fa fa-sitemap',color:'green', title: 'Main Dashboard'},
