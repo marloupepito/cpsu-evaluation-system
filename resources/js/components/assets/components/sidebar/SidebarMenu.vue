@@ -1,29 +1,59 @@
 <script>
-const sidebarMenu = [
-  { path: '/adminstrator/dashboard', icon: 'fa fa-sitemap bg-pink', title: 'Dashboard'},
-   { path: '/adminstrator/accounts', icon: 'fa fa-user-cog bg-green', title: 'Account Evaluators',
-    children: [
-      { path: '/adminstrator/accounts/students', title: 'Account Students' },
-      { path: '/adminstrator/accounts/faculty', title: 'Account Faculty' }
-    ]
-  },
-  { path: '/adminstrator/faculty', icon: 'fa fa-users bg-yellow', title: 'Faculty Evaluatees',
-    children: [
-      { path: '/adminstrator/faculty/regular', title: 'Regular Employee' },
-      { path: '/adminstrator/faculty/casual', title: 'Casual Employee' },
-    ]
-  },{ 
-   path: '/adminstrator/results/allresults', icon: 'fa fa-chart-pie bg-red', title: 'Results',
-    // children: [
-    //   { path: '/adminstrator/results/allresults', title: 'All Results' },
-    //   { path: '/adminstrator/results/regular', title: 'Regular Employee Results' },
-    //   { path: '/adminstrator/results/casual', title: 'Casual Employee Results' }
-    // ]
-  },
-   { path: '/adminstrator/schedule', icon: 'fa fa-calendar bg-indigo', title: 'Schedule'},
-  { path: '/adminstrator/questionaire', icon: 'fa fa-pen bg-blue', title: 'Questionaire'},
-  
-]
+
+let sidebarMenu;
+switch (localStorage.getItem("academic_rank")) {
+  case 'Main Administrator Campus':
+    sidebarMenu = [
+            { path: '/adminstrator/main/dashboard', icon: 'fa fa-sitemap',color:'green', title: 'Main Dashboard'},
+             { path: '/adminstrator/main/accounts', icon: 'fa fa-school',color:'green', title: 'Account Campuses'},
+            { 
+             path: '/adminstrator/main/students', icon: 'fa fa-user-graduate',color:'green', title: 'Students',
+                children: [
+                { path: '/adminstrator/main/students/regular_students', title: 'Regular Students' },
+                { path: '/adminstrator/main/students/irregular_students', title: 'Irregular Students' },
+              ]
+            },
+            { path: '/adminstrator/main/faculty-staff', icon: 'fa fa-users-gear',color:'green', title: 'Faculty | Staff',
+              children: [
+                { path: '/adminstrator/main/faculty-staff/faculty', title: 'CPSU Faculty' },
+                { path: '/adminstrator/main/faculty-staff/staff', title: 'CPSU Staff' },
+              ]
+            },
+            { 
+             path: '/adminstrator/main/results', icon: 'fa fa-chart-pie',color:'green', title: 'Results',
+            },
+             { path: '/adminstrator/main/schedule', icon: 'fa fa-calendar',color:'green', title: 'Schedule'},
+            { path: '/adminstrator/main/questionaire', icon: 'fa fa-pen',color:'green', title: 'Questionaire'},
+            
+          ];
+    break;
+    case 'Campus Administrator':
+    sidebarMenu =  [
+            { path: '/adminstrator/dashboard', icon: 'fa fa-sitemap',color:'green', title: 'Dashboard'},
+             { path: '/adminstrator/students', icon: 'fa fa-user-graduate',color:'green', title: 'Students',
+              children: [
+                { path: '/adminstrator/students/regular_students', title: 'Regular Students' },
+                { path: '/adminstrator/students/irregular_students', title: 'Irregular Students' }
+              ]
+            },
+            { path: '/adminstrator/faculty', icon: 'fa fa-users-cog',color:'green', title: 'Faculty | Staff',
+              children: [
+                { path: '/adminstrator/faculty/faculty', title: 'CPSU Faculty' },
+                { path: '/adminstrator/faculty/staff', title: 'CPSU Staff' },
+              ]
+            },{ 
+             path: '/adminstrator/results/allresults', icon: 'fa fa-chart-pie',color:'green', title: 'Results',
+              // children: [
+              //   { path: '/adminstrator/results/allresults', title: 'All Results' },
+              //   { path: '/adminstrator/results/regular', title: 'Regular Employee Results' },
+              //   { path: '/adminstrator/results/casual', title: 'Casual Employee Results' }
+              // ]
+            },
+             { path: '/adminstrator/schedule', icon: 'fa fa-calendar',color:'green', title: 'Schedule'},
+           // { path: '/adminstrator/questionaire', icon: 'fa fa-pen',color:'green', title: 'Questionaire'},
+            
+          ];
+}
 
 export default sidebarMenu;
 </script>

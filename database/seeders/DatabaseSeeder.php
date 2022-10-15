@@ -23,7 +23,16 @@ class DatabaseSeeder extends Seeder
         $user->name = 'Ely Galagate';
         $user->username = 'admin';
  		$user->password = Hash::make('admin');
- 		$user->academic_rank = 'admin';
+ 		$user->academic_rank = 'Main Administrator Campus';
+ 		$user->year = date('Y');
+        $user->save();
+
+        $user = new User;
+        $user->name = 'Balogo';
+        $user->username = 'djvv';
+        $user->campus = 'djvv';
+ 		$user->password = Hash::make('admin');
+ 		$user->academic_rank = 'Campus Administrator';
  		$user->year = date('Y');
         $user->save();
 
@@ -34,41 +43,62 @@ class DatabaseSeeder extends Seeder
  		$user->semester = '2nd Semester';
         $user->save();
 
-        for ($i=0; $i < 5; $i++) { 
-        	$user = new Evaluator;
-	        $user->id_number = 'Faculty CPSU'.$i;
-	        $user->password = Hash::make('admin');
-	 		$user->evaluator_rank = 'Faculty';
-	 		$user->academic_rank = 'PSIT II';
-	 		$user->school_year = null;
-	 		$user->section = null;
-	 		$user->status = null;
-	 		$user->year = date('Y');
-	        $user->save();
-        }
-         for ($i=0; $i < 5; $i++) { 
+
+         for ($i=0; $i < 10; $i++) { 
         	$user = new Evaluator;
 	        $user->id_number = 'Student CPSU'.$i;
+	        $user->campusid = 2;
+	        $user->campus = 'djvv';
 	        $user->password = Hash::make('admin');
 	 		$user->course = 'College of Computer Study';
 	 		$user->evaluator_rank = 'Student';
 	 		$user->academic_rank = 'Student';
 	 		$user->school_year = '3rd Year';
 	 		$user->section = 'A';
-	 		$user->status = null;
+	 		$user->status = 'Irregular';
+	 		$user->year = date('Y');
+	        $user->save();
+        }
+        for ($i=0; $i < 10; $i++) { 
+        	$user = new Evaluator;
+	        $user->id_number = 'Student CPSU A'.$i;
+	        $user->campusid = 2;
+	        $user->campus = 'djvv';
+	        $user->password = Hash::make('admin');
+	 		$user->course = 'College of Computer Study';
+	 		$user->evaluator_rank = 'Student';
+	 		$user->academic_rank = 'Student';
+	 		$user->school_year = '3rd Year';
+	 		$user->section = 'A';
+	 		$user->status = 'Regular';
 	 		$user->year = date('Y');
 	        $user->save();
         }
 
 
-        for ($i=0; $i < 5; $i++) { 
+        for ($i=0; $i < 10; $i++) { 
         	$user = new Faculty;
 	        $user->id_number = 'Faculty #'.$i;
+	        $user->campusid = 2;
+	        $user->campus = 'djvv';
 	        $user->photos = 'sample.jpg';
 	 		$user->name = 'name'.$i;
 	 		$user->department = 'Bachelor of Science Information Technology';
 	 		$user->academic_rank = 'PSI II';
-	 		$user->status = 'Regular';
+	 		$user->status = 'Faculty';
+	 		$user->year = date('Y');
+	        $user->save();
+        }
+         for ($i=0; $i < 10; $i++) { 
+        	$user = new Faculty;
+	        $user->id_number = 'staff #'.$i;
+	        $user->campusid = 2;
+	        $user->campus = 'djvv';
+	        $user->photos = 'sample.jpg';
+	 		$user->name = 'name'.$i;
+	 		$user->department = 'Bachelor of Science Information Technology';
+	 		$user->academic_rank = 'PSI II';
+	 		$user->status = 'Staff';
 	 		$user->year = date('Y');
 	        $user->save();
         }

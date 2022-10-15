@@ -18,7 +18,7 @@ class UsersController extends Controller
 
         if(Auth::attempt($request->only('username','password'))){
             return response()->json([
-                'status' => 'success'
+                'status' => Auth::user()
             ]);
         }else{
             return response()->json([
@@ -31,7 +31,7 @@ class UsersController extends Controller
         
     }
     public function get_all_users(Request $request){
-        $users = User::where('usertype', '=' ,'cafe')
+        $users = User::where('academic_rank', '<>' ,'Main Administrator Campus')
         ->get();
         return response()->json([
             'status' => $users

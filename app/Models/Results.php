@@ -12,6 +12,8 @@ class Results extends Model
     protected $fillable = [
         'evaluatee_id',
         'evaluator_id',
+        'campusid',
+        'campus',
         'commitment',
         'kos',
         'til',

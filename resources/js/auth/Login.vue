@@ -92,12 +92,17 @@ export default {
                 username:this.username,
                 password:this.password
             })
-            .then(res=>{   
-            console.log(res.data.status)     
-                if(res.data.status === 'success'){
-                    window.location ='/adminstrator/dashboard'
+            .then(res=>{       
+                if(res.data.status && res.data.status.academic_rank === 'Main Administrator Campus'){
+                	localStorage.setItem("academic_rank", res.data.status.academic_rank);
+               		window.location ='/adminstrator/main/dashboard'
+                }else if(res.data.status && res.data.status.academic_rank !== 'Main Administrator Campus'){
+                	localStorage.setItem("academic_rank", res.data.status.academic_rank);
+                	localStorage.setItem("campus", res.data.status.campus);
+                	localStorage.setItem("campusid", res.data.status.id);
+               	    window.location ='/adminstrator/dashboard'
                 }else{
-                  this.incorrect = res.data.status
+                	 this.incorrect = res.data.status
                 }
             })
             .catch(err=>{

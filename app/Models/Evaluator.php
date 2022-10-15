@@ -11,6 +11,8 @@ class Evaluator extends Model
     protected $table = 'evaluator';
     protected $fillable = [
        'id_number',
+       'campusid',
+       'campus',
        'password',
        'course',
        'evaluator_rank',

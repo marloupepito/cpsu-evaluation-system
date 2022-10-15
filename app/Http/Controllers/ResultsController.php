@@ -122,9 +122,11 @@ class ResultsController extends Controller
         $date = date('Y');
         $request->validate([
             'status'=>['required'],
+            'campus'=>['required'],
+            'campusid'=>['required'],
         ]);
 
-        $users = Results::where('year','=',$date)
+        $users = Results::where([['year','=',$date],['campus','=',$request->campus],['campusid','=',$request->campusid]])
         ->select('evaluatee_id','a','b','c','d','e','year','semester')->distinct()->get();
         return response()->json([
                 'status' => $users

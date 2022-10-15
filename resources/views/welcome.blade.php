@@ -20,6 +20,9 @@
                 span.logo{
                     background-image: url('/images/logo.png') !important;
                 }
+                a.menu-link{
+                    display: 'none' !important;
+                }
         </style>
     </head>
     <body>
@@ -28,7 +31,8 @@
         </div>
     </body>
     <script>
-        
+        // localStorage.setItem("academic_rank", 'Campus Administrator');
+        // console.log(localStorage.getItem("academic_rank"))
              function preventBack() { window.history.forward(); }
         setTimeout("preventBack()", 0);
         window.onunload = function () { null };

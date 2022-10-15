@@ -39,14 +39,14 @@
 			<!-- BEGIN header-nav -->
 			<div class="navbar-nav">
 				<header-mega-menu v-if="appOptions.appHeaderMegaMenu"></header-mega-menu>
-		<!-- 		<div class="navbar-item navbar-form">
+			<div class="navbar-item navbar-form">
 					<form action="" method="POST" name="search">
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="Enter keyword" />
 							<button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
 						</div>
 					</form>
-				</div> -->
+				</div>
 				
 				<b-nav-item-dropdown class="navbar-item" toggle-class="navbar-link dropdown-toggle" no-caret  v-if="appOptions.appHeaderLanguageBar">
 					<template slot="button-content">

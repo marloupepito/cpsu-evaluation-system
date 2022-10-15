@@ -72,6 +72,7 @@ Route::put('/update_schedule','ScheduleController@update_schedule');
 Route::put('/change_sem','ScheduleController@change_sem');
 
 Route::post('/user_login','UsersController@user_login');
+Route::post('/get_all_users','UsersController@get_all_users');
 Route::get('/{vue?}',function(){
     return view('welcome');
 })->where('vue','[\/\w\.-]*');

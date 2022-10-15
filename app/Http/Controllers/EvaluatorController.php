@@ -8,9 +8,11 @@ class EvaluatorController extends Controller
 {
     public function get_evaluators(Request $request){
     	 $request->validate([
-            'evaluator'=>['required'],
+            'status'=>['required'],
+            'campus'=>['required'],
+            'campusid'=>['required'],
         ]);
-        $users = Evaluator::where('evaluator_rank', '=' ,$request->evaluator)
+        $users = Evaluator::where([['status', '=' ,$request->status],['campus', '=' ,$request->campus],['campusid', '=' ,$request->campusid]])
         ->get();
         return response()->json([
             'status' => $users

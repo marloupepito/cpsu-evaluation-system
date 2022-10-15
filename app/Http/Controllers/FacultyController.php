@@ -9,8 +9,10 @@ class FacultyController extends Controller
      public function get_faculty(Request $request){
     	 $request->validate([
             'status'=>['required'],
+            'campusid'=>['required'],
+            'campus'=>['required'],
         ]);
-        $users = Faculty::where('status', '=' ,$request->status)
+        $users = Faculty::where([['status', '=' ,$request->status],['campusid', '=' ,$request->campusid],['campus', '=' ,$request->campus]])
         ->get();
         return response()->json([
             'status' => $users
