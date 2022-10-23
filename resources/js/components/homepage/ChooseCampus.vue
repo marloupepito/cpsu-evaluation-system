@@ -4,14 +4,14 @@
 		<div id="loading"/>
 		<div class="cpsu"/>
 		</div>
-			<div   class="card border-0 mb-3 bg-white text-dark" >
+			<div v-if="hidden === 'd-none'"  class="card border-0 mb-3 bg-white text-dark" >
 				<!-- BEGIN card-body -->
 				<div  class="card-body text-capitalize">
 					<!-- BEGIN title -->
 					<div class="mb-3 text-gray-500 ">
 						<b>CPSU Faculty Evaluation System</b>
 					</div>
-				  <b-card v-for="(item, index) in campus" :key="item.id" :title="item.campus"class="shadow d-flex mb-2">
+				  <b-card v-for="(item, index) in campus" :sub-title="item.name" :key="item.id" :title="item.campus"class="shadow d-flex mb-2">
 				     <b-button href="#" @click="gotohome(item.campus,item.id)" variant="success" style="background-color:green;float:right;">PLEASE PROCEED</b-button>
 				  </b-card>
 				</div>
