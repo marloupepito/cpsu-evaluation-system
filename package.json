@@ -75,20 +75,7 @@
         "vuejs-datepicker": "^1.6.2",
         "vuex": "^3.6.2"
     },
-    "eslintConfig": {
-        "root": true,
-        "env": {
-            "node": true
-        },
-        "extends": [
-            "plugin:vue/essential",
-            "eslint:recommended"
-        ],
-        "rules": {},
-        "parserOptions": {
-            "parser": "babel-eslint"
-        }
-    },
+
     "postcss": {
         "plugins": {
             "autoprefixer": {}

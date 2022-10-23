@@ -1,10 +1,10 @@
 <template>
-    <div class="col-xl-6 col-lg-6 offset-md-3" >
+    <div class="col-xl-6 col-lg-6 offset-md-3"style="height:100vh !important;" >
 		<div :class="hidden" v-if="path == '/'">
 		<div id="loading"/>
 		<div class="cpsu"/>
 		</div>
-			<div   class="card border-0 mb-3 bg-white text-dark" style="height:100vh !important;">
+			<div   class="card border-0 mb-3 bg-white text-dark" >
 				<!-- BEGIN card-body -->
 				<div  class="card-body text-capitalize">
 					<!-- BEGIN title -->

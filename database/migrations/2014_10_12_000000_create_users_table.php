@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
         Schema::create('evaluator', function (Blueprint $table) {
             $table->id();
             $table->string('id_number')->unique()->nullable();
-            $table->string('campusid')->nullable();
+            $table->bigInteger('campusid')->nullable();
             $table->string('campus')->nullable();
             $table->string('name')->nullable();
             $table->string('class_status')->nullable();
@@ -48,7 +48,7 @@ class CreateUsersTable extends Migration
         Schema::create('faculty', function (Blueprint $table) {
             $table->id();
             $table->string('id_number')->unique()->nullable();
-            $table->string('campusid')->nullable();
+            $table->bigInteger('campusid')->nullable();
             $table->string('password')->nullable();
             $table->string('campus')->nullable();
             $table->string('photos')->nullable();
@@ -64,7 +64,7 @@ class CreateUsersTable extends Migration
         Schema::create('faculty_subject_loading', function (Blueprint $table) {
             $table->id();
             $table->string('id_number')->unique()->nullable();
-            $table->string('campusid')->nullable();
+            $table->bigInteger('campusid')->nullable();
             $table->string('subject')->nullable();
             $table->string('campus')->nullable();
             $table->string('semester')->nullable();
@@ -104,7 +104,7 @@ class CreateUsersTable extends Migration
 
         Schema::create('schedule', function (Blueprint $table) {
             $table->id();
-            $table->string('campusid')->nullable();
+            $table->bigInteger('campusid')->nullable();
             $table->string('campus')->nullable();
             $table->string('start')->nullable();
             $table->string('end')->nullable();
@@ -119,7 +119,7 @@ class CreateUsersTable extends Migration
             $table->string('evaluatee_id')->nullable();
             $table->string('evaluator_id')->nullable();
             $table->string('commitment')->nullable();
-            $table->string('campusid')->nullable();
+            $table->bigInteger('campusid')->nullable();
             $table->string('campus')->nullable();
             $table->string('name')->nullable();
             $table->string('kos')->nullable();
