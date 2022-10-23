@@ -149,7 +149,7 @@ export default {
           field: 'username',
         },
         {
-          label: 'Eveluation Start On',
+          label: 'Evaluation Start On',
           field: 'end',
         },
         {

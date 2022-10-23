@@ -24,7 +24,7 @@
 
 			  <template slot="table-row" slot-scope="props">
 			    <span v-if="props.column.field == 'campus'">
-			      <a href="#" @click="goTo(props.row.id,props.row.campus)" class="text-capitalize"><u>{{props.row.campus}}</u></a> 
+			      <a href="#" @click="goTo(props.row.campusid,props.row.campus)" class="text-capitalize"><u>{{props.row.campus}}</u></a> 
 			    </span>
 			  </template>
 			</vue-good-table>
@@ -41,10 +41,10 @@ export default {
   	  axios.post('/get_faculty',{
   	  status:'Faculty',
   	  campusid:window.location.search.substring(1),
-      campus:window.location.pathname.split('/')[5].replace(/ /g,'_')
+      campus:window.location.pathname.split('/')[5].replace(/_/g,' ')
     })
     .then(res=>{
-    	this.campus = window.location.pathname.split('/')[5].replace(/ /g,'_')
+    	this.campus = window.location.pathname.split('/')[5].replace(/_/g,' ')
       this.rows = res.data.status
     })
   },

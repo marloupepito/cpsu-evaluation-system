@@ -25,7 +25,7 @@
 
 		  <template slot="table-row" slot-scope="props">
 		    <span v-if="props.column.field == 'campus'">
-		      <a href="#" @click="goTo(props.row.id,props.row.campus)" class="text-capitalize"><u>{{props.row.campus}}</u></a> 
+		      <a href="#" @click="goTo(props.row.campusid,props.row.campus)" class="text-capitalize"><u>{{props.row.campus}}</u></a> 
 		    </span>
 		  </template>
 		</vue-good-table>

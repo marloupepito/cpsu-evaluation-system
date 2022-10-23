@@ -17,7 +17,7 @@
 						<div class="d-flex align-items-center">
 							<span class="logo"></span> <b>CPSU</b>&nbsp;Evaluation
 						</div>
-						<small>DJVV Campus San Carlos City Negros Occidental</small>
+						<small>Central Philippine State University</small>
 					</div>
 					<div class="icon">
 						<i class="fa fa-lock"></i>
@@ -45,7 +45,7 @@
 
 
 						<div class="mb-20px">
-							<a href="/" class="btn btn-primary d-block w-100 h-45px btn-lg">Back to Homepage</a>
+							<a href="/" class="btn btn-primary d-block w-100 h-45px btn-lg">Homepage</a>
 						</div>
 					
 					</form>

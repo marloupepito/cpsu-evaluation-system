@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Evaluator;
 use App\Models\Faculty;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 class EvaluatorController extends Controller
 {
@@ -33,6 +34,7 @@ class EvaluatorController extends Controller
               $users = Evaluator::where([['campusid', '=' ,$request->campusid],['campus', '=' ,$request->campus],['id_number', '=' ,$request->username],['password','=',$request->password]])
                 ->get();
                 if(count($users) !== 0){
+                    $request->session()->put('evaluator_type', 'student');
                     $request->session()->put('username', $request->username);
                     $request->session()->put('password', $request->password);
                     return response()->json([
@@ -47,6 +49,7 @@ class EvaluatorController extends Controller
                $users = Faculty::where([['campusid', '=' ,$request->campusid],['campus', '=' ,$request->campus],['id_number', '=' ,$request->username],['password','=',$request->password]])
                 ->get();
                 if(count($users) !== 0){
+                    $request->session()->put('evaluator_type', 'peer');
                     $request->session()->put('username', $request->username);
                     $request->session()->put('password', $request->password);
                     return response()->json([
@@ -58,9 +61,35 @@ class EvaluatorController extends Controller
                     ]);
                 }
          }else if($request->type === 'self'){
-            
+               $users = Faculty::where([['campusid', '=' ,$request->campusid],['campus', '=' ,$request->campus],['id_number', '=' ,$request->username],['password','=',$request->password]])
+                ->get();
+                if(count($users) !== 0){
+                    $request->session()->put('evaluator_type', 'self');
+                    $request->session()->put('username', $request->username);
+                    $request->session()->put('password', $request->password);
+                    return response()->json([
+                        'status' => 'success'
+                    ]);
+                }else{
+                     return response()->json([
+                        'status' => 'error'
+                    ]);
+                }
          }else if($request->type === 'supervisor'){
-            
+            $users = User::where([['id', '=' ,$request->campusid],['campus', '=' ,$request->campus],['id_number', '=' ,$request->username],['password','=',$request->password]])
+                ->get();
+                if(count($users) !== 0){
+                    $request->session()->put('evaluator_type', 'supervisor');
+                    $request->session()->put('username', $request->username);
+                    $request->session()->put('password', $request->password);
+                    return response()->json([
+                        'status' => 'success'
+                    ]);
+                }else{
+                     return response()->json([
+                        'status' => 'error'
+                    ]);
+                }
          }
 
       

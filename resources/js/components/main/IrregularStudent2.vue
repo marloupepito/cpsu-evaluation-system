@@ -41,11 +41,12 @@ export default {
   	  axios.post('/get_evaluators',{
   	  status:'Irregular',
   	  campusid:window.location.search.substring(1),
-      campus:window.location.pathname.split('/')[5].replace(/ /g,'_')
+      campus:window.location.pathname.split('/')[5].replace(/_/g,' ')
     })
     .then(res=>{
-    	this.campus = window.location.pathname.split('/')[5].replace(/ /g,'_')
+    	this.campus = window.location.pathname.split('/')[5].replace(/_/g,' ')
       this.rows = res.data.status
+      
     })
   },
   data(){

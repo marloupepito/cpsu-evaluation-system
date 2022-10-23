@@ -140,6 +140,12 @@ export default {
     })
   },
   methods:{
+    getQR (e){
+      this.$swal({
+      imageUrl: "http://api.qrserver.com/v1/create-qr-code/?data=" + e,
+      imageAlt: 'QR CODE'
+    })
+    },
     actionFaculty (e){
       console.log(e)
       this.$swal({
@@ -261,6 +267,10 @@ export default {
         {
           label: 'Subject loaded',
           field: 'status',
+        },
+         {
+          label: 'QR Code',
+          field: 'qr',
         },
 
       ],

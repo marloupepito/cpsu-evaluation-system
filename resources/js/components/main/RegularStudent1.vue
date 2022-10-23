@@ -25,7 +25,7 @@
 
 		  <template slot="table-row" slot-scope="props">
 		    <span v-if="props.column.field == 'campus'">
-		      <a href="#" @click="goTo(props.row.id,props.row.campus)" class="text-capitalize"><u>{{props.row.campus}}</u></a> 
+		      <a href="#" @click="goTo(props.row.campusid,props.row.campus)" class="text-capitalize"><u>{{props.row.campus}}</u></a> 
 		    </span>
 		  </template>
 		</vue-good-table>
@@ -41,6 +41,7 @@ export default {
   	axios.post('/get_all_users')
   	.then(res=>{
   		this.rows = res.data.status
+      console.log(res.data.status[0].campusid)
   		})
   },
   data(){

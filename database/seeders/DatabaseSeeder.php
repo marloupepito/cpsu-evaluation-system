@@ -216,6 +216,7 @@ class DatabaseSeeder extends Seeder
         	$user = new Faculty;
 	        $user->id_number = 'Faculty #'.$i;
 	        $user->campusid = 2;
+            $user->password = Hash::make('admin');
 	        $user->campus = 'CPSU Hinoba-an Campus';
 	        $user->photos = 'sample.jpg';
 	 		$user->name = 'name'.$i;
@@ -227,6 +228,7 @@ class DatabaseSeeder extends Seeder
          for ($i=0; $i < 10; $i++) { 
         	$user = new Faculty;
 	        $user->id_number = 'staff #'.$i;
+            $user->password = Hash::make('admin');
 	        $user->campusid = 2;
 	        $user->campus = 'CPSU Hinoba-an Campus';
 	        $user->photos = 'sample.jpg';

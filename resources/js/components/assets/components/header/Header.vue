@@ -9,7 +9,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<router-link to="/dashboard" class="navbar-brand"><span class="navbar-logo"></span> <b>CPSU</b> Evaluation System</router-link>
+				<router-link to="/dashboard" class="navbar-brand"><span class="navbar-logo"></span> <b style="color:green">CPSU</b> &nbsp;Evaluation System</router-link>
 				<button type="button" class="navbar-mobile-toggler" v-on:click="toggleTopMenuMobile" v-if="appOptions.appTopMenu && !appOptions.appSidebarNone">
 					<span class="fa-stack fa-lg text-inverse">
 						<i class="far fa-square fa-stack-2x"></i>
