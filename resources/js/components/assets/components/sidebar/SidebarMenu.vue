@@ -26,12 +26,12 @@ switch (academic) {
             { 
              path: '/adminstrator/main/results', icon: 'fa fa-chart-pie',color:'green', title: 'Results',
             },
-             { path: '/adminstrator/main/schedule', icon: 'fa fa-calendar',color:'green', title: 'Schedule'},
+           //  { path: '/adminstrator/main/schedule', icon: 'fa fa-calendar',color:'green', title: 'Schedule'},
             { path: '/adminstrator/main/questionaire', icon: 'fa fa-pen',color:'green', title: 'Questionaire'},
             
           ];
     break;
-    case 'Campus Administrator':
+    default:
     sidebarMenu =  [
             { path: '/adminstrator/dashboard', icon: 'fa fa-sitemap',color:'green', title: 'Dashboard'},
              { path: '/adminstrator/students', icon: 'fa fa-user-graduate',color:'green', title: 'Students',

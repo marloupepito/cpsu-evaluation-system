@@ -1,10 +1,16 @@
 <template>
 	<div>
 		<div v-if="pathname === '/'">
+			 <ChooseCampus />
+		</div>
+		<div v-else-if="pathname === '/home'">
 			<Home />
 		</div>
 		<div v-else-if="pathname === '/start-evaluation'">
 			<EvaluationStart />
+		</div>
+		<div v-else-if="pathname === '/scan_qr'">
+			<ScanQr />
 		</div>
 		<div v-else-if="pathname === '/evaluation-form'">
 			<EvaluationForm />
@@ -65,14 +71,18 @@ import ThemePanel from './assets/components/theme-panel/ThemePanel.vue'
 import ScrollTopBtn from './assets/components/scroll-top-btn/ScrollTopBtn.vue'
 import AppOptions from './assets/config/AppOptions.vue'
 import Home from './homepage/Home.vue'
-import EvaluationStart from './../auth/Evaluation-Scan.vue'
+import ChooseCampus from './homepage/ChooseCampus.vue'
+import ScanQr from './../auth/Evaluation-Scan.vue'
+import EvaluationStart from './homepage/Evaluator.vue'
 import Login from './../auth/Login.vue'
 import EvaluationForm from './homepage/Evaluation-Form.vue'
 import HowToEvaluate from './homepage/How-to-evaluate.vue'
 const path = window.location.pathname
+import axios from 'axios'
 export default {
 	name: 'app',
 	components: {
+		ScanQr,
 		Sidebar,
 		SidebarRight,
 		Header,
@@ -83,7 +93,8 @@ export default {
 		Home,
 		EvaluationStart,
 		EvaluationForm,
-		HowToEvaluate
+		HowToEvaluate,
+		ChooseCampus
 	},
 	data() {
 		return {
@@ -186,6 +197,14 @@ export default {
 	},
 	mounted() {
 		this.$insProgress.finish()
+		axios.get('/user')
+		.then(res=>{
+		})
+		.catch(err=>{
+			//	if(window.location.pathname !== '/' || window.location.pathname !== '/home'){
+			//		localStorage.clear()
+			//	}
+			})
 	},
 	created() {
 		AppOptions.appBodyScrollTop = window.scrollY;

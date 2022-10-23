@@ -31,7 +31,7 @@
 								<div class="d-flex align-items-center mb-2px">
 									<div class="flex-grow-1">
 										<div class="progress h-5px rounded-pill bg-white bg-opacity-10">
-											<div class="progress-bar progress-bar-striped bg-blue" style="width: 100%"></div>
+											<div class="progress-bar progress-bar-striped bg-green" style="width: 100%"></div>
 										</div>
 									</div>
 									
@@ -39,7 +39,7 @@
 								<div class="text-gray-500 small mb-15px text-truncate">
 									This is a tutorial how to evaluate properly.
 								</div>
-								<a href="/how-to-evaluate" class="btn btn-xs btn-blue fs-10px ps-2 pe-2">
+								<a href="/how-to-evaluate" class="btn btn-xs btn-green fs-10px ps-2 pe-2">
 									Click Me!
 								</a>
 							</div>
@@ -62,21 +62,21 @@
 								<div class="d-flex align-items-center mb-2px">
 									<div class="flex-grow-1">
 										<div class="progress h-5px rounded-pill bg-white bg-opacity-10">
-											<div class="progress-bar progress-bar-striped bg-danger" style="width: 100%"></div>
+											<div class="progress-bar progress-bar-striped bg-green" style="width: 100%"></div>
 										</div>
 									</div>
 								
 								</div>
 								<div class="text-gray-500 small mb-15px text-truncate">
 									{{timerStatus}}<br />
-									<b class="text-danger">
+									<b class="text-green">
 									{{timerCount}}
 									</b>
 									<b :class="hide">
 									{{timerCount2}}
 									</b>
 								</div>
-								<button @click="startEvaluation" :disabled="buttonDisable" class="btn btn-xs btn-danger fs-10px ps-2 pe-2">Click Me!</button>
+								<button @click="startEvaluation" :disabled="buttonDisable" class="btn btn-xs btn-green fs-10px ps-2 pe-2">Click Me!</button>
 							</div>
 							<!-- END col-8 -->
 						</div>
@@ -97,14 +97,14 @@
 								<div class="d-flex align-items-center mb-2px">
 									<div class="flex-grow-1">
 										<div class="progress h-5px rounded-pill bg-white bg-opacity-10">
-											<div class="progress-bar progress-bar-striped bg-blue" style="width: 100%"></div>
+											<div class="progress-bar progress-bar-striped bg-green" style="width: 100%"></div>
 										</div>
 									</div>
 								</div>
 								<div class="text-gray-500 small mb-15px text-truncate">
 										For administrative only!
 								</div>
-								<a href="/login" class="btn btn-xs btn-blue fs-10px ps-2 pe-2">Click Me!</a>
+								<a href="/login" class="btn btn-xs btn-green fs-10px ps-2 pe-2">Click Me!</a>
 							</div>
 							<!-- END col-8 -->
 						</div>
@@ -132,21 +132,31 @@ export default {
 			hide:'text-black d-none',
 			start:'',
 			end:'',
-			hidden:'',
-			timeHide:3
+			hidden:'d-none',
+			timeHide:3,
+			campus:'',
+			campusid:''
 			}
 	},
 	mounted(){
-		axios.post('get_schedule')
+		const campus = window.location.search.substring(1).replace(/_/g,' ')
+		const id = window.location.hash.substring(1)
+		console.log(campus)
+		axios.post('/get_schedule',{
+			campus:campus,
+			campusid:id
+		})
 		.then(res=>{
-				localStorage.setItem("start", new Date(res.data.status[0].start+" 6:00:00 am").getTime())
-			localStorage.setItem("end", new Date(res.data.status[0].end+" 6:00:00 am").getTime())
+			this.campus = campus.replace(/ /g,'_')
+			this.campusid =id
+			this.start = String(new Date(res.data.status[0].start+" 6:00:00 am").getTime())
+			this.end = String(new Date(res.data.status[0].end+" 6:00:00 am").getTime())
 			})
 
 	},
 	methods:{
 		startEvaluation(){
-			window.location='/start-evaluation';
+			window.location='/start-evaluation?'+this.campus+'#'+this.campusid;
 		}
 	},
     watch: {
@@ -170,7 +180,7 @@ export default {
 				} 
 
 					  const now = new Date().getTime();
-					  const distance = localStorage.getItem("start") - now;
+					  const distance = this.start === ""?new Date() - now:this.start - now;
 					  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
 					  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 					  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -209,8 +219,8 @@ export default {
 				} 
 
 			  const now = new Date().getTime();
-			  const distance2 = localStorage.getItem("end") - now;
-			  const distance1 = localStorage.getItem("start") - now;
+			  const distance2 = this.end === ""?new Date() - now:this.end - now;
+			  const distance1 = this.start === ""?new Date() - now:this.start - now;
 
 			  const days2 = Math.floor(distance2 / (1000 * 60 * 60 * 24));
 			  const hours2 = Math.floor((distance2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -226,7 +236,6 @@ export default {
 				  if (aaaa(seconds2) === false) {
 				 		 	this.buttonDisable=true
 			    			clearInterval(bbb)
-			    			console.log('end')
 			    			this.timerStatus ='The Evaluation is not available!'
 	               }
 		      

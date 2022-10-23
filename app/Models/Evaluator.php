@@ -13,6 +13,7 @@ class Evaluator extends Model
        'id_number',
        'campusid',
        'campus',
+       'name',
        'password',
        'course',
        'evaluator_rank',

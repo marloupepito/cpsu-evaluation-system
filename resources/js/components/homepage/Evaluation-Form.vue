@@ -534,12 +534,16 @@ import axios from 'axios'
 		      q18:null,
 		      q19:null,
 		      q20:null,
+		      info:[],
 		    }
 		  },
 		  methods:{
 		  	submitForm (e){
 		  		e.preventDefault();
 		  		const form = {
+		  				campus:this.info.campus,
+		  				campusid:this.info.campusid,
+		  				name:this.info.name,
 		  			  comment:this.comment,
 		  			  evaluator:this.evaluator_id,
 		  			  evaluatee:this.facultyValue,
@@ -622,7 +626,7 @@ import axios from 'axios'
 			axios.post('/evaluator_session')
 		     .then(res=>{
 		        if(res.data.status === 'success'){
-		            console.log(res.data.status)
+		            this.info = res.data.info[0]
 		            this.evaluator_id = res.data.id
 		        }else{
 		           window.location='/'

@@ -23,6 +23,9 @@
                 a.menu-link{
                     display: 'none' !important;
                 }
+                div.menu-caret:before{
+                    color: white !important;
+                }
         </style>
     </head>
     <body>
@@ -33,9 +36,9 @@
     <script>
         // localStorage.setItem("academic_rank", 'Campus Administrator');
         // console.log(localStorage.getItem("academic_rank"))
-             function preventBack() { window.history.forward(); }
-        setTimeout("preventBack()", 0);
-        window.onunload = function () { null };
+        //      function preventBack() { window.history.forward(); }
+        // setTimeout("preventBack()", 0);
+        // window.onunload = function () { null };
         
     </script>
     

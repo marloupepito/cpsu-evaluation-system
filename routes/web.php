@@ -7,6 +7,7 @@ use App\http\Controllers\QuestionaireController;
 use App\http\Controllers\ResultsController;
 use App\http\Controllers\ScheduleController;
 use App\http\Controllers\UsersController;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,7 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->get('/authenticated', function () {
     return true;
 });
-Route::post('/logout','UsersController@logout');
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -43,15 +44,25 @@ Route::get('/how-to-evaluate', function () {
 Route::get('/evaluation-form', function () {
     return view('welcome');
 });
+Route::get('/home', function () {
+    return view('welcome');
+});
 
+Route::get('/scan_qr', function () {
+    return view('welcome');
+});
+
+Route::post('/logout','UsersController@logout');
 Route::post('/get_evaluators','EvaluatorController@get_evaluators');
 Route::post('/logout_evaluator','EvaluatorController@logout_evaluator');
 
 Route::post('/get_faculty','FacultyController@get_faculty');
 Route::post('/get_all_faculty','FacultyController@get_all_faculty');
+Route::post('/add_faculty','FacultyController@add_faculty');
 
 Route::post('/scan_qrcode','EvaluatorController@scan_qrcode');
 Route::post('/evaluator_session','EvaluatorController@evaluator_session');
+Route::post('/add_student','EvaluatorController@add_student');
 
 Route::post('/get_questionaire','QuestionaireController@get_questionaire');
 Route::put('/edit_questionaire1','QuestionaireController@edit_questionaire1');
@@ -73,6 +84,8 @@ Route::put('/change_sem','ScheduleController@change_sem');
 
 Route::post('/user_login','UsersController@user_login');
 Route::post('/get_all_users','UsersController@get_all_users');
+Route::post('/get_all_users2','UsersController@get_all_users2');
+Route::post('/add_campus','UsersController@add_campus');
 Route::get('/{vue?}',function(){
     return view('welcome');
 })->where('vue','[\/\w\.-]*');

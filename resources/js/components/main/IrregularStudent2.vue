@@ -81,6 +81,12 @@ export default {
     };
   },
   methods:{
+      getQR (e){
+      this.$swal({
+      imageUrl: "http://api.qrserver.com/v1/create-qr-code/?data=" + e,
+      imageAlt: 'QR CODE'
+      })
+    },
   	backTo(){
   		this.$router.push({ path:'/adminstrator/main/faculty-staff/faculty' })
   		.catch(err=>{})

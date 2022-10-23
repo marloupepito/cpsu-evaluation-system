@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name')->nullable();
             $table->string('username')->unique()->nullable();
             $table->string('password')->nullable();
-            $table->string('campus')->nullable();
+            $table->string('campus')->unique()->nullable();
             $table->string('academic_rank')->nullable();
             $table->string('year')->nullable();
             $table->rememberToken();
@@ -30,6 +30,8 @@ class CreateUsersTable extends Migration
             $table->string('id_number')->unique()->nullable();
             $table->string('campusid')->nullable();
             $table->string('campus')->nullable();
+            $table->string('name')->nullable();
+            $table->string('class_status')->nullable();
             $table->string('password')->nullable();
             $table->string('course')->nullable();
             $table->string('evaluator_rank')->nullable();
@@ -47,6 +49,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('id_number')->unique()->nullable();
             $table->string('campusid')->nullable();
+            $table->string('password')->nullable();
             $table->string('campus')->nullable();
             $table->string('photos')->nullable();
             $table->string('name')->nullable();
@@ -118,6 +121,7 @@ class CreateUsersTable extends Migration
             $table->string('commitment')->nullable();
             $table->string('campusid')->nullable();
             $table->string('campus')->nullable();
+            $table->string('name')->nullable();
             $table->string('kos')->nullable();
             $table->string('til')->nullable();
             $table->string('mol')->nullable();

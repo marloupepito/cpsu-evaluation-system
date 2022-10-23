@@ -42,6 +42,8 @@ export default {
 				currentMonth = (currentMonth < 10) ? '0' + currentMonth : currentMonth;
 		
 		return {
+			campus:'',
+			campusid:'',
             semester:'',
 			calendarOptions: {
 			contentHeight: 410,
@@ -79,8 +81,15 @@ export default {
 		}
 	},
 	mounted(){
-		axios.post('/get_schedule')
+		const campus = localStorage.getItem("campus");
+    const campusid = localStorage.getItem("campusid");
+		axios.post('/get_schedule',{
+			campusid:campusid,
+    		campus:campus
+			})
 		.then(res=>{
+			this.campus = campus
+			this.campusid = campusid
 			this.calendarOptions.events[0].start = res.data.status[0].start
 			this.calendarOptions.events[0].end = res.data.status[0].end
 			this.semester = res.data.status[0].semester
@@ -89,6 +98,8 @@ export default {
     methods: {
     changeSem(e){
    		 axios.put('/change_sem',{
+   		 	campus:this.campus,
+   		 	campusid:this.campusid,
    		 	semester:e.target.value
    		 	})
 		.then(res=>{
@@ -108,6 +119,8 @@ export default {
         const start = year+'-'+month+'-'+day
         const end = year+'-'+month+'-'+(day+2)
 			axios.put('/update_schedule',{
+				campus:this.campus,
+   		 	campusid:this.campusid,
         		start:start,
         		end:end
         		})
@@ -136,6 +149,8 @@ export default {
 		const day2 = (bb < 10) ? '0' + bb : bb;
         const end = year2+'-'+month2+'-'+day2
         	axios.put('/update_schedule',{
+        		campus:this.campus,
+   		 	campusid:this.campusid,
         		start:start,
         		end:end
         		})

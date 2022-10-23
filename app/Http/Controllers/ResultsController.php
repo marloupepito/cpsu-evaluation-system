@@ -10,11 +10,13 @@ use App\Models\Faculty;
 class ResultsController extends Controller
 {
      public function submit_form(Request $request){
-        $date = date('Y');
          $request->validate([
             'evaluator'=>['required'],
             'evaluatee'=>['required'],
             'commitment'=>['required'],
+            'name'=>['required'],
+            'campus'=>['required'],
+            'campusid'=>['required'],
             'kos'=>['required'],
             'til'=>['required'],
             'mol'=>['required'],
@@ -30,6 +32,9 @@ class ResultsController extends Controller
         $user->evaluator_id = $request->evaluator;
         $user->commitment = $request->commitment;
         $user->kos = $request->kos;
+        $user->name = $request->name;
+        $user->campus = $request->campus;
+        $user->campusid = $request->campusid;
         $user->til = $request->til;
         $user->mol = $request->mol;
         $user->total = $total;
@@ -39,20 +44,19 @@ class ResultsController extends Controller
         $user->semester = $zz->semester;
         $user->department = $aa->course;
         $user->academic_rank = $aa->academic_rank;
-        $user->year = date('Y');
         $user->save();
 
        
 
         if($user){
-        $ccs = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Computer Study'],['year','=',$date]])->get()->sum('total');
+        $ccs = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Computer Study']])->get()->sum('total');
 
-         $cte = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Teachers Education'],['year','=',$date]])->get()->sum('total');
+         $cte = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Teachers Education']])->get()->sum('total');
 
-         $cbm = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Business Management'],['year','=',$date]])->get()->sum('total');
-         $caf = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Agriculture and Forestry'],['year','=',$date]])->get()->sum('total');
+         $cbm = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Business Management']])->get()->sum('total');
+         $caf = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Agriculture and Forestry']])->get()->sum('total');
 
-         $ccje = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Criminal Justice Education'],['year','=',$date]])->get()->sum('total');
+         $ccje = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Criminal Justice Education']])->get()->sum('total');
 
         $a = Results::where('evaluatee_id','=',$request->evaluatee)->get()->sum('commitment');
         $b = Results::where('evaluatee_id','=',$request->evaluatee)->get()->sum('kos');
@@ -62,14 +66,14 @@ class ResultsController extends Controller
 
         $f = Results::where('evaluatee_id','=',$request->evaluatee)->get();
 
-        $count1 = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Computer Study'],['year','=',$date],['semester','=',$zz->semester]])->get();
-         $count2 = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Teachers Education'],['year','=',$date],['semester','=',$zz->semester]])->get();
+        $count1 = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Computer Study'],['semester','=',$zz->semester]])->get();
+         $count2 = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Teachers Education'],['semester','=',$zz->semester]])->get();
 
-        $count3 = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Business Management'],['year','=',$date],['semester','=',$zz->semester]])->get();
+        $count3 = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Business Management'],['semester','=',$zz->semester]])->get();
 
-        $count4 = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Agriculture and Forestry'],['year','=',$date],['semester','=',$zz->semester]])->get();
+        $count4 = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Agriculture and Forestry'],['semester','=',$zz->semester]])->get();
 
-        $count5 = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Criminal Justice Education'],['year','=',$date],['semester','=',$zz->semester]])->get();
+        $count5 = Results::where([['evaluatee_id','=',$request->evaluatee],['department','=','College of Criminal Justice Education'],['semester','=',$zz->semester]])->get();
 
         Results::where('evaluatee_id','=',$request->evaluatee)
       ->update([
@@ -119,27 +123,24 @@ class ResultsController extends Controller
     }
 
     public function get_all_results(Request $request){
-        $date = date('Y');
         $request->validate([
             'status'=>['required'],
             'campus'=>['required'],
             'campusid'=>['required'],
         ]);
 
-        $users = Results::where([['year','=',$date],['campus','=',$request->campus],['campusid','=',$request->campusid]])
+        $users = Results::where([['campus','=',$request->campus],['campusid','=',$request->campusid]])
         ->select('evaluatee_id','a','b','c','d','e','year','semester')->distinct()->get();
         return response()->json([
                 'status' => $users
             ]);
     }
        public function get_all_results2(Request $request){
-        $date = date('Y');
         $request->validate([
             'status'=>['required'],
         ]);
 
-        $users = Results::where('year','=',$date)
-        ->select('evaluatee_id','a','b','c','d','e','year','semester')->distinct()->get();
+        $users = Results::select('evaluatee_id','a','b','c','d','e','year','semester')->distinct()->get();
         return response()->json([
                 'status' => $users
             ]);
@@ -152,11 +153,10 @@ class ResultsController extends Controller
         $request->session()->put('evaluateeid', $request->id);
     }
      public function get_all_overall(Request $request){
-        $date = date('Y');
 
        $users = Results::where('evaluatee_id', '=' ,$request->session()->get('evaluateeid'))
         ->get();
-        $users2 = Results::where([['evaluatee_id', '=' ,$request->session()->get('evaluateeid')],['year' , '=' , $date]])
+        $users2 = Results::where([['evaluatee_id', '=' ,$request->session()->get('evaluateeid')]])
         ->select('evaluatee_id','a','b','c','d','e','year','semester')->distinct()->first();
 
 
@@ -188,22 +188,19 @@ class ResultsController extends Controller
             ]);
     }
 
-     public function counting_data(){
-          $schedule = Schedule::where('id', '=' ,1)->first();
+     public function counting_data(Request $request){
+          $schedule = Schedule::where([['campus', '=' ,$request->campus],['campusid', '=' ,$request->campusid]])->first();
 
-          $date = date('Y');
 
-           $active = Evaluator::where([['status', '=' ,'active'],['year','=',$date]])
+           $active = Evaluator::where([['campus', '=' ,$request->campus],['campusid', '=' ,$request->campusid],['status', '=' ,'active']])
         ->get();
 
-        $notactive = Evaluator::where([['status', '=' ,null],['year','=',$date]])
+        $notactive = Evaluator::where([['campus', '=' ,$request->campus],['campusid', '=' ,$request->campusid],['status', '=' ,null]])
         ->get();
 
-        $evaluators = Evaluator::where('year','=',$date)
-        ->get();
+        $evaluators = Evaluator::all();
 
-         $evaluatee = Faculty::where('year','=',$date)
-        ->get();
+         $evaluatee = Faculty::all();
 
 
         return response()->json([

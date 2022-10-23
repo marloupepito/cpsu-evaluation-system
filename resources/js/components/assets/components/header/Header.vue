@@ -104,6 +104,7 @@ export default {
 			axios.post('/logout')
 			.then(res=>{
 				window.location='/login'
+				localStorage.clear()
 			})
 		},
 		home(){

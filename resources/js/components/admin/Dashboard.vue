@@ -524,14 +524,17 @@ import AppOptions from '../assets/config/AppOptions.vue'
 import axios  from 'axios'
 export default {
 	mounted(){
-		axios.post('/counting_data')
+		const campus = localStorage.getItem("campus");
+   		 const campusid = localStorage.getItem("campusid");
+		axios.post('/counting_data',{
+			campus:campus,
+			campusid:campusid
+		})
 		.then(res=>{
 			this.evaluator = res.data.evaluators
 			this.evaluatee = res.data.evaluatee
 			this.active = res.data.active
 			this.notactive = res.data.notactive
-			console.log(res.data.active)
-			console.log(res.data.notactive)
 			})
 		},
 	components: {

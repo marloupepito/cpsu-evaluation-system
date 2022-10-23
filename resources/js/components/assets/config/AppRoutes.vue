@@ -46,14 +46,16 @@ import Regular2 from '../../admin/RegularStudent2.vue'
 import Irregular from '../../admin/IrregularStudent.vue'
 import Irregular2 from '../../admin/IrregularStudent2.vue'
 
-
 import axios from 'axios'
  let routes;
  const academic = localStorage.getItem("academic_rank") === null?'null':localStorage.getItem("academic_rank");
 
 switch (academic) {
   case 'null':
-    routes = [{ path: '/' }];
+    routes = [
+    { path: '*', component: ExtraError},
+    { path: '/'},
+    ];
     break;
   case 'Main Administrator Campus':
     routes = [
@@ -149,7 +151,7 @@ switch (academic) {
              }, 
           ];
     break;
-    case 'Campus Administrator':
+    default:
     routes =  [
             { path: '*', component: ExtraError},
               { path: '/adminstrator', 

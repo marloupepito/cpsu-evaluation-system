@@ -14,6 +14,7 @@ class Results extends Model
         'evaluator_id',
         'campusid',
         'campus',
+        'name',
         'commitment',
         'kos',
         'til',

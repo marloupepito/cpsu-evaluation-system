@@ -7,7 +7,7 @@ use App\Models\Schedule;
 class ScheduleController extends Controller
 {
     public function get_schedule(Request $request){
-        $users = Schedule::all();
+        $users = Schedule::where([['campus','=',$request->campus],['campusid','=',$request->campusid]])->get();
         return response()->json([
             'status' => $users
         ]);
@@ -18,13 +18,13 @@ class ScheduleController extends Controller
             'end'=>['required'],
         ]);
 
-        $aa = Schedule::where('id', '=' ,1)
+        $aa = Schedule::where([['campus', '=' ,$request->campus],['campusid', '=' ,$request->campusid]])
           ->update([
             'start' => $request->start,
             'end' => $request->end,
             ]);
           if($aa){
-             $users = Schedule::all();
+             $users = Schedule::where([['campus','=',$request->campus],['campusid','=',$request->campusid]])->get();
              return response()->json([
                 'status' => $users
              ]);
@@ -35,12 +35,12 @@ class ScheduleController extends Controller
             'semester'=>['required'],
         ]);
 
-        $aa = Schedule::where('id', '=' ,1)
+        $aa = Schedule::where([['campus', '=' ,$request->campus],['campusid', '=' ,$request->campusid]])
           ->update([
             'semester' => $request->semester,
             ]);
           if($aa){
-             $users = Schedule::all();
+             $users = Schedule::where([['campus','=',$request->campus],['campusid','=',$request->campusid]])->get();
              return response()->json([
                 'status' => $users
              ]);

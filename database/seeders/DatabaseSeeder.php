@@ -20,27 +20,165 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $user = new User;
-        $user->name = 'Ely Galagate';
+        $user->name = 'Main Administrator';
         $user->username = 'admin';
+        $user->campus = 'CPSU Kabangkalan Campus';
  		$user->password = Hash::make('admin');
  		$user->academic_rank = 'Main Administrator Campus';
- 		$user->year = date('Y');
         $user->save();
 
         $user = new User;
-        $user->name = 'Balogo';
-        $user->username = 'djvv';
-        $user->campus = 'djvv';
+        $user->name = 'ABELLO, Mark Anthony G.';
+        $user->username = 'admin1';
+        $user->campus = 'CPSU Hinoba-an Campus';
  		$user->password = Hash::make('admin');
  		$user->academic_rank = 'Campus Administrator';
- 		$user->year = date('Y');
+        $user->save();
+
+        $user = new User;
+        $user->name = 'FERARIS, Erwin P., PhD';
+        $user->username = 'admin2';
+        $user->campus = 'CPSU Sipalay Campus';
+ 		$user->password = Hash::make('admin');
+ 		$user->academic_rank = 'Campus Administrator';
+        $user->save();
+
+
+        $user = new User;
+        $user->name = 'BORRES, Germa T., PhD';
+        $user->username = 'admin3';
+        $user->campus = 'CPSU Cauayan Campus';
+ 		$user->password = Hash::make('admin');
+ 		$user->academic_rank = 'Campus Administrator';
+        $user->save();
+
+        $user = new User;
+        $user->name = 'CORPUZ Filipina G.';
+        $user->username = 'admin4';
+        $user->campus = 'CPSU Ilog Campus';
+ 		$user->password = Hash::make('admin');
+ 		$user->academic_rank = 'Campus Administrator';
+        $user->save();
+
+
+        $user = new User;
+        $user->name = 'MISAJON, Chim C., PhD';
+        $user->username = 'admin5';
+        $user->campus = 'CPSU Candoni Campus';
+ 		$user->password = Hash::make('admin');
+ 		$user->academic_rank = 'Campus Administrator';
+        $user->save();
+
+        $user = new User;
+        $user->name = 'PREDO, Gregorio D.';
+        $user->username = 'admin6';
+        $user->campus = 'CPSU Hinigaran Campus';
+ 		$user->password = Hash::make('admin');
+ 		$user->academic_rank = 'Campus Administrator';
+        $user->save();
+
+
+        $user = new User;
+        $user->name = 'GONZALES, Patrocenio L.';
+        $user->username = 'admin7';
+        $user->campus = 'CPSU Moises Padilla Campus';
+ 		$user->password = Hash::make('admin');
+ 		$user->academic_rank = 'Campus Administrator';
+        $user->save();
+
+
+        $user = new User;
+        $user->name = 'FORDENTE, Noel B.';
+        $user->username = 'admin8';
+        $user->campus = 'CPSU Victorias Campus';
+ 		$user->password = Hash::make('admin');
+ 		$user->academic_rank = 'Campus Administrator';
+        $user->save();
+
+
+        $user = new User;
+        $user->name = 'BALOGO, Ken M';
+        $user->username = 'admin9';
+        $user->campus = 'CPSU San Carlos Campus';
+ 		$user->password = Hash::make('admin');
+ 		$user->academic_rank = 'Campus Administrator';
+        $user->save();
+
+        
+
+
+        $user = new Schedule;
+        $user->campusid = 2;
+	    $user->campus = 'CPSU Hinoba-an Campus';
+        $user->start = date("Y"."-"."m"."-"."d");
+        $user->end = date("Y"."-"."m"."-"."d", strtotime('+ 2 days'));
+ 		$user->semester = '1st Semester';
+        $user->save();
+
+        $user = new Schedule;
+        $user->campusid = 3;
+	    $user->campus = 'CPSU Sipalay Campus';
+        $user->start = date("Y"."-"."m"."-"."d");
+        $user->end = date("Y"."-"."m"."-"."d", strtotime('+ 2 days'));
+ 		$user->semester = '1st Semester';
+        $user->save();
+
+        $user = new Schedule;
+        $user->campusid = 4;
+	    $user->campus = 'CPSU Cauayan Campus';
+        $user->start = date("Y"."-"."m"."-"."d");
+        $user->end = date("Y"."-"."m"."-"."d", strtotime('+ 2 days'));
+ 		$user->semester = '1st Semester';
+        $user->save();
+
+        $user = new Schedule;
+        $user->campusid = 5;
+	    $user->campus = 'CPSU Ilog Campus';
+        $user->start = date("Y"."-"."m"."-"."d");
+        $user->end = date("Y"."-"."m"."-"."d", strtotime('+ 2 days'));
+ 		$user->semester = '1st Semester';
+        $user->save();
+
+        $user = new Schedule;
+        $user->campusid = 6;
+	    $user->campus = 'CPSU Candoni Campus';
+        $user->start = date("Y"."-"."m"."-"."d");
+        $user->end = date("Y"."-"."m"."-"."d", strtotime('+ 2 days'));
+ 		$user->semester = '1st Semester';
         $user->save();
 
 
         $user = new Schedule;
+        $user->campusid = 7;
+	    $user->campus = 'CPSU Hinigaran Campus';
         $user->start = date("Y"."-"."m"."-"."d");
         $user->end = date("Y"."-"."m"."-"."d", strtotime('+ 2 days'));
- 		$user->semester = '2nd Semester';
+ 		$user->semester = '1st Semester';
+        $user->save();
+
+        $user = new Schedule;
+        $user->campusid = 8;
+	    $user->campus = 'CPSU Moises Padilla Campus';
+        $user->start = date("Y"."-"."m"."-"."d");
+        $user->end = date("Y"."-"."m"."-"."d", strtotime('+ 2 days'));
+ 		$user->semester = '1st Semester';
+        $user->save();
+
+        $user = new Schedule;
+        $user->campusid = 9;
+	    $user->campus = 'CPSU Victorias Campus';
+        $user->start = date("Y"."-"."m"."-"."d");
+        $user->end = date("Y"."-"."m"."-"."d", strtotime('+ 2 days'));
+ 		$user->semester = '1st Semester';
+        $user->save();
+
+
+        $user = new Schedule;
+        $user->campusid = 10;
+	    $user->campus = 'CPSU San Carlos Campus';
+        $user->start = date("Y"."-"."m"."-"."d");
+        $user->end = date("Y"."-"."m"."-"."d", strtotime('+ 2 days'));
+ 		$user->semester = '1st Semester';
         $user->save();
 
 
@@ -48,30 +186,28 @@ class DatabaseSeeder extends Seeder
         	$user = new Evaluator;
 	        $user->id_number = 'Student CPSU'.$i;
 	        $user->campusid = 2;
-	        $user->campus = 'djvv';
+	        $user->campus = 'CPSU Hinoba-an Campus';
 	        $user->password = Hash::make('admin');
 	 		$user->course = 'College of Computer Study';
 	 		$user->evaluator_rank = 'Student';
 	 		$user->academic_rank = 'Student';
 	 		$user->school_year = '3rd Year';
 	 		$user->section = 'A';
-	 		$user->status = 'Irregular';
-	 		$user->year = date('Y');
+	 		$user->class_status = 'Irregular';
 	        $user->save();
         }
         for ($i=0; $i < 10; $i++) { 
         	$user = new Evaluator;
 	        $user->id_number = 'Student CPSU A'.$i;
 	        $user->campusid = 2;
-	        $user->campus = 'djvv';
+	        $user->campus = 'CPSU Hinoba-an Campus';
 	        $user->password = Hash::make('admin');
 	 		$user->course = 'College of Computer Study';
 	 		$user->evaluator_rank = 'Student';
 	 		$user->academic_rank = 'Student';
 	 		$user->school_year = '3rd Year';
 	 		$user->section = 'A';
-	 		$user->status = 'Regular';
-	 		$user->year = date('Y');
+	 		$user->class_status = 'Regular';
 	        $user->save();
         }
 
@@ -80,26 +216,24 @@ class DatabaseSeeder extends Seeder
         	$user = new Faculty;
 	        $user->id_number = 'Faculty #'.$i;
 	        $user->campusid = 2;
-	        $user->campus = 'djvv';
+	        $user->campus = 'CPSU Hinoba-an Campus';
 	        $user->photos = 'sample.jpg';
 	 		$user->name = 'name'.$i;
 	 		$user->department = 'Bachelor of Science Information Technology';
 	 		$user->academic_rank = 'PSI II';
 	 		$user->status = 'Faculty';
-	 		$user->year = date('Y');
 	        $user->save();
         }
          for ($i=0; $i < 10; $i++) { 
         	$user = new Faculty;
 	        $user->id_number = 'staff #'.$i;
 	        $user->campusid = 2;
-	        $user->campus = 'djvv';
+	        $user->campus = 'CPSU Hinoba-an Campus';
 	        $user->photos = 'sample.jpg';
 	 		$user->name = 'name'.$i;
 	 		$user->department = 'Bachelor of Science Information Technology';
 	 		$user->academic_rank = 'PSI II';
 	 		$user->status = 'Staff';
-	 		$user->year = date('Y');
 	        $user->save();
         }
 
