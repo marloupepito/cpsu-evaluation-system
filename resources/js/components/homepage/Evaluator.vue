@@ -7,11 +7,11 @@
 							<b>CPSU Faculty Evaluation System</b>
 							<span class="ms-2"><i class="fa fa-info-circle" title="Marketing Campaign" v-b-popover.hover="'Campaign that run for getting more returning customers.'"></i></span>
 						</div>
-						<div class="row align-items-center pb-1px" style="height:46vh !important">
+						<div class="row align-items-center pb-1px">
 
 
-							<div class="col-6 col-md-6 " style="height:46vh !important">
-								<div class=" card shadow m-1 p-2">
+							<div class="col-6 col-md-6 mb-4 d-flex align-items-center" style="height:40vh !important">
+								<div class=" card shadow m-1 p-2 h-100">
 								<div class="h5 mb-2px text-truncate pt-3">STUDENT</div>
 								<div class="d-flex align-items-center mb-2px">
 									<div class="flex-grow-1">
@@ -33,8 +33,8 @@
 
 
 
-							<div class="col-6 col-md-6 " style="height:46vh !important">
-								<div class=" card shadow m-1 p-2">
+							<div class="col-6 col-md-6 mb-4 d-flex align-items-center" style="height:40vh !important">
+								<div class=" card shadow m-1 p-2 h-100">
 								<div class="h5 mb-2px text-truncate pt-3">SELF</div>
 								<div class="d-flex align-items-center mb-2px">
 									<div class="flex-grow-1">
@@ -55,8 +55,8 @@
 
 
 
-							<div class="col-6 col-md-6 " style="height:46vh !important">
-								<div class=" card shadow m-1 p-2">
+							<div class="col-6 col-md-6 mb-4 d-flex align-items-center" style="height:40vh !important">
+								<div class=" card shadow m-1 p-2 h-100">
 								<div class="h5 mb-2px text-truncate pt-3">PEER</div>
 								<div class="d-flex align-items-center mb-2px">
 									<div class="flex-grow-1">
@@ -76,8 +76,8 @@
 							</div>
 
 
-							<div class="col-6 col-md-6 " style="height:46vh !important">
-								<div class=" card shadow m-1 p-2">
+							<div class="col-6 col-md-6 mb-4 d-flex align-items-center" style="height:40vh !important">
+								<div class=" card shadow m-1 p-2 h-100">
 								<div class="h5 mb-2px text-truncate pt-3">SUPERVISOR</div>
 								<div class="d-flex align-items-center mb-2px">
 									<div class="flex-grow-1">
