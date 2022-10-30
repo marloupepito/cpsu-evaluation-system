@@ -30,6 +30,7 @@ import Account1 from '../../admin/Account1.vue'
 import Account2 from '../../admin/Account2.vue'
 import Dashboard from '../../admin/Dashboard.vue'
 import Faculty1 from '../../admin/Faculty1.vue'
+import SubjectLoaded1 from '../../admin/SubjectLoaded1.vue'
 import Faculty2 from '../../admin/Faculty2.vue'
 import Questionaire from '../../admin/Questionair.vue'
 import Resulting from '../../admin/Result.vue'
@@ -45,6 +46,8 @@ import Regular from '../../admin/RegularStudent.vue'
 import Regular2 from '../../admin/RegularStudent2.vue'
 import Irregular from '../../admin/IrregularStudent.vue'
 import Irregular2 from '../../admin/IrregularStudent2.vue'
+import StudentLoaded from '../../admin/StudentLoaded.vue'
+
 
 import axios from 'axios'
  let routes;
@@ -175,6 +178,7 @@ switch (academic) {
                     path: '/adminstrator/students',
                     component: Regular,
                     children:[
+                      { path:'/adminstrator/students/loaded', component:StudentLoaded },
                       { path:'/adminstrator/students/regular_students', component:Regular2 },
                       { path:'/adminstrator/students/irregular_students', component:Irregular2 },
                     ]
@@ -184,9 +188,14 @@ switch (academic) {
                     component: Faculty1,
                   },
                   {
+                    path: '/adminstrator/faculty/loaded1',
+                    component: SubjectLoaded1,
+                  },
+                  {
                     path: '/adminstrator/faculty/staff',
                     component: Faculty2,
                   },
+                  
                   {
                     path: '/adminstrator/results/allresults',
                     component: Resulting,

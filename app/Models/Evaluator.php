@@ -21,6 +21,7 @@ class Evaluator extends Model
        'school_year',
        'section',
        'status',
+       'semester',
        'year'
     ];
 }

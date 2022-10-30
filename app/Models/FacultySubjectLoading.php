@@ -18,6 +18,7 @@ class FacultySubjectLoading extends Model
         'school_year',
         'section',
         'year',
+        'department',
         'program',
     ];
 

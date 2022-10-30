@@ -5,14 +5,14 @@
     <div class=" card shadow">
       <div class="row p-1">
         <div class="col-md-8">
-          <h6 class="display-6">CPSU Staff</h6>
+          <h6 class="display-6 m-0">CPSU Staff</h6>
         </div>
         <div class="col-md-4">
-          <div class="btn-group me-2">
-            <a href="javascript:;" class="btn btn-white btn-lg mt-2"><i class="fa fa-fw fa-file"></i>CSV FILE</a>
+          <div class="btn-group">
+            <a href="javascript:;" class="btn btn-white btn-lg mt-1"><i class="fa fa-fw fa-file"></i>CSV FILE</a>
             </div>
-            <div class="btn-group me-2">
-              <a href="javascript:;" v-b-modal.modal-prevent-closing class="btn btn-white btn-lg mt-2"><i class="fa fa-fw fa-archive"></i>ID NUMBER</a>
+            <div class="btn-group">
+              <a href="javascript:;" v-b-modal.modal-prevent-closing class="btn btn-white btn-lg mt-1"><i class="fa fa-fw fa-archive"></i>ID NUMBER</a>
             </div>
         </div>
       </div>
@@ -61,12 +61,13 @@
           invalid-feedback="department is required"
           :state="departmentState"
         >
-          <b-form-input
+          <v-select
             id="department-input"
             v-model="department"
             :state="departmentState"
             required
-          ></b-form-input>
+             :options="['College of Computer Study','College of Business Management','College of Teachers Education', 'College of Agriculture and Forestry','College of Criminal Justice Education']"
+          ></v-select>
         </b-form-group>
 
         <b-form-group
@@ -112,7 +113,7 @@
             </span> -->
         <template slot="table-row" slot-scope="props">
             <span v-if="props.column.field == 'qr'">
-              <a @click="getQR([props.row.id_number,props.row.password])" class="btn btn-primary btn-xs d-block">QR Code</a>
+              <a @click="getQR([props.row.id,props.row.password,props.row.id_number])" class="btn btn-primary btn-xs d-block">QR Code</a>
             </span>
         </template>
         </vue-good-table>
@@ -141,13 +142,6 @@ export default {
   },
   methods:{
     getQR (e){
-      this.$swal({
-      imageUrl: "http://api.qrserver.com/v1/create-qr-code/?data=" + e,
-      imageAlt: 'QR CODE'
-    })
-    },
-    actionFaculty (e){
-      console.log(e)
       this.$swal({
       imageUrl: "http://api.qrserver.com/v1/create-qr-code/?data=" + e,
       imageAlt: 'QR CODE'

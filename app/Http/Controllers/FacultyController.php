@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Faculty;
+use App\Models\Evaluator;
+use App\Models\FacultySubjectLoading;
+use App\Models\StudentSubjectLoading;
 use Illuminate\Support\Facades\Hash;
 class FacultyController extends Controller
 {
@@ -19,12 +22,56 @@ class FacultyController extends Controller
             'status' => $users
         ]);
     }
-     public function get_all_faculty(){
-        $users = Faculty::all();
-        return response()->json([
-            'status' => $users
-        ]);
+     public function get_all_faculty(Request $request){
+        $username = $request->session()->get('username');
+        $password = $request->session()->get('password');
+         $users = Evaluator::where([['id_number', '=' ,$username],['password','=',$password]])
+        ->first();
+
+        if($request->session()->get('evaluator_type') === 'student'){
+
+            $loading = FacultySubjectLoading::where([['department','=',$users->course],['year','=',$users->school_year],['semester','=',$users->semester]])->get();
+
+                
+                $aaa = StudentSubjectLoading::where([['program', '=' ,null],['evaluator_id', '=' ,$users->id]])
+                ->orWhere([['program', '<>' ,'active'],['evaluator_id', '=' ,$users->id]])
+                ->get();
+
+                $subjectLoadingStudent = StudentSubjectLoading::where([['program', '=' ,null],['evaluator_id', '=' ,$users->id]])
+                ->orWhere([['program', '=' ,'active'],['evaluator_id', '=' ,$users->id]])
+                ->get();
+
+                if(count($subjectLoadingStudent) === 0){
+                     foreach ($loading as $load) {
+                        StudentSubjectLoading::create([
+                            'evaluator_id' => $users->id,
+                            'id_number' => $load->id_number,
+                            'campusid' => $load->campusid,
+                            'subject' => $load->subject,
+                            'semester' => $load->semester,
+                            'department' => $load->department,
+                            'section' => $load->section,
+                            'year' => $load->year,
+                        ]);
+                    }
+
+                   
+                }else{
+
+                }
+
+                 $faculty = Faculty::where('id', '=',$subjectLoadingStudent[0]->id_number)->first();
+                    return response()->json([
+                        'status' => $aaa,
+                        'faculty' =>$faculty
+                    ]);
+
+         
+
+        }
+        
     }
+
      public function add_faculty(Request $request){
         
         

@@ -9,6 +9,7 @@ use App\Models\Faculty;
 use App\Models\Questionaire;
 use App\Models\Results;
 use App\Models\Schedule;
+use App\Models\SubjectList;
 use Illuminate\Support\Facades\Hash;
 class DatabaseSeeder extends Seeder
 {
@@ -192,8 +193,9 @@ class DatabaseSeeder extends Seeder
 	 		$user->evaluator_rank = 'Student';
 	 		$user->academic_rank = 'Student';
 	 		$user->school_year = '3rd Year';
-	 		$user->section = 'A';
+	 		$user->section = 'Section A';
 	 		$user->class_status = 'Irregular';
+            $user->semester = '1st Semester';
 	        $user->save();
         }
         for ($i=0; $i < 10; $i++) { 
@@ -206,8 +208,9 @@ class DatabaseSeeder extends Seeder
 	 		$user->evaluator_rank = 'Student';
 	 		$user->academic_rank = 'Student';
 	 		$user->school_year = '3rd Year';
-	 		$user->section = 'A';
+	 		$user->section = 'Section A';
 	 		$user->class_status = 'Regular';
+            $user->semester = '1st Semester';
 	        $user->save();
         }
 
@@ -220,7 +223,7 @@ class DatabaseSeeder extends Seeder
 	        $user->campus = 'CPSU Hinoba-an Campus';
 	        $user->photos = 'sample.jpg';
 	 		$user->name = 'name'.$i;
-	 		$user->department = 'Bachelor of Science Information Technology';
+	 		$user->department = 'College of Computer Study';
 	 		$user->academic_rank = 'PSI II';
 	 		$user->status = 'Faculty';
 	        $user->save();
@@ -233,7 +236,7 @@ class DatabaseSeeder extends Seeder
 	        $user->campus = 'CPSU Hinoba-an Campus';
 	        $user->photos = 'sample.jpg';
 	 		$user->name = 'name'.$i;
-	 		$user->department = 'Bachelor of Science Information Technology';
+	 		$user->department = 'College of Computer Study';
 	 		$user->academic_rank = 'PSI II';
 	 		$user->status = 'Staff';
 	        $user->save();
@@ -261,6 +264,527 @@ class DatabaseSeeder extends Seeder
 	        $user->q19 = 'Structures/re-structures learning and teaching-learning context to enhance attainment of collective learning objectives.';
 	        $user->q20 = 'Use of Instructional Materials (audio/video materials: fieldtrips, film showing, computer aided instruction and etc.) to reinforces learning processes.';
 	        $user->save();
+
+
+            $subject = new SubjectList;
+            $subject->subject = 'CCIT 01- INTRODUCTION TO COMPUTING';
+            $subject->department = 'College of Computer Study';
+            $subject->semester = '1st Semester';
+            $subject->year = '1st Year';
+            $subject->save();
+
+             $subject = new SubjectList;
+            $subject->subject = 'CCIT 02- COMPUTER PROGRAMMING';
+            $subject->department = 'College of Computer Study';
+            $subject->semester = '1st Semester';
+            $subject->year = '1st Year';
+            $subject->save();
+
+             $subject = new SubjectList;
+            $subject->subject = 'GEC 1- Understanding the Self';
+            $subject->department = 'College of Computer Study';
+            $subject->semester = '1st Semester';
+            $subject->year = '1st Year';
+            $subject->save();
+
+             $subject = new SubjectList;
+            $subject->subject = 'GEC 2- Reading in Philippine History';
+            $subject->department = 'College of Computer Study';
+            $subject->semester = '1st Semester';
+            $subject->year = '1st Year';
+            $subject->save();
+
+             $subject = new SubjectList;
+            $subject->subject = 'GEC 4 - Mathematics in the Modern World';
+            $subject->department = 'College of Computer Study';
+            $subject->semester = '1st Semester';
+            $subject->year = '1st Year';
+            $subject->save();
+
+             $subject = new SubjectList;
+            $subject->subject = 'GEC 5- Purposive Communication';
+            $subject->department = 'College of Computer Study';
+            $subject->semester = '1st Semester';
+            $subject->year = '1st Year';
+            $subject->save();
+
+
+             $subject = new SubjectList;
+            $subject->subject = 'GEC 6 - Art Appreciation';
+            $subject->department = 'College of Computer Study';
+            $subject->semester = '1st Semester';
+            $subject->year = '1st Year';
+            $subject->save();
+
+
+             $subject = new SubjectList;
+            $subject->subject = 'PE1 - Movement Enhancement';
+            $subject->department = 'College of Computer Study';
+            $subject->semester = '1st Semester';
+            $subject->year = '1st Year';
+            $subject->save();
+
+
+             $subject = new SubjectList;
+            $subject->subject = 'CCIT 04- DATA STRUCTURES AND ALGORITHM';
+            $subject->department = 'College of Computer Study';
+            $subject->semester = '1st Semester';
+            $subject->year = '2nd Year';
+            $subject->save();
+
+
+             $subject = new SubjectList;
+            $subject->subject = 'PCIT 03- INTEGRATIVE PROGRAMMING AND TECHNOLOGIES 1';
+            $subject->department = 'College of Computer Study';
+            $subject->semester = '1st Semester';
+            $subject->year = '2nd Year';
+            $subject->save();
+
+
+             $subject = new SubjectList;
+            $subject->subject = 'PFIT 01- PLATFORM TECHNOLOGIES';
+            $subject->department = 'College of Computer Study';
+            $subject->semester = '1st Semester';
+            $subject->year = '2nd Year';
+            $subject->save();
+
+
+             $subject = new SubjectList;
+            $subject->subject = 'PCIT 04- INTRODUCTION TO HUMAN COMPUTER INTERACTION';
+            $subject->department = 'College of Computer Study';
+            $subject->semester = '1st Semester';
+            $subject->year = '2nd Year';
+            $subject->save();
+
+
+             $subject = new SubjectList;
+            $subject->subject = 'PCIT 05- SOCIAL AND PROFESSIONAL ISSUES';
+            $subject->department = 'College of Computer Study';
+            $subject->semester = '1st Semester';
+            $subject->year = '2nd Year';
+            $subject->save();
+
+             $subject = new SubjectList;
+            $subject->subject = 'GEL 2 - Philippine Indigenous Communities';
+            $subject->department = 'College of Computer Study';
+            $subject->semester = '1st Semester';
+            $subject->year = '2nd Year';
+            $subject->save();
+
+            $subject = new SubjectList;
+            $subject->subject = 'PE 3- PATH FIT 1';
+            $subject->department = 'College of Computer Study';
+            $subject->semester = '1st Semester';
+            $subject->year = '2nd Year';
+            $subject->save();
+
+
+            $subject = new SubjectList;
+            $subject->subject = 'CCIT 06- APPLICATIONS DEVELOPMENT AND EMERGING TECHNOLOGY';
+            $subject->department = 'College of Computer Study';
+            $subject->semester = '1st Semester';
+            $subject->year = '3rd Year';
+            $subject->save();
+
+
+            $subject = new SubjectList;
+            $subject->subject = 'PFIT 03- WEB SYSTEMS AND TECHNOLOGY';
+            $subject->department = 'College of Computer Study';
+            $subject->semester = '1st Semester';
+            $subject->year = '3rd Year';
+            $subject->save();
+
+
+            $subject = new SubjectList;
+            $subject->subject = 'PCIT 09- NETWORKING 2';
+            $subject->department = 'College of Computer Study';
+            $subject->semester = '1st Semester';
+            $subject->year = '3rd Year';
+            $subject->save();
+
+             $subject = new SubjectList;
+            $subject->subject = 'PCIT 11- SYSTEM ADMINISTRATION AND MAINTENANCE';
+            $subject->department = 'College of Computer Study';
+            $subject->semester = '1st Semester';
+            $subject->year = '3rd Year';
+            $subject->save();
+
+            $subject = new SubjectList;
+            $subject->subject = 'PSIT 04- TECHNOPRENUERSHIP';
+            $subject->department = 'College of Computer Study';
+            $subject->semester = '1st Semester';
+            $subject->year = '3rd Year';
+            $subject->save();
+
+
+            $subject = new SubjectList;
+            $subject->subject = 'PSIT 03- IT SECURITY AND MANAGEMENT';
+            $subject->department = 'College of Computer Study';
+            $subject->semester = '1st Semester';
+            $subject->year = '3rd Year';
+            $subject->save();
+
+
+            $subject = new SubjectList;
+            $subject->subject = 'GEL 9- Life and Works and Writings of Dr. Jose Rizal 3';
+            $subject->department = 'College of Computer Study';
+            $subject->semester = '1st Semester';
+            $subject->year = '3rd Year';
+            $subject->save();
+
+            $subject = new SubjectList;
+            $subject->subject = 'GEC 1- Understanding the Self';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '1st Year';
+            $subject->save();
+
+            $subject = new SubjectList;
+            $subject->subject = 'GEC 2- Reading in Philippine History';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '1st Year';
+            $subject->save();
+
+
+            $subject = new SubjectList;
+            $subject->subject = 'GEC 4 - Mathematics in the Modern World';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '1st Year';
+            $subject->save();
+
+
+            $subject = new SubjectList;
+            $subject->subject = 'GEC 5 - Purposive Communication';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '1st Year';
+            $subject->save();
+
+            $subject = new SubjectList;
+            $subject->subject = 'GEC 6 - Art Appreciation';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '1st Year';
+            $subject->save();
+
+            $subject = new SubjectList;
+            $subject->subject = 'Prof.Ed.1- The Child and Adolescent Learners and Learning Principles';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '1st Year';
+            $subject->save();
+
+
+            $subject = new SubjectList;
+            $subject->subject = 'Prof.Ed. 2- Teaching Profession';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '1st Year';
+            $subject->save();
+
+
+            $subject = new SubjectList;
+            $subject->subject = 'Sci. 1 - Teaching Science in Elementary Grades (Biology and Chemistry)';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '1st Year';
+            $subject->save();
+
+            $subject = new SubjectList;
+            $subject->subject = 'PE 1- Movement Enhancement';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '1st Year';
+            $subject->save();
+
+            $subject = new SubjectList;
+            $subject->subject = 'NSTP- National Service Training Program 1';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '1st Year';
+            $subject->save();
+
+
+            $subject = new SubjectList;
+            $subject->subject = 'GEL 2 - Philippine Indigenous Communities';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '2nd Year';
+            $subject->save();
+
+
+            $subject = new SubjectList;
+            $subject->subject = 'Prof.Ed. 5 -Technology for Teaching and Learning 1';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '2nd Year';
+            $subject->save();
+
+
+            $subject = new SubjectList;
+            $subject->subject = 'Prof. Ed 6- Assessment in Student Learning';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '2nd Year';
+            $subject->save();
+
+            $subject = new SubjectList;
+            $subject->subject = 'STAT- Elementary Statistics';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '2nd Year';
+            $subject->save();
+
+
+            $subject = new SubjectList;
+            $subject->subject = 'TLE 1- Edukasyong Pantahanan at Pangkabuhayan';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '2nd Year';
+            $subject->save();
+
+
+            $subject = new SubjectList;
+            $subject->subject = 'MATH 1- Teaching Math in the Primary Grade';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '2nd Year';
+            $subject->save();
+
+
+            $subject = new SubjectList;
+            $subject->subject = 'ENG. 1 - Teaching English in Elementary Grades';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '2nd Year';
+            $subject->save();
+
+            $subject = new SubjectList;
+            $subject->subject = 'VED 1- Good Manners and Right Conduct (Edukasyon sa Pagpakatao)';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '2nd Year';
+            $subject->save();
+
+
+            $subject = new SubjectList;
+            $subject->subject = 'PE 3- Physical Activities Towards Health and Fitness I';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '2nd Year';
+            $subject->save();
+
+
+            $subject = new SubjectList;
+            $subject->subject = 'GEM- Life and Works of Rizal';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '3rd Year';
+            $subject->save();
+
+
+            $subject = new SubjectList;
+            $subject->subject = 'Prof.Ed. 9- The Teacher and the Social Curriculum';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '3rd Year';
+            $subject->save();
+
+            $subject = new SubjectList;
+            $subject->subject = 'Prof. Ed. 10- Building and Enhancing New Literacies Across Curriculum';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '3rd Year';
+            $subject->save();
+
+
+            $subject = new SubjectList;
+            $subject->subject = 'SSC 1- Teaching Social Studies in the Elementary Grades (Philippine History & Government)';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '3rd Year';
+            $subject->save();
+
+
+            $subject = new SubjectList;
+            $subject->subject = 'FIL 1 - Pagtuturo ng Filipino sa Elementarya I - Estruktura at Gamit ng Wikang Filipino';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '3rd Year';
+            $subject->save();
+
+
+            $subject = new SubjectList;
+            $subject->subject = 'TTL 2- Technology for Teaching and Learning in Elementary Grades';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '3rd Year';
+            $subject->save();
+
+            $subject = new SubjectList;
+            $subject->subject = 'Research 2- Research in Education';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '3rd Year';
+            $subject->save();
+
+
+            $subject = new SubjectList;
+            $subject->subject = 'FS 1- Field Study 1- Observation of Teaching and Learning in Actual School Environment';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '4th Year';
+            $subject->save();
+
+
+            $subject = new SubjectList;
+            $subject->subject = 'FS 2- Field Study 2- Participation and Teaching Assistantship';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '4th Year';
+            $subject->save();
+
+
+            $subject = new SubjectList;
+            $subject->subject = 'ST 2- Special Topic- Program Outcomes Assessment';
+            $subject->department = 'College of Teachers Education';
+            $subject->semester = '1st Semester';
+            $subject->year = '4th Year';
+            $subject->save();
+
+            // $subject = new SubjectList;
+            // $subject->subject = '';
+            // $subject->department = 'College of Teachers Education';
+            // $subject->semester = '1st Semester';
+            // $subject->save();
+
+
+            // $subject = new SubjectList;
+            // $subject->subject = '';
+            // $subject->department = '';
+            // $subject->semester = '1st Semester';
+            // $subject->save();
+
+
+            // $subject = new SubjectList;
+            // $subject->subject = '';
+            // $subject->department = '';
+            // $subject->semester = '1st Semester';
+            // $subject->save();
+
+
+            // $subject = new SubjectList;
+            // $subject->subject = '';
+            // $subject->department = '';
+            // $subject->semester = '1st Semester';
+            // $subject->save();
+
+            // $subject = new SubjectList;
+            // $subject->subject = '';
+            // $subject->department = '';
+            // $subject->semester = '1st Semester';
+            // $subject->save();
+
+
+            // $subject = new SubjectList;
+            // $subject->subject = '';
+            // $subject->department = '';
+            // $subject->semester = '1st Semester';
+            // $subject->save();
+
+
+            // $subject = new SubjectList;
+            // $subject->subject = '';
+            // $subject->department = '';
+            // $subject->semester = '1st Semester';
+            // $subject->save();
+
+
+            // $subject = new SubjectList;
+            // $subject->subject = '';
+            // $subject->department = '';
+            // $subject->semester = '1st Semester';
+            // $subject->save();
+
+            // $subject = new SubjectList;
+            // $subject->subject = '';
+            // $subject->department = '';
+            // $subject->semester = '1st Semester';
+            // $subject->save();
+
+
+            // $subject = new SubjectList;
+            // $subject->subject = '';
+            // $subject->department = '';
+            // $subject->semester = '1st Semester';
+            // $subject->save();
+
+
+            // $subject = new SubjectList;
+            // $subject->subject = '';
+            // $subject->department = '';
+            // $subject->semester = '1st Semester';
+            // $subject->save();
+
+
+            // $subject = new SubjectList;
+            // $subject->subject = '';
+            // $subject->department = '';
+            // $subject->semester = '1st Semester';
+            // $subject->save();
+
+            // $subject = new SubjectList;
+            // $subject->subject = '';
+            // $subject->department = '';
+            // $subject->semester = '1st Semester';
+            // $subject->save();
+
+
+            // $subject = new SubjectList;
+            // $subject->subject = '';
+            // $subject->department = '';
+            // $subject->semester = '1st Semester';
+            // $subject->save();
+
+
+            // $subject = new SubjectList;
+            // $subject->subject = '';
+            // $subject->department = '';
+            // $subject->semester = '1st Semester';
+            // $subject->save();
+
+
+            // $subject = new SubjectList;
+            // $subject->subject = '';
+            // $subject->department = '';
+            // $subject->semester = '1st Semester';
+            // $subject->save();
+
+            // $subject = new SubjectList;
+            // $subject->subject = '';
+            // $subject->department = '';
+            // $subject->semester = '1st Semester';
+            // $subject->save();
+
+
+            // $subject = new SubjectList;
+            // $subject->subject = '';
+            // $subject->department = '';
+            // $subject->semester = '1st Semester';
+            // $subject->save();
+
+
+            // $subject = new SubjectList;
+            // $subject->subject = '';
+            // $subject->department = '';
+            // $subject->semester = '1st Semester';
+            // $subject->save();
+
+
+
+
 
         
     }

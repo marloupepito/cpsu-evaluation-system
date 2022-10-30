@@ -15,11 +15,20 @@ class EvaluatorController extends Controller
             'campus'=>['required'],
             'campusid'=>['required'],
         ]);
-        $users = Evaluator::where([['class_status', '=' ,$request->status],['campus', '=' ,$request->campus],['campusid', '=' ,$request->campusid]])
-        ->get();
-        return response()->json([
-            'status' => $users
-        ]);
+       
+        if($request->year === null ||  $request->section === null ||  $request->section === null){
+             $users = Evaluator::where([['class_status', '=' ,$request->status],['campus', '=' ,$request->campus],['campusid', '=' ,$request->campusid]])
+                    ->get();
+                    return response()->json([
+                        'status' => $users
+                    ]);
+        }else{
+             $users = Evaluator::where([['course', '=' ,$request->department],['section', '=' ,$request->section],['school_year', '=' ,$request->year],['class_status', '=' ,$request->status],['campus', '=' ,$request->campus],['campusid', '=' ,$request->campusid]])
+                    ->get();
+                    return response()->json([
+                        'status' => $users
+                    ]);
+        }
     }
     public function scan_qrcode(Request $request){
          $request->validate([
@@ -31,7 +40,7 @@ class EvaluatorController extends Controller
         ]);
 
          if($request->type === 'student'){
-              $users = Evaluator::where([['campusid', '=' ,$request->campusid],['campus', '=' ,$request->campus],['id_number', '=' ,$request->username],['password','=',$request->password]])
+              $users = Evaluator::where([['id_number','=',$request->username],['campusid', '=' ,$request->campusid],['campus', '=' ,$request->campus],['id', '=' ,$request->evaluatorid],['password','=',$request->password]])
                 ->get();
                 if(count($users) !== 0){
                     $request->session()->put('evaluator_type', 'student');
@@ -46,50 +55,13 @@ class EvaluatorController extends Controller
                     ]);
                 }
          }else if($request->type === 'peer'){
-               $users = Faculty::where([['campusid', '=' ,$request->campusid],['campus', '=' ,$request->campus],['id_number', '=' ,$request->username],['password','=',$request->password]])
-                ->get();
-                if(count($users) !== 0){
-                    $request->session()->put('evaluator_type', 'peer');
-                    $request->session()->put('username', $request->username);
-                    $request->session()->put('password', $request->password);
-                    return response()->json([
-                        'status' => 'success'
-                    ]);
-                }else{
-                     return response()->json([
-                        'status' => 'error'
-                    ]);
-                }
+            
          }else if($request->type === 'self'){
-               $users = Faculty::where([['campusid', '=' ,$request->campusid],['campus', '=' ,$request->campus],['id_number', '=' ,$request->username],['password','=',$request->password]])
-                ->get();
-                if(count($users) !== 0){
-                    $request->session()->put('evaluator_type', 'self');
-                    $request->session()->put('username', $request->username);
-                    $request->session()->put('password', $request->password);
-                    return response()->json([
-                        'status' => 'success'
-                    ]);
-                }else{
-                     return response()->json([
-                        'status' => 'error'
-                    ]);
-                }
+             
+
          }else if($request->type === 'supervisor'){
-            $users = User::where([['id', '=' ,$request->campusid],['campus', '=' ,$request->campus],['id_number', '=' ,$request->username],['password','=',$request->password]])
-                ->get();
-                if(count($users) !== 0){
-                    $request->session()->put('evaluator_type', 'supervisor');
-                    $request->session()->put('username', $request->username);
-                    $request->session()->put('password', $request->password);
-                    return response()->json([
-                        'status' => 'success'
-                    ]);
-                }else{
-                     return response()->json([
-                        'status' => 'error'
-                    ]);
-                }
+            
+
          }
 
       
@@ -156,6 +128,7 @@ class EvaluatorController extends Controller
         $user->school_year = $request->year;
         $user->section = $request->section;
         $user->class_status = $request->status;
+        $user->semester = $request->sem;
         $user->save();
 
         $users = Evaluator::where([['class_status', '=' ,$request->status],['campus', '=' ,$request->campus],['campusid', '=' ,$request->campusid]])

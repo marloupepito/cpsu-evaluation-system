@@ -41,7 +41,7 @@
             </span> -->
         <template slot="table-row" slot-scope="props">
             <span v-if="props.column.field == 'qr'">
-              <a @click="getQR([props.row.id_number,props.row.password])" class="btn btn-primary btn-xs d-block">QR Code</a>
+              <a @click="getQR([props.row.id,props.row.id_number,props.row.password])" class="btn btn-primary btn-xs d-block">QR Code</a>
             </span>
         </template>
         </vue-good-table>

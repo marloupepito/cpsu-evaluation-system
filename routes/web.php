@@ -7,6 +7,8 @@ use App\http\Controllers\QuestionaireController;
 use App\http\Controllers\ResultsController;
 use App\http\Controllers\ScheduleController;
 use App\http\Controllers\UsersController;
+use App\http\Controllers\SubjectLoadingController;
+use App\http\Controllers\StudentSubjectLoadingController;
 use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
@@ -86,6 +88,14 @@ Route::post('/user_login','UsersController@user_login');
 Route::post('/get_all_users','UsersController@get_all_users');
 Route::post('/get_all_users2','UsersController@get_all_users2');
 Route::post('/add_campus','UsersController@add_campus');
+
+Route::post('/get_subject_loading','SubjectLoadingController@get_subject_loading');
+Route::post('/add_subject_loaded','SubjectLoadingController@add_subject_loaded');
+Route::post('/select_course_year','SubjectLoadingController@select_course_year');
+
+Route::post('/get_student_subject_loading','StudentSubjectLoadingController@get_student_subject_loading');
+
+
 Route::get('/{vue?}',function(){
     return view('welcome');
 })->where('vue','[\/\w\.-]*');

@@ -11,18 +11,20 @@ switch (academic) {
             { path: '/adminstrator/main/dashboard', icon: 'fa fa-sitemap',color:'green', title: 'Main Dashboard'},
              { path: '/adminstrator/main/accounts', icon: 'fa fa-school',color:'green', title: 'Account Campuses'},
             { 
-             path: '/adminstrator/main/students', icon: 'fa fa-user-graduate',color:'green', title: 'Students',
-                children: [
-                { path: '/adminstrator/main/students/regular_students', title: 'Regular Students' },
-                { path: '/adminstrator/main/students/irregular_students', title: 'Irregular Students' },
-              ]
+               path: '/adminstrator/main/students/regular_students', icon: 'fa fa-user-graduate',color:'green', title: 'Students',
+             // path: '/adminstrator/main/students', icon: 'fa fa-user-graduate',color:'green', title: 'Students',
+             //    children: [
+             //    { path: '/adminstrator/main/students/regular_students', title: 'Regular Students' },
+             //    { path: '/adminstrator/main/students/irregular_students', title: 'Irregular Students' },
+             //  ]
             },
-            { path: '/adminstrator/main/faculty-staff', icon: 'fa fa-users-gear',color:'green', title: 'Faculty | Staff',
-              children: [
-                { path: '/adminstrator/main/faculty-staff/faculty', title: 'CPSU Faculty' },
-                { path: '/adminstrator/main/faculty-staff/staff', title: 'CPSU Staff' },
-              ]
-            },
+             { path: '/adminstrator/main/faculty-staff/faculty', icon: 'fa fa-users-gear',color:'green', title: 'Faculty',},
+            // { path: '/adminstrator/main/faculty-staff', icon: 'fa fa-users-gear',color:'green', title: 'Faculty',
+            //   children: [
+            //     { path: '/adminstrator/main/faculty-staff/faculty', title: 'CPSU Faculty' },
+            //     { path: '/adminstrator/main/faculty-staff/staff', title: 'CPSU Staff' },
+            //   ]
+            // },
             { 
              path: '/adminstrator/main/results', icon: 'fa fa-chart-pie',color:'green', title: 'Results',
             },
@@ -34,18 +36,21 @@ switch (academic) {
     default:
     sidebarMenu =  [
             { path: '/adminstrator/dashboard', icon: 'fa fa-sitemap',color:'green', title: 'Dashboard'},
-             { path: '/adminstrator/students', icon: 'fa fa-user-graduate',color:'green', title: 'Students',
-              children: [
-                { path: '/adminstrator/students/regular_students', title: 'Regular Students' },
-                { path: '/adminstrator/students/irregular_students', title: 'Irregular Students' }
-              ]
-            },
-            { path: '/adminstrator/faculty', icon: 'fa fa-users-cog',color:'green', title: 'Faculty | Staff',
-              children: [
-                { path: '/adminstrator/faculty/faculty', title: 'CPSU Faculty' },
-                { path: '/adminstrator/faculty/staff', title: 'CPSU Staff' },
-              ]
-            },{ 
+            { path: '/adminstrator/students/regular_students', icon: 'fa fa-user-graduate',color:'green', title: 'Students', },
+            //  { path: '/adminstrator/students', icon: 'fa fa-user-graduate',color:'green', title: 'Students',
+            //   children: [
+            //     { path: '/adminstrator/students/regular_students', title: 'Regular Students' },
+            //     { path: '/adminstrator/students/irregular_students', title: 'Irregular Students' }
+            //   ]
+            // },
+            { path: '/adminstrator/faculty/faculty', icon: 'fa fa-users-cog',color:'green', title: 'Faculty'},
+            // { path: '/adminstrator/faculty', icon: 'fa fa-users-cog',color:'green', title: 'Faculty | Staff',
+            //   children: [
+            //     { path: '/adminstrator/faculty/faculty', title: 'CPSU Faculty' },
+            //     { path: '/adminstrator/faculty/staff', title: 'CPSU Staff' },
+            //   ]
+            // },
+            { 
              path: '/adminstrator/results/allresults', icon: 'fa fa-chart-pie',color:'green', title: 'Results',
               // children: [
               //   { path: '/adminstrator/results/allresults', title: 'All Results' },

@@ -40,6 +40,7 @@ class CreateUsersTable extends Migration
             $table->string('section')->nullable();
             $table->string('status')->nullable();
             $table->string('year')->nullable();
+            $table->string('semester')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -63,7 +64,24 @@ class CreateUsersTable extends Migration
 
         Schema::create('faculty_subject_loading', function (Blueprint $table) {
             $table->id();
-            $table->string('id_number')->unique()->nullable();
+            $table->string('id_number')->nullable();
+            $table->bigInteger('campusid')->nullable();
+            $table->string('subject')->nullable();
+            $table->string('campus')->nullable();
+            $table->string('semester')->nullable();
+            $table->string('school_year')->nullable();
+            $table->string('department')->nullable();
+            $table->string('section')->nullable();
+            $table->string('year')->nullable();
+            $table->string('program')->nullable();
+            $table->rememberToken();
+            $table->timestamps();
+        });
+
+        Schema::create('student_subject_loading', function (Blueprint $table) {
+            $table->id();
+            $table->string('id_number')->nullable();
+            $table->string('evaluator_id')->nullable();
             $table->bigInteger('campusid')->nullable();
             $table->string('subject')->nullable();
             $table->string('campus')->nullable();

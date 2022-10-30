@@ -40,8 +40,8 @@
 				</table>
 
 <form @submit="submitForm" id='myForm'>
-<b>Select Evaluatee</b>
-<v-select :options="faculty" v-model="facultyValue" required @input="selectEvaluatee"></v-select><br />
+<b>Evaluatee: {{evaluateeName}}</b>
+<!-- <v-select :options="faculty" v-model="facultyValue" required @input="selectEvaluatee"></v-select><br /> -->
 				<table class="table table-bordered">
 					  <thead>
 					    <tr class="table-secondary">
@@ -491,7 +491,6 @@
 				<br /><br />
 				<div class="fixed-bottom">
 
-				<notifications group="top-center" class="align-middle text-center" position="top center" :speed="500" />
 				
 				<button type="submit" @submit="submitForm" :disabled="disable" style="z-index:-1 !important" class="what btn btn-primary btn-sm  d-block col-md-12 col-xs-12 col-sm-12 offset-md-3">SUBMIT</button>
 				</div>
@@ -509,7 +508,7 @@ import axios from 'axios'
 		data () {
 		    return {
 		    	comment:null,
-		    	disable:true,
+		    	disable:false,
 		      faculty:[],
 		      evaluator_id:[],
 		      facultyValue:null,
@@ -535,15 +534,19 @@ import axios from 'axios'
 		      q19:null,
 		      q20:null,
 		      info:[],
+		      question:'',
+		      evaluateeName:'',
+		      id2:''
 		    }
 		  },
 		  methods:{
 		  	submitForm (e){
 		  		e.preventDefault();
 		  		const form = {
+		  				id2:this.id2,
 		  				campus:this.info.campus,
 		  				campusid:this.info.campusid,
-		  				name:this.info.name,
+		  				name:this.evaluateeName,
 		  			  comment:this.comment,
 		  			  evaluator:this.evaluator_id,
 		  			  evaluatee:this.facultyValue,
@@ -571,24 +574,41 @@ import axios from 'axios'
 							  cancelButtonText: 'No!',
 							  confirmButtonText: 'Yes!'
 							}).then((result) => {
-							  if (result.isConfirmed) {
-							    axios.post('/get_all_faculty')
+
+
+								axios.post('/get_all_faculty')
 							     .then(res=>{
-							     	this.faculty = res.data.status.map(a =>a.name)
+							     	if(res.data.status.length ===0){
+							     		window.location ='/'
+							     		}else{
+							     			this.id2 = res.data.status[0].id
+							     			this.evaluateeName = res.data.faculty.name
+							     			this.facultyValue = res.data.status[0].id_number
+							     		}
 							     })
-							      this.$swal.close()
-							      this.disable=true
-							      document.getElementById("myForm").reset();
-							  }else{
-							  	axios.post('/logout_evaluator')
-							     .then(res=>{
-							       	if(res.data.status === 'success'){
-							       		window.location = '/'
-							       	}else{
-										console.log('error')
-							       	}
-							      })
-							  }
+
+
+
+							//  if (result.isConfirmed) {
+							//    axios.post('/get_all_faculty')
+							  //   .then(res=>{
+							//     	this.faculty = res.data.status.map(a =>a.name)
+							//     })
+							//      this.$swal.close()
+							//      this.disable=true
+							 //     document.getElementById("myForm").reset();
+							//  }else{
+							//  	axios.post('/logout_evaluator')
+							//     .then(res=>{
+							//       	if(res.data.status === 'success'){
+							 //      		window.location = '/'
+							//       	}else{
+							//			console.log('error')
+							 //      	}
+							 //     })
+							 // }
+
+
 							})
 		  			})
 		  		.catch(err=>{
@@ -628,6 +648,7 @@ import axios from 'axios'
 		        if(res.data.status === 'success'){
 		            this.info = res.data.info[0]
 		            this.evaluator_id = res.data.id
+
 		        }else{
 		           window.location='/'
 		        }
@@ -640,7 +661,13 @@ import axios from 'axios'
 
 		     axios.post('/get_all_faculty')
 		     .then(res=>{
-		     	this.faculty = res.data.status.map(a =>a.name)
+		     	if(res.data.status.length ===0){
+		     		window.location ='/'
+		     		}else{
+		     			this.id2 = res.data.status[0].id
+		     			this.evaluateeName = res.data.faculty.name
+		     			this.facultyValue = res.data.status[0].id_number
+		     		}
 		     })
 		}
 	}

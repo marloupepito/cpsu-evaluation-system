@@ -53,8 +53,9 @@ export default {
     	this.pause()
     	const a = content.split(",");
       const credentials = {
-        username:a[0],
-        password:a[1],
+        evaluatorid:a[0],
+        username:a[1],
+        password:a[2],
         campus:this.campus,
         campusid:this.campusid,
         type:this.type,
@@ -62,6 +63,7 @@ export default {
 
    
      this.verify = false
+     console.log(credentials)
      axios.post('/scan_qrcode',credentials)
      .then(res=>{
         if(res.data.status === 'success'){

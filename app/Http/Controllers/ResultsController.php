@@ -7,6 +7,7 @@ use App\Models\Results;
 use App\Models\Evaluator;
 use App\Models\Schedule;
 use App\Models\Faculty;
+use App\Models\StudentSubjectLoading;
 class ResultsController extends Controller
 {
      public function submit_form(Request $request){
@@ -24,6 +25,10 @@ class ResultsController extends Controller
         $total = ($request->commitment+$request->kos+$request->til+$request->mol) / 4;
         $aa = Evaluator::where('id_number', '=' ,$request->evaluator)
         ->first();
+
+        StudentSubjectLoading::where('id', $request->id2)
+      ->update(['program' => 'active']);
+
         Evaluator::where('id_number', $request->evaluator)
       ->update(['status' => 'active']);
         $zz = Schedule::where('id', '=' ,1)->first();

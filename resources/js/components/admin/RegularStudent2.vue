@@ -55,31 +55,34 @@
         </b-form-group>
 
         <b-form-group
-          label="Course"
+          label="Department"
           label-for="course-input"
           invalid-feedback="Student ID is required"
           :state="courseState"
         >
-          <b-form-input
+          <v-select
             id="course-input"
             v-model="course"
             :state="courseState"
             required
-          ></b-form-input>
+            :options="['College of Computer Study','College of Business Management','College of Teachers Education', 'College of Agriculture and Forestry','College of Criminal Justice Education']"
+          ></v-select>
+
         </b-form-group>
 
         <b-form-group
-          label="School Year"
+          label="Year"
           label-for="year-input"
           invalid-feedback="Student ID is required"
           :state="yearState"
         >
-          <b-form-input
+          <v-select
             id="year-input"
             v-model="year"
             :state="yearState"
             required
-          ></b-form-input>
+            :options="['1st Year','2nd Year','3rd Year', '4th Year']"
+          ></v-select>
         </b-form-group>
 
         <b-form-group
@@ -88,12 +91,13 @@
           invalid-feedback="Student ID is required"
           :state="sectionState"
         >
-          <b-form-input
+          <v-select
             id="section-input"
             v-model="section"
             :state="sectionState"
             required
-          ></b-form-input>
+             :options="['Section A','Section B','Section C', 'Section D', 'Section E', 'Section F']"
+          ></v-select>
         </b-form-group>
 
         <b-form-group
@@ -102,18 +106,50 @@
           invalid-feedback="Student ID is required"
           :state="semState"
         >
-          <b-form-input
+          <v-select
             id="sem-input"
             v-model="sem"
             :state="semState"
             required
-          ></b-form-input>
+            :options="['1st Semester','2nd Semester']"
+          ></v-select>
         </b-form-group>
       </form>
     </b-modal>
+<br />
 
-    	<br />
-				
+
+    <div class="row shadow p-2">
+    <div class='col-md-4'>
+          <v-select
+            id="section-input"
+            v-model="department2"
+            placeholder="Select Department"
+            :options="['College of Computer Study','College of Business Management','College of Teachers Education', 'College of Agriculture and Forestry','College of Criminal Justice Education']"
+          ></v-select>
+      </div>
+      <div class='col-md-3'>
+          <v-select
+            id="section-input"
+            v-model="year2"
+            placeholder="Select Year"
+            :options="['1st Year','2nd Year','3rd Year', '4th Year']"
+          ></v-select>
+      </div>
+       <div class='col-md-3'>
+          <v-select
+            id="section-input"
+            v-model="section2"
+            placeholder="Select Section"
+            :options="['Section A','Section B','Section C', 'Section D', 'Section E', 'Section F']"
+          ></v-select>
+      </div>
+
+       <div class='col-md-2'>
+          <button @click="searchYS" class="btn btn-md btn-green">Search</button>
+      </div>
+    </div>
+		<br />
 		<!-- END mailbox-content -->
 		<div class=" card shadow">
         <vue-good-table
@@ -136,7 +172,14 @@
             </span> -->
         <template slot="table-row" slot-scope="props">
             <span v-if="props.column.field == 'qr'">
-              <a @click="getQR([props.row.id_number,props.row.password])" class="btn btn-primary btn-xs d-block">QR Code</a>
+              <div class="row">
+                <!-- <div class="col-md-6">
+                  <button @click="gotoStudentLoaded(props.row.id)" class="btn btn-green btn-xs d-block w-100">Loaded</button>
+                </div> -->
+                <div class="col-md-12">
+                  <a @click="getQR([props.row.id,props.row.id_number,props.row.password])" class="btn btn-primary btn-xs d-block">QR Code</a>
+                </div>
+              </div>
             </span>
         </template>
         </vue-good-table>
@@ -148,6 +191,7 @@
 <script>
 import AppOptions from '../assets/config/AppOptions.vue'
 import axios from 'axios'
+import moment from 'moment';
 export default {
   mounted(){
 
@@ -155,7 +199,10 @@ export default {
 		const campusid = localStorage.getItem("campusid");
     axios.post('/get_evaluators',{
       status:'Regular',
-      campusid:campusid,
+         department:null,
+        year:null,
+        section:null,
+        campusid:campusid,
       	campus:campus
 
     })
@@ -166,6 +213,25 @@ export default {
     })
   },
   methods:{
+    gotoStudentLoaded(id){
+      this.$router.push({path:'/adminstrator/students/loaded?'+id})
+      },
+    searchYS(){
+       axios.post('/get_evaluators',{
+            status:'Regular',
+            department:this.department2,
+              year:this.year2,
+              section:this.section2,
+              campusid:this.campusid,
+              campus:this.campus
+
+          })
+          .then(res=>{
+            this.rows = res.data.status
+            console.log(res.data.status)
+          })
+      },
+
     getQR (e){
       this.$swal({
       imageUrl: "http://api.qrserver.com/v1/create-qr-code/?data=" + e,
@@ -242,6 +308,9 @@ export default {
 		AppOptions.appContentClass = 'p-0';
 
 		return { 
+      department2:'',
+      section2:'',
+      year2:'',
       name: '',
       nameState: null,
       studentid: '',
@@ -278,7 +347,7 @@ export default {
           field: 'class_status',
         },
         {
-          label: 'QR code',
+          label: 'Action',
           field: 'qr',
         },
       ],
