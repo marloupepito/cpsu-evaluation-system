@@ -1,14 +1,7 @@
 <template>
  <div>
     <qrcode-stream :camera="camera" @decode="onDecode" @init="onInit" style="height:100vh">
-      <div v-if="verify === true" v-show="showScanConfirmation" class="scan-confirmation">
-        <center>
-        	<div style="padding-top:200px">
-        	<img src="/images/x.png" alt="Checkmark" width="100px" height="100px" />
-        	<h2 class="text-danger mt-2">Incorrect QR code!</h2>
-        </div>
-        </center>
-      </div>
+  
     </qrcode-stream>
   </div>
 </template>
@@ -63,7 +56,6 @@ export default {
 
    
      this.verify = false
-     console.log(credentials)
      axios.post('/scan_qrcode',credentials)
      .then(res=>{
         if(res.data.status === 'success'){
@@ -129,17 +121,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.scan-confirmation {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-
-  background-color: rgba(255, 255, 255, .8);
-
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-}
-</style>

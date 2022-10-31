@@ -559,11 +559,11 @@ import axios from 'axios'
 		  		axios.post('/submit_form',form)
 		  		.then(res=>{
 		  			//0
-		  				console.log(res.data.x1)
+		  			//	console.log(res.data.x1)
 		  				//.38
-						console.log(res.data.x2)
+				//		console.log(res.data.x2)
 						//0
-						console.log(res.data.x3)
+					//	console.log(res.data.x3)
 
 
 						this.$swal({
@@ -593,6 +593,7 @@ import axios from 'axios'
 							     })
 
 
+
 		  			})
 		  		.catch(err=>{
 		  				 this.disable=false
@@ -608,6 +609,7 @@ import axios from 'axios'
 
 		        }else{
 		           window.location='/'
+		           
 		        }
 		      })
 
@@ -620,8 +622,10 @@ import axios from 'axios'
 		     .then(result=>{
 			     	axios.post('/get_all_faculty')
 			    	 .then(res=>{
+			    	 	console.log(res.data.status)
 			     	if(res.data.status.length ===0){
-			     		window.location ='/'
+			     	 window.location ='/'
+
 			     		}else{
 			     			this.id2 = res.data.status[0].id
 			     			this.evaluateeName = res.data.faculty.name

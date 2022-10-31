@@ -23,18 +23,42 @@
 
 <script>
 import AppOptions from '../../config/AppOptions.vue'
-
+import axios from 'axios'
 export default {
 	name: 'SidebarNavProfile',
 	data() {
 		return {
 			stat: '',
-			appOptions: AppOptions
+			appOptions: AppOptions,
+			id:'',
+			academic_rank:'',
+			password:''
 		}
 	},
+	mounted(){
+			const a = localStorage.getItem("academic_rank");
+            const b = localStorage.getItem("campus");
+            const c = localStorage.getItem("campusid");
+			axios.post('/get_admin',{
+				academic_rank:a,
+				campus:b,
+				campusid:c
+			})
+			.then(res=>{
+				this.id=res.data.status.id
+				this.academic_rank=res.data.status.academic_rank
+				this.password=res.data.status.password
+			})
+		},
 	methods: {
 		expand: function() {
+
 			this.stat = (this.stat == 'expand') ? 'collapse' : 'expand'
+			 this.$swal({
+			      imageUrl: "http://api.qrserver.com/v1/create-qr-code/?data=" + [this.id,this.academic_rank,this.password],
+			      imageAlt: 'QR CODE',
+			      showConfirmButton: false,
+			    })
 		}
   }
 }

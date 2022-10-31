@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Faculty;
 use App\Models\Evaluator;
+use App\Models\User;
 use App\Models\FacultySubjectLoading;
 use App\Models\StudentSubjectLoading;
 use Illuminate\Support\Facades\Hash;
@@ -123,6 +124,103 @@ class FacultyController extends Controller
 
 
                 }   
+        }
+
+        else if($request->session()->get('evaluator_type') === 'self'){
+
+                $users = Faculty::where([['year', '=' ,null],['id_number', '=' ,$username],['password','=',$password]])
+               ->get();
+
+               if(count($users) !== 0){
+
+                   $subjectLoadingStudent = StudentSubjectLoading::where([['id_number', '=' ,$users[0]->id],['program', '=' ,null],['evaluator_id', '=' ,$users[0]->id]])
+                      ->get();
+
+                     if(count($subjectLoadingStudent) === 0){
+
+                          StudentSubjectLoading::create([
+                                'evaluator_id' => $users[0]->id,
+                                'id_number' => $users[0]->id,
+                                'campusid' => $users[0]->campusid,
+                                'department' => $users[0]->department,
+                            ]);
+                        
+                        
+                           return response()->json([
+                                'status' => $users,
+                                'faculty' =>'done',
+                                'console' => 'done'
+                            ]);
+
+                     }else{
+
+
+
+                            return response()->json([
+                                'status' => $subjectLoadingStudent,
+                                'faculty' => $users[0],
+                                'console' => 'done'
+                            ]);
+                     }
+
+
+
+               }else{
+                     return response()->json([
+                        'status' =>$users,
+                    ]);
+               }
+
+
+        }
+        else if($request->session()->get('evaluator_type') === 'supervisor'){
+
+            $users = User::where([['academic_rank','=',$username],['password','=',$password]])->first();
+         
+
+          $aaa = StudentSubjectLoading::where([['program', '=' ,null],['evaluator_id', '=' ,$users->id]])
+                    ->get();
+
+            $subjectLoadingStudent = StudentSubjectLoading::where([['evaluator_id', '=' ,$users->id],['program', '=' ,null]])
+                                   ->orWhere([['program', '=' ,'active'],['evaluator_id', '=' ,$users->id]])
+                ->get();
+
+
+                if(count($subjectLoadingStudent) === 0){
+
+                    $loading = Faculty::where('campusid','=',$users->id)->get();
+
+                    foreach ($loading as $load) {
+                        StudentSubjectLoading::create([
+                            'evaluator_id' => $users->id,
+                            'id_number' => $load->id,
+                            'campusid' => $load->campusid,
+                            'campus' => $load->campus,
+                        ]);
+                    }
+                   return response()->json([
+                        'status' => $users,
+                    ]);
+                }else{
+
+                     if(count($aaa) !== 0){
+                             $faculty = Faculty::where('id', '=',$aaa[0]->id_number)->first();
+                             return response()->json([
+                                'status' => $aaa,
+                                'faculty' =>$faculty,
+                                'console' => $faculty
+                            ]);
+                    }else{
+                             return response()->json([
+                                'status' => $aaa,
+                                'faculty' =>'done',
+                                'console' => 'done'
+                            ]);
+                    }
+
+                }
+               
+
         }
         //end
         

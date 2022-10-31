@@ -86,4 +86,16 @@ class UsersController extends Controller
             'status' => $users
         ]);
     }
+
+
+     public function get_admin(Request $request){
+
+
+        $users = DB::table('users')
+        ->where([['campus', '=' ,$request->campus],['id', '=' ,$request->campusid],['academic_rank', '=' ,$request->academic_rank]])
+        ->first();
+        return response()->json([
+            'status' => $users
+        ]);
+    }
 }

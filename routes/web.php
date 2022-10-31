@@ -55,6 +55,7 @@ Route::get('/scan_qr', function () {
 });
 
 Route::post('/logout','UsersController@logout');
+Route::post('/get_admin','UsersController@get_admin');
 Route::post('/get_evaluators','EvaluatorController@get_evaluators');
 Route::post('/logout_evaluator','EvaluatorController@logout_evaluator');
 
