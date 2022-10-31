@@ -113,7 +113,7 @@
                   <a @click="gotoLoaded(props.row.id)" class="btn btn-green btn-xs d-block">Loaded</a>
                </div>
                <div class="col-md-6">
-                  <a @click="getQR([props.row.id,props.row.password,props.row.id_number])" class="btn btn-primary btn-xs d-block">QR Code</a>
+                  <a @click="getQR([props.row.id,props.row.id_number,props.row.password])" class="btn btn-primary btn-xs d-block">QR Code</a>
                </div>
             </div>
               

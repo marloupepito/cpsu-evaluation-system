@@ -25,18 +25,17 @@ class FacultyController extends Controller
      public function get_all_faculty(Request $request){
         $username = $request->session()->get('username');
         $password = $request->session()->get('password');
-         $users = Evaluator::where([['id_number', '=' ,$username],['password','=',$password]])
-        ->first();
+         
 
         if($request->session()->get('evaluator_type') === 'student'){
+            $users = Evaluator::where([['id_number', '=' ,$username],['password','=',$password]])
+            ->first();
+             $loading = FacultySubjectLoading::where([['department','=',$users->course],['year','=',$users->school_year],['semester','=',$users->semester]])->get();
 
-            $loading = FacultySubjectLoading::where([['department','=',$users->course],['year','=',$users->school_year],['semester','=',$users->semester]])->get();
-
-                
                 $aaa = StudentSubjectLoading::where([['program', '=' ,null],['evaluator_id', '=' ,$users->id]])
-                ->orWhere([['program', '<>' ,'active'],['evaluator_id', '=' ,$users->id]])
-                ->get();
-
+                    ->orWhere([['program', '<>' ,'active'],['evaluator_id', '=' ,$users->id]])
+                    ->get();
+                
                 $subjectLoadingStudent = StudentSubjectLoading::where([['program', '=' ,null],['evaluator_id', '=' ,$users->id]])
                 ->orWhere([['program', '=' ,'active'],['evaluator_id', '=' ,$users->id]])
                 ->get();
@@ -58,17 +57,74 @@ class FacultyController extends Controller
                    
                 }else{
 
-                }
+                    if(count($aaa) !== 0){
+                             $faculty = Faculty::where('id', '=',$aaa[0]->id_number)->first();
+                             return response()->json([
+                                'status' => $aaa,
+                                'faculty' =>$faculty,
+                                'console' => $faculty
+                            ]);
+                    }else{
+                             return response()->json([
+                                'status' => $aaa,
+                                'faculty' =>'done',
+                                'console' => 'done'
+                            ]);
+                    }
+                  
 
-                 $faculty = Faculty::where('id', '=',$subjectLoadingStudent[0]->id_number)->first();
-                    return response()->json([
-                        'status' => $aaa,
-                        'faculty' =>$faculty
-                    ]);
 
-         
+                }   
 
+        }else if($request->session()->get('evaluator_type') === 'peer'){
+            $users = Faculty::where([['id_number', '=' ,$username],['password','=',$password]])
+            ->first();
+
+                $loading = Faculty::where([['id','<>',$users->id],['campusid','=',$users->campusid],['department','=',$users->department]])->get();
+
+                $aaa = StudentSubjectLoading::where([['program', '=' ,null],['evaluator_id', '=' ,$users->id]])
+                    ->orWhere([['program', '<>' ,'active'],['evaluator_id', '=' ,$users->id]])
+                    ->get();
+                
+                $subjectLoadingStudent = StudentSubjectLoading::where([['program', '=' ,null],['evaluator_id', '=' ,$users->id]])
+                ->orWhere([['program', '=' ,'active'],['evaluator_id', '=' ,$users->id]])
+                ->get();
+
+                if(count($subjectLoadingStudent) === 0){
+
+                     foreach ($loading as $load) {
+
+                        StudentSubjectLoading::create([
+                            'evaluator_id' => $users->id,
+                            'id_number' => $load->id,
+                            'campusid' => $load->campusid,
+                            'department' => $load->department,
+                        ]);
+                    }
+
+                   
+                }else{
+
+                    if(count($aaa) !== 0){
+                             $faculty = Faculty::where('id', '=',$aaa[0]->id_number)->first();
+                             return response()->json([
+                                'status' => $aaa,
+                                'faculty' =>$faculty,
+                                'console' => $faculty
+                            ]);
+                    }else{
+                             return response()->json([
+                                'status' => $aaa,
+                                'faculty' =>'done',
+                                'console' => 'done'
+                            ]);
+                    }
+                  
+
+
+                }   
         }
+        //end
         
     }
 

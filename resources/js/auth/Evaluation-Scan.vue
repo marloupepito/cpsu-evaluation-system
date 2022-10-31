@@ -79,18 +79,35 @@ export default {
               },1500);
         }else{
            // this.verify = true
-            this.unpause()
-            this.$swal({
-            icon: 'error',
-            title: 'Incorrect QR code!',
-            showConfirmButton: false,
-            timer: 1000
-          })
+           if(res.data.status === 'done'){
+              this.unpause()
+                this.$swal({
+                icon: 'warning',
+                title: 'Evaluated Done!',
+                showConfirmButton: false,
+                timer: 1000
+              })
+            }else{
+              console.log(res.data.status)
+              this.unpause()
+                this.$swal({
+                icon: 'error',
+                title: 'Incorrect QR code!',
+                showConfirmButton: false,
+                timer: 1000
+              })
+            }
+            
         }
       })
       .catch(err=>{
-            this.verify = true  
             this.unpause()
+            this.$swal({
+            icon: 'error',
+            title: 'Connection Error!',
+            showConfirmButton: false,
+            timer: 1000
+          })
         })
 
 

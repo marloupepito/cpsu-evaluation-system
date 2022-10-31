@@ -541,6 +541,7 @@ import axios from 'axios'
 		  },
 		  methods:{
 		  	submitForm (e){
+		  		 this.disable=true
 		  		e.preventDefault();
 		  		const form = {
 		  				id2:this.id2,
@@ -563,84 +564,40 @@ import axios from 'axios'
 						console.log(res.data.x2)
 						//0
 						console.log(res.data.x3)
-		  					this.$swal({
-		  					 allowOutsideClick: false,
-							  title: 'Do you want to conduct another evaluation?',
-							  text: "If YES, you can proceed to evaluation; If NO, you can logout.",
-							  icon: 'warning',
-							  showCancelButton: true,
-							  confirmButtonColor: '#3085d6',
-							  cancelButtonColor: '#d33',
-							  cancelButtonText: 'No!',
-							  confirmButtonText: 'Yes!'
-							}).then((result) => {
 
 
-								axios.post('/get_all_faculty')
+						this.$swal({
+						  icon: 'success',
+						  title: 'Rating Submitted!',
+						  showConfirmButton: false,
+						  timer: 1500
+						})
+
+		  					axios.post('/get_all_faculty')
 							     .then(res=>{
 							     	if(res.data.status.length ===0){
-							     		window.location ='/'
+							     				window.location ='/'
+							     				axios.post('/logout_evaluator')
+											    .then(res=>{
+											     
+											     })
 							     		}else{
 							     			this.id2 = res.data.status[0].id
 							     			this.evaluateeName = res.data.faculty.name
 							     			this.facultyValue = res.data.status[0].id_number
+							     			 this.disable=false
+							     			 this.comment =null
+							 			 	  document.getElementById("myForm").reset();
+							 			 	  
 							     		}
 							     })
 
 
-
-							//  if (result.isConfirmed) {
-							//    axios.post('/get_all_faculty')
-							  //   .then(res=>{
-							//     	this.faculty = res.data.status.map(a =>a.name)
-							//     })
-							//      this.$swal.close()
-							//      this.disable=true
-							 //     document.getElementById("myForm").reset();
-							//  }else{
-							//  	axios.post('/logout_evaluator')
-							//     .then(res=>{
-							//       	if(res.data.status === 'success'){
-							 //      		window.location = '/'
-							//       	}else{
-							//			console.log('error')
-							 //      	}
-							 //     })
-							 // }
-
-
-							})
 		  			})
 		  		.catch(err=>{
-
+		  				 this.disable=false
 		  			})
 		  	},
-		  	selectEvaluatee(e){
-		  		this.facultyValue =e
-		  		axios.post('/verify_evaluate',{
-		  			evaluator:this.evaluator_id,
-		  			evaluatee:e
-		  			})
-		  		.then(res=>{
-		  				if(res.data.status === 'success'){
-		  					
-		  					this.disable=false
-
-		  				}else{
-		  					this.disable=true
-		  					const text = `You have completed your evaluation with ${e}`;
-		  					const group = 'top-center';
-		  					const type = 'error';
-		  					this.$notify({
-					          group,
-					          title: `error`,
-					          text,
-					          type,
-					        })
-		  				}
-		  			})
-
-		  	}
 		  },
 		mounted(){
 			axios.post('/evaluator_session')
@@ -660,14 +617,17 @@ import axios from 'axios'
 		     })
 
 		     axios.post('/get_all_faculty')
-		     .then(res=>{
-		     	if(res.data.status.length ===0){
-		     		window.location ='/'
-		     		}else{
-		     			this.id2 = res.data.status[0].id
-		     			this.evaluateeName = res.data.faculty.name
-		     			this.facultyValue = res.data.status[0].id_number
-		     		}
+		     .then(result=>{
+			     	axios.post('/get_all_faculty')
+			    	 .then(res=>{
+			     	if(res.data.status.length ===0){
+			     		window.location ='/'
+			     		}else{
+			     			this.id2 = res.data.status[0].id
+			     			this.evaluateeName = res.data.faculty.name
+			     			this.facultyValue = res.data.status[0].id_number
+			     		}
+			     	})
 		     })
 		}
 	}
