@@ -39,7 +39,7 @@
 								<div class="text-gray-500 small mb-15px text-truncate">
 									This is a tutorial how to evaluate properly.
 								</div>
-								<a href="/how-to-evaluate" class="btn btn-xs btn-green fs-10px ps-2 pe-2">
+								<a @click="gotohow" class="btn btn-xs btn-green fs-10px ps-2 pe-2">
 									Click Me!
 								</a>
 							</div>
@@ -104,7 +104,7 @@
 								<div class="text-gray-500 small mb-15px text-truncate">
 										For administrative only!
 								</div>
-								<a href="/login" class="btn btn-xs btn-green fs-10px ps-2 pe-2">Click Me!</a>
+								<a @click="gotologin" class="btn btn-xs btn-green fs-10px ps-2 pe-2">Click Me!</a>
 							</div>
 							<!-- END col-8 -->
 						</div>
@@ -120,8 +120,15 @@ import axios from 'axios';
 	const countDownDate = new Date("2022-08-22 6:17:00 pm").getTime();
 	const countDownDate2 = new Date("2022-08-24 6:18:00 pm").getTime();
  	const path = window.location.pathname
-
+import AppOptions from '../assets/config/AppOptions.vue'
 export default {
+		created() {
+		AppOptions.appEmpty = true;
+	},
+	beforeRouteLeave (to, from, next) {
+		AppOptions.appEmpty = true;
+		next();
+	},
 	data() {
 		return { 
 			path:path,
@@ -157,6 +164,13 @@ export default {
 	methods:{
 		startEvaluation(){
 			window.location='/start-evaluation?'+this.campus+'#'+this.campusid;
+		},
+		gotohow(){
+			this.$router.push({path:'/how-to-evaluate'})
+		},
+		gotologin(){
+			
+			this.$router.push({path:'/login'})
 		}
 	},
     watch: {

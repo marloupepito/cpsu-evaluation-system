@@ -1,28 +1,6 @@
 <template>
 	<div>
-		<div v-if="pathname === '/'">
-			 <ChooseCampus />
-		</div>
-		<div v-else-if="pathname === '/home'">
-			<Home />
-		</div>
-		<div v-else-if="pathname === '/start-evaluation'">
-			<EvaluationStart />
-		</div>
-		<div v-else-if="pathname === '/scan_qr'">
-			<ScanQr />
-		</div>
-		<div v-else-if="pathname === '/evaluation-form'">
-			<EvaluationForm />
-		</div>
-		<div v-else-if="pathname === '/how-to-evaluate'">
-			<HowToEvaluate />
-		</div>
-		<div v-else-if="pathname === '/login'">
-			<Login />
-		</div>
-		
-		<div v-else>
+		<div>
 			<div class="app" v-if="!appOptions.appEmpty" v-bind:class="{
 				'app-header-fixed': appOptions.appHeaderFixed && !appOptions.appHeaderNone,
 				'app-sidebar-fixed': appOptions.appSidebarFixed,

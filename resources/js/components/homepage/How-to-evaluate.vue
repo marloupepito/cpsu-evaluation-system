@@ -342,14 +342,31 @@
 			<!-- END timeline-item pb-0 --><br /><br />
 				<div class="fixed-bottom">
 				
-				<a href="/" style="z-index:-1 !important" class="what btn btn-primary btn-md  d-block col-md-12 col-xs-12 col-sm-12 offset-md-3">Back to Homepage</a>
+				<a @click="backtocampuses" style="z-index:-1 !important" class="what btn btn-primary btn-md  d-block col-md-12 col-xs-12 col-sm-12 offset-md-3">Back to Homepage</a>
 				</div>
 		</div>
 
     </div>
-</template
+</template>
 
+<script>
+import AppOptions from '../assets/config/AppOptions.vue'
+export default{
+		created() {
+		AppOptions.appEmpty = true;
+	},
+	beforeRouteLeave (to, from, next) {
+		AppOptions.appEmpty = true;
+		next();
+	},
+	methods:{
+		backtocampuses(){
+			this.$router.push({path:'/campuses'})
+		}
+	}
+}
 
+</script>
 <style>
 .what {
    width: 100% !important;

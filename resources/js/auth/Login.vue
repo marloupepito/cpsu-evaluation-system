@@ -45,7 +45,7 @@
 
 
 						<div class="mb-20px">
-							<a href="/" class="btn btn-primary d-block w-100 h-45px btn-lg">Homepage</a>
+							<a @click="gotohome" class="btn btn-primary d-block w-100 h-45px btn-lg">Homepage</a>
 						</div>
 					
 					</form>
@@ -63,11 +63,18 @@
 
 <script>
 import axios from 'axios'
-
+import AppOptions from '../components/assets/config/AppOptions.vue'
 export default {
 	mounted(){
 			
 		},
+		created() {
+		AppOptions.appEmpty = true;
+	},
+	beforeRouteLeave (to, from, next) {
+		AppOptions.appEmpty = true;
+		next();
+	},
 	data() {
 		return {
 			incorrect:null,
@@ -85,6 +92,9 @@ export default {
 		}
 	},
 	methods: {
+		gotohome(){
+			this.$router.push({path:'/'})
+			},
 		 validate (e) {
 		 	e.preventDefault()
 		 	this.incorrect =''

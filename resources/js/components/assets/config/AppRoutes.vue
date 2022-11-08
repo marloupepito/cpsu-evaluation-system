@@ -49,6 +49,12 @@ import Irregular2 from '../../admin/IrregularStudent2.vue'
 import StudentLoaded from '../../admin/StudentLoaded.vue'
 
 
+
+import ChooseCampus from '../../homepage/ChooseCampus.vue'
+import Homepage from '../../homepage/Homepage.vue'
+import Home from '../../homepage/Home.vue'
+import How from '../../homepage/How-to-evaluate.vue'
+
 import axios from 'axios'
  let routes;
  const academic = localStorage.getItem("academic_rank") === null?'null':localStorage.getItem("academic_rank");
@@ -57,12 +63,21 @@ switch (academic) {
   case 'null':
     routes = [
     { path: '*', component: ExtraError},
-    { path: '/'},
+    { path: '/', component:Homepage},
+    { path: '/login', component:Login},
+    { path: '/home', component:Home},
+    { path: '/how-to-evaluate', component:How},
+    { path: '/campuses', component:ChooseCampus},
     ];
     break;
   case 'Main Administrator Campus':
     routes = [
             { path: '*', component: ExtraError},
+            { path: '/', component:Homepage},
+            { path: '/login', component:Login},
+            { path: '/home', component:Home},
+            { path: '/how-to-evaluate', component:How},
+             { path: '/campuses', component:ChooseCampus},
               { path: '/adminstrator/main', 
                 component: Administrator,
                  beforeEnter: (to, from, next) => {
@@ -157,6 +172,11 @@ switch (academic) {
     default:
     routes =  [
             { path: '*', component: ExtraError},
+            { path: '/', component:Homepage},
+            { path: '/login', component:Login},
+            { path: '/home', component:Home},
+            { path: '/how-to-evaluate', component:How},
+             { path: '/campuses', component:ChooseCampus},
               { path: '/adminstrator', 
                 component: Administrator,
                  beforeEnter: (to, from, next) => {
