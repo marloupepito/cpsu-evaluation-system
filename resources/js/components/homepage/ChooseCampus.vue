@@ -63,12 +63,12 @@ export default {
 
 	},
 	methods:{
-		
+
 		gotocampuses(){
 			this.$router.push({path:'/Campuses'})
 			},
 		gotohome(campus,id){
-			window.location= '/home?'+campus.replace(/ /g,'_')+'#'+id;
+			this.$router.push({path:'/home?'+campus.replace(/ /g,'_')+'#'+id})
 		}
 	},
 }

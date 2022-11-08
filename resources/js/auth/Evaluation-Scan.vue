@@ -9,8 +9,15 @@
 
 <script>
 	import axios from 'axios'
+  import AppOptions from '../components/assets/config/AppOptions.vue'
 export default {
-
+  created() {
+    AppOptions.appEmpty = true;
+  },
+  beforeRouteLeave (to, from, next) {
+    AppOptions.appEmpty = true;
+    next();
+  },
   data () {
     return {
       camera: 'auto',

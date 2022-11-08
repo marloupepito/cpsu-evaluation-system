@@ -1,6 +1,5 @@
 <template>
-	<div id="page-container" class="fade">
-	<div id="home" class="content has-bg home">
+	<div id="home" class="content has-bg home" style="height:100vh">
 			<!-- begin content-bg -->
 			<div class="content-bg" style="background-image: url(images/background.jpeg);" 
 				data-paroller="true" 
@@ -14,12 +13,11 @@
 				<h3>Multipurpose One Page Theme</h3>
 			
 				<a href="#" class="btn btn-theme btn-primary w-100 m-0 mb-3 text-white">About</a> 
-				<a href="#" class="btn btn-theme btn-primary w-100 m-0 mb-3 text-white" @click="gotocampuses">Campuses</a>
+				<a href="#" class="btn btn-theme btn-primary w-100 m-0 mb-3 text-white" @click="gotocampuses">Campuses</a> 
 				<a href="#" class="btn btn-theme btn-primary w-100 m-0 mb-3 text-white"  @click="gotohow">How To Evaluate</a>
 				<br />
 				or <a href="#">subscribe</a> newsletter
 			</div>
-		</div>
 		</div>
 </template>
 

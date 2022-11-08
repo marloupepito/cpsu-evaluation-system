@@ -163,7 +163,7 @@ export default {
 	},
 	methods:{
 		startEvaluation(){
-			window.location='/start-evaluation?'+this.campus+'#'+this.campusid;
+			this.$router.push({path:'/start-evaluation?'+this.campus+'#'+this.campusid})
 		},
 		gotohow(){
 			this.$router.push({path:'/how-to-evaluate'})

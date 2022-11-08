@@ -106,8 +106,15 @@
 </template>
 <script>
 import axios from 'axios';
-
+import AppOptions from '../assets/config/AppOptions.vue'
 export default {
+		created() {
+		AppOptions.appEmpty = true;
+	},
+	beforeRouteLeave (to, from, next) {
+		AppOptions.appEmpty = true;
+		next();
+	},
 	data() {
 		return {
 			campus:'',
@@ -122,7 +129,7 @@ export default {
 	},
 	methods:{
 		gotoQr(categories){
-				window.location='/scan_qr?'+categories+','+this.campus.replace(/ /g,'_')+'#'+this.campusid
+				this.$router.push({path:'/scan_qr?'+categories+','+this.campus.replace(/ /g,'_')+'#'+this.campusid})
 		}
 	},
     watch: {
