@@ -6,7 +6,8 @@
         <title>CPSU - Evaluation System</title>
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
         <!-- Fonts -->
-      
+      <link href="assets/css/one-page-parallax/vendor.min.css" rel="stylesheet" />
+    <link href="assets/css/one-page-parallax/app.min.css" rel="stylesheet" />
         <!-- Styles -->
         <script src="{{ asset('js/app.js') }}" defer></script>
         <style>
@@ -41,5 +42,8 @@
         // window.onunload = function () { null };
         
     </script>
+
+        <script src="assets/js/one-page-parallax/vendor.min.js"></script>
+    <script src="assets/js/one-page-parallax/app.min.js"></script>
     
 </html>

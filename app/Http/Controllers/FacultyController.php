@@ -17,7 +17,7 @@ class FacultyController extends Controller
             'campusid'=>['required'],
             'campus'=>['required'],
         ]);
-        $users = Faculty::where([['status', '=' ,$request->status],['campusid', '=' ,$request->campusid],['campus', '=' ,$request->campus]])
+        $users = Faculty::where([['campusid', '=' ,$request->campusid],['campus', '=' ,$request->campus]])
         ->get();
         return response()->json([
             'status' => $users
