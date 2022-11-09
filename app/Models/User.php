@@ -24,6 +24,7 @@ class User extends Authenticatable
             'password',
             'academic_rank',
             'year',
+            'self',
     ];
 
     /**

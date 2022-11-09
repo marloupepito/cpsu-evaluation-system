@@ -80,27 +80,55 @@ class ResultsController extends Controller
         }
         else if($request->session()->get('evaluator_type') === 'self'){
 
-            Faculty::where('id', $request->evaluator)
-            ->update(['status' => 'active','year' => 'active']);
-            $aa = Faculty::where('id', '=' ,$request->evaluator)
-            ->first();
-             $zz = Schedule::where('id', '=' ,1)->first();
-                $user = new Results;
-                $user->evaluatee_id = $request->evaluatee;
-                $user->evaluator_id = $request->evaluator;
-                $user->commitment = $request->commitment;
-                $user->kos = $request->kos;
-                $user->name = $request->name;
-                $user->campus = $request->campus;
-                $user->campusid = $request->campusid;
-                $user->til = $request->til;
-                $user->mol = $request->mol;
-                $user->total = $total;
-                $user->comment = $request->comment;
-                $user->semester = $zz->semester;
-                $user->department = $aa->department;
-                $user->academic_rank = $aa->academic_rank;
-                $user->save();
+            if($request->session()->get('keyadmin') === 'admin'){
+                User::where('id', $request->evaluator)
+                ->update(['self' => 'active','year' => 'active']);
+
+                $aa = User::where('id', '=' ,$request->evaluator)
+                ->first();
+
+                 $zz = Schedule::where('id', '=' ,1)->first();
+                    $user = new Results;
+                    $user->evaluatee_id = $request->evaluatee;
+                    $user->evaluator_id = $request->evaluator;
+                    $user->commitment = $request->commitment;
+                    $user->kos = $request->kos;
+                    $user->name = $request->name;
+                    $user->campus = $request->campus;
+                    $user->campusid = $request->campusid;
+                    $user->til = $request->til;
+                    $user->mol = $request->mol;
+                    $user->total = $total;
+                    $user->comment = $request->comment;
+                    $user->semester = $zz->semester;
+                    $user->department = $aa->department;
+                    $user->academic_rank = $aa->academic_rank;
+                    $user->save();
+            }else{
+                 Faculty::where('id', $request->evaluator)
+                ->update(['status' => 'active','year' => 'active']);
+                $aa = Faculty::where('id', '=' ,$request->evaluator)
+                ->first();
+                 $zz = Schedule::where('id', '=' ,1)->first();
+                    $user = new Results;
+                    $user->evaluatee_id = $request->evaluatee;
+                    $user->evaluator_id = $request->evaluator;
+                    $user->commitment = $request->commitment;
+                    $user->kos = $request->kos;
+                    $user->name = $request->name;
+                    $user->campus = $request->campus;
+                    $user->campusid = $request->campusid;
+                    $user->til = $request->til;
+                    $user->mol = $request->mol;
+                    $user->total = $total;
+                    $user->comment = $request->comment;
+                    $user->semester = $zz->semester;
+                    $user->department = $aa->department;
+                    $user->academic_rank = $aa->academic_rank;
+                    $user->save();
+            }
+           
+
         }
 
         else if($request->session()->get('evaluator_type') === 'supervisor'){

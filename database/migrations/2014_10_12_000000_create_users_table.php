@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('campus')->unique()->nullable();
             $table->string('academic_rank')->nullable();
             $table->string('year')->nullable();
+            $table->string('self')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

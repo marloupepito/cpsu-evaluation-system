@@ -73,7 +73,8 @@ export default {
                 timer: 1000
               })
               setTimeout(() => {
-                   window.location='/evaluation-form?'+this.type+','+this.campus.replace(/ /g,'_')+'#'+this.campusid
+                this.$router.push({path:'/evaluation-form?'+this.type+','+this.campus.replace(/ /g,'_')+'#'+this.campusid})
+                  // window.location='/evaluation-form?'+this.type+','+this.campus.replace(/ /g,'_')+'#'+this.campusid
                    this.unpause()
               },1500);
         }else{

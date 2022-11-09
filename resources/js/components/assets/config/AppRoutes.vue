@@ -56,6 +56,7 @@ import Home from '../../homepage/Home.vue'
 import How from '../../homepage/How-to-evaluate.vue'
 import Evaluator from '../../homepage/Evaluator.vue'
 import Scan from '../../../auth/Evaluation-Scan.vue'
+import EvaluationForm from '../../homepage/Evaluation-Form.vue'
 import axios from 'axios'
  let routes;
  const academic = localStorage.getItem("academic_rank") === null?'null':localStorage.getItem("academic_rank");
@@ -71,6 +72,7 @@ switch (academic) {
     { path: '/campuses', component:ChooseCampus},
     { path: '/start-evaluation', component:Evaluator},
     { path: '/scan_qr', component:Scan},
+    { path: '/evaluation-form', component:EvaluationForm},
     ];
     break;
   case 'Main Administrator Campus':
@@ -83,6 +85,7 @@ switch (academic) {
              { path: '/campuses', component:ChooseCampus},
              { path: '/start-evaluation', component:Evaluator},
              { path: '/scan_qr', component:Scan},
+             { path: '/evaluation-form', component:EvaluationForm},
               { path: '/adminstrator/main', 
                 component: Administrator,
                  beforeEnter: (to, from, next) => {
@@ -184,6 +187,7 @@ switch (academic) {
              { path: '/campuses', component:ChooseCampus},
              { path: '/start-evaluation', component:Evaluator},
              { path: '/scan_qr', component:Scan},
+             { path: '/evaluation-form', component:EvaluationForm},
               { path: '/adminstrator', 
                 component: Administrator,
                  beforeEnter: (to, from, next) => {

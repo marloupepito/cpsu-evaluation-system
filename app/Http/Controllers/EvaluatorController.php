@@ -79,6 +79,8 @@ class EvaluatorController extends Controller
                     $users = Faculty::where([['id_number','=',$request->username],['campusid', '=' ,$request->campusid],['campus', '=' ,$request->campus],['id', '=' ,$request->evaluatorid],['password','=',$request->password]])
                     ->get();
 
+                   
+
                   
                     if(count($users) !== 0){
 
@@ -110,8 +112,23 @@ class EvaluatorController extends Controller
                     $users = Faculty::where([['id_number','=',$request->username],['campusid', '=' ,$request->campusid],['campus', '=' ,$request->campus],['id', '=' ,$request->evaluatorid],['password','=',$request->password]])
                     ->get();
 
-                  
-                    if(count($users) !== 0){
+                   $user = User::where([['self','=',null],['id','=',$request->campusid]])->get();
+                   if(count($user) !== 0){
+
+                         if(count($aaa) === 0 && $user[0]->self === 'active'){
+                            return response()->json([
+                                'status' => 'done'
+                            ]);
+
+                        }else{
+                                $request->session()->put('evaluator_type', 'self');
+                                $request->session()->put('username', $request->username);
+                                $request->session()->put('password', $request->password);
+                                return response()->json([
+                                    'status' => 'success'
+                                ]);
+                        }
+                   }else if(count($users) !== 0){
 
                         if(count($aaa) === 0 && $users[0]->year === 'active'){
                             return response()->json([
@@ -127,9 +144,17 @@ class EvaluatorController extends Controller
                                 ]);
                         }
                     }else{
-                         return response()->json([
-                            'status' => 'error'
-                        ]);
+
+                        if(count($user) === 0){
+                            return response()->json([
+                                'status' => 'done'
+                            ]);
+                        }else{
+                              return response()->json([
+                                'status' => 'error'
+                            ]);
+                        }
+                       
                     }
 
          }else if($request->type === 'supervisor'){
@@ -213,6 +238,8 @@ class EvaluatorController extends Controller
 
                  $users = Faculty::where([['id_number', '=' ,$username],['password','=',$password]])
                     ->get();
+
+
                     if(count($users) !== 0){
                         return response()->json([
                             'status' => 'success',
@@ -220,9 +247,23 @@ class EvaluatorController extends Controller
                             'info' => $users
                         ]);
                     }else{
-                         return response()->json([
-                            'status' => $users
-                        ]);
+
+                        $user = User::where([['self', '=', null],['password','=',$password]])
+                         ->get();
+
+                         if(count($user) !== 0){
+
+                            return response()->json([
+                                'status' => 'success',
+                                'id' => $user[0]->id,
+                                'info' => $user
+                            ]);
+                         }else{
+                              return response()->json([
+                                    'status' => $users
+                                ]);
+                         }
+                       
                      }
         }
         else if($request->session()->get('evaluator_type') === 'supervisor'){
@@ -250,6 +291,8 @@ class EvaluatorController extends Controller
 
         $request->session()->forget('username');
         $request->session()->forget('password');
+        $request->session()->forget('keyadmin');
+
 
         if($request->session()->get('username') === null && $request->session()->get('password') === null){
           return response()->json([

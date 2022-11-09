@@ -492,7 +492,7 @@
 				<div class="fixed-bottom">
 
 				
-				<button type="submit" @submit="submitForm" :disabled="disable" style="z-index:-1 !important" class="what btn btn-primary btn-sm  d-block col-md-12 col-xs-12 col-sm-12 offset-md-3">SUBMIT</button>
+				<button type="submit" @submit="submitForm" :disabled="disable" style="z-index:-1 !important" class="what btn btn-green btn-sm  d-block col-md-12 col-xs-12 col-sm-12 offset-md-3">SUBMIT</button>
 				</div>
 
 </form>
@@ -503,8 +503,16 @@
 
 
 <script>
+import AppOptions from '../assets/config/AppOptions.vue'
 import axios from 'axios'
 	export default {
+			created() {
+		AppOptions.appEmpty = true;
+	},
+	beforeRouteLeave (to, from, next) {
+		AppOptions.appEmpty = true;
+		next();
+	},
 		data () {
 		    return {
 		    	comment:null,
@@ -558,12 +566,7 @@ import axios from 'axios'
 		  		}
 		  		axios.post('/submit_form',form)
 		  		.then(res=>{
-		  			//0
-		  			//	console.log(res.data.x1)
-		  				//.38
-				//		console.log(res.data.x2)
-						//0
-					//	console.log(res.data.x3)
+		  		
 
 
 						this.$swal({
@@ -576,7 +579,8 @@ import axios from 'axios'
 		  					axios.post('/get_all_faculty')
 							     .then(res=>{
 							     	if(res.data.status.length ===0){
-							     				window.location ='/'
+							     				// window.location ='/'
+							     				 this.$router.push({path:'/campuses'})
 							     				axios.post('/logout_evaluator')
 											    .then(res=>{
 											     
@@ -606,10 +610,10 @@ import axios from 'axios'
 		        if(res.data.status === 'success'){
 		            this.info = res.data.info[0]
 		            this.evaluator_id = res.data.id
-
+		            
 		        }else{
-		           window.location='/'
-		           
+		       //  window.location='/'
+		           this.$router.push({path:'/campuses'})
 		        }
 		      })
 
@@ -622,10 +626,9 @@ import axios from 'axios'
 		     .then(result=>{
 			     	axios.post('/get_all_faculty')
 			    	 .then(res=>{
-			    	 	console.log(res.data.status)
 			     	if(res.data.status.length ===0){
-			     	 window.location ='/'
-
+			     	//window.location ='/'
+			     		 this.$router.push({path:'/campuses'})
 			     		}else{
 			     			this.id2 = res.data.status[0].id
 			     			this.evaluateeName = res.data.faculty.name

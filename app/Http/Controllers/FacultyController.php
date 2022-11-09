@@ -131,7 +131,35 @@ class FacultyController extends Controller
                 $users = Faculty::where([['year', '=' ,null],['id_number', '=' ,$username],['password','=',$password]])
                ->get();
 
-               if(count($users) !== 0){
+                $user = User::where([['self','=',null],['password','=',$password]])->get();
+
+                if(count($user) !== 0){
+
+                    $subjectLoadingStudent = StudentSubjectLoading::where([['id_number', '=' ,$user[0]->id],['program', '=' ,null],['evaluator_id', '=' ,$user[0]->id]])
+                      ->get();
+                      if(count($subjectLoadingStudent) === 0){
+                        $request->session()->put('keyadmin', 'admin');
+                         StudentSubjectLoading::create([
+                                'evaluator_id' => $user[0]->id,
+                                'id_number' => $user[0]->id,
+                                'campusid' => $user[0]->id,
+                                'campus' => 'admin',
+                                'department' => $user[0]->academic_rank,
+                            ]);
+                         return response()->json([
+                                'status' => $user,
+                                'faculty' =>'done',
+                                'console' => 'done'
+                            ]);
+                      }else{
+                          return response()->json([
+                                'status' => $subjectLoadingStudent,
+                                'faculty' => $user[0],
+                                'console' => 'done'
+                            ]);
+                      }
+                   
+                }else if(count($users) !== 0){
 
                    $subjectLoadingStudent = StudentSubjectLoading::where([['id_number', '=' ,$users[0]->id],['program', '=' ,null],['evaluator_id', '=' ,$users[0]->id]])
                       ->get();
@@ -168,6 +196,7 @@ class FacultyController extends Controller
                }else{
                      return response()->json([
                         'status' =>$users,
+                        'console' =>$user
                     ]);
                }
 
