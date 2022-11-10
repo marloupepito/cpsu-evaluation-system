@@ -88,7 +88,6 @@ export default {
                 timer: 1000
               })
             }else{
-              console.log(res.data.status)
               this.unpause()
                 this.$swal({
                 icon: 'error',

@@ -554,7 +554,7 @@ import axios from 'axios'
 		  		const form = {
 		  				id2:this.id2,
 		  				campus:this.info.campus,
-		  				campusid:this.info.campusid,
+		  				campusid:this.info.campusid === undefined?this.info.id:this.info.campusid,
 		  				name:this.evaluateeName,
 		  			  comment:this.comment,
 		  			  evaluator:this.evaluator_id,
@@ -610,7 +610,6 @@ import axios from 'axios'
 		        if(res.data.status === 'success'){
 		            this.info = res.data.info[0]
 		            this.evaluator_id = res.data.id
-		            
 		        }else{
 		       //  window.location='/'
 		           this.$router.push({path:'/campuses'})

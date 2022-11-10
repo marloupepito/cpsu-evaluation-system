@@ -58,14 +58,7 @@ export default {
           label: 'Academic Rank',
           field: 'academic_rank',
         },
-        {
-          label: 'Eveluation Start',
-          field: 'score',
-        },
-        {
-          label: 'Eveluation End',
-          field: 'score',
-        },
+     
 
         {
           label: 'Created On',

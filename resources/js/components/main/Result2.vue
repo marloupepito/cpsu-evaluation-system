@@ -58,11 +58,12 @@ export default {
   	  axios.post('/get_all_results',{
   	  status:'all',
   	  campusid:window.location.search.substring(1),
-      campus:window.location.pathname.split('/')[4].replace(/ /g,'_')
+      campus:window.location.pathname.split('/')[4].replace(/_/g,' ')
     })
     .then(res=>{
-    	this.campus = window.location.pathname.split('/')[4].replace(/ /g,'_')
+    	this.campus = window.location.pathname.split('/')[4].replace(/_/g,' ')
       this.rows = res.data.status
+      console.log(window.location.search.substring(1))
     })
   },
   data(){
@@ -101,7 +102,7 @@ export default {
         },
         {
           label: 'School Year',
-          field: 'year',
+          field: 'school_year',
           width: '10%'
         },
         {

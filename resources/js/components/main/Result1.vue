@@ -26,7 +26,7 @@
 
   <template slot="table-row" slot-scope="props">
     <span v-if="props.column.field == 'campus'">
-      <a href="#" @click="goTo(props.row.id,props.row.campus)" class="text-capitalize"><u>{{props.row.campus}}</u></a> 
+      <a href="#" @click="goTo(props.row.campusid,props.row.campus)" class="text-capitalize"><u>{{props.row.campus}}</u></a> 
     </span>
   </template>
 
@@ -60,14 +60,7 @@ export default {
           label: 'Academic Rank',
           field: 'academic_rank',
         },
-        {
-          label: 'Eveluation Start',
-          field: 'score',
-        },
-        {
-          label: 'Eveluation End',
-          field: 'score',
-        },
+    
 
         {
           label: 'Created On',

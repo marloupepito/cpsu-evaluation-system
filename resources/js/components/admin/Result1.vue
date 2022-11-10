@@ -70,6 +70,7 @@ export default {
     })
     .then(res=>{
       this.rows = res.data.status
+      console.log(res.data.status)
     })
   },
   methods:{
@@ -98,7 +99,7 @@ export default {
             columns: [
         {
           label: 'Name of Faculty',
-          field: 'evaluatee_id',
+          field: 'name',
           width: '20%'
         },
         {
@@ -128,7 +129,7 @@ export default {
         },
         {
           label: 'School Year',
-          field: 'year',
+          field: 'school_year',
           width: '10%'
         },
         {

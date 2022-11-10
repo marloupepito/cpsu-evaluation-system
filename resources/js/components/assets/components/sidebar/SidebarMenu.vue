@@ -8,7 +8,7 @@ switch (academic) {
     break;
   case 'Main Administrator Campus':
     sidebarMenu = [
-            { path: '/adminstrator/main/dashboard', icon: 'fa fa-sitemap',color:'green', title: 'Main Dashboard'},
+          //  { path: '/adminstrator/main/dashboard', icon: 'fa fa-sitemap',color:'green', title: 'Main Dashboard'},
              { path: '/adminstrator/main/accounts', icon: 'fa fa-school',color:'green', title: 'Account Campuses'},
             { 
                path: '/adminstrator/main/students/regular_students', icon: 'fa fa-user-graduate',color:'green', title: 'Students',

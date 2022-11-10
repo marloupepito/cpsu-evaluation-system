@@ -155,11 +155,8 @@ export default {
         {
           label: 'Eveluation End On',
           field: 'start',
-        }, {
-          label: 'Status',
-          field: 'status',
         },
-
+     
        
       ],
       rows: [],

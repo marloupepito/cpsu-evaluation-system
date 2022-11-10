@@ -35,7 +35,7 @@ class ResultsController extends Controller
             ->update(['status' => 'active']);
              $aa = Evaluator::where('id_number', '=' ,$request->evaluator)
             ->first();
-                 $zz = Schedule::where('id', '=' ,1)->first();
+                 $zz = Schedule::where('campusid', '=' ,$request->campusid)->first();
                 $user = new Results;
                 $user->evaluatee_id = $request->evaluatee;
                 $user->evaluator_id = $request->evaluator;
@@ -43,7 +43,8 @@ class ResultsController extends Controller
                 $user->kos = $request->kos;
                 $user->name = $request->name;
                 $user->campus = $request->campus;
-                $user->campusid = $request->campusid;
+                $user->school_year = substr($zz->start,0,4);
+                $user->campusid = $zz->campusid;
                 $user->til = $request->til;
                 $user->mol = $request->mol;
                 $user->total = $total;
@@ -60,7 +61,7 @@ class ResultsController extends Controller
             ->update(['status' => 'active']);
             $aa = Faculty::where('id', '=' ,$request->evaluator)
             ->first();
-             $zz = Schedule::where('id', '=' ,1)->first();
+             $zz = Schedule::where('campusid', '=' ,$request->campusid)->first();
                 $user = new Results;
                 $user->evaluatee_id = $request->evaluatee;
                 $user->evaluator_id = $request->evaluator;
@@ -68,7 +69,8 @@ class ResultsController extends Controller
                 $user->kos = $request->kos;
                 $user->name = $request->name;
                 $user->campus = $request->campus;
-                $user->campusid = $request->campusid;
+                $user->school_year = substr($zz->start,0,4);
+                $user->campusid = $zz->campusid;
                 $user->til = $request->til;
                 $user->mol = $request->mol;
                 $user->total = $total;
@@ -87,7 +89,7 @@ class ResultsController extends Controller
                 $aa = User::where('id', '=' ,$request->evaluator)
                 ->first();
 
-                 $zz = Schedule::where('id', '=' ,1)->first();
+                 $zz = Schedule::where('campusid', '=' ,$request->campusid)->first();
                     $user = new Results;
                     $user->evaluatee_id = $request->evaluatee;
                     $user->evaluator_id = $request->evaluator;
@@ -95,7 +97,8 @@ class ResultsController extends Controller
                     $user->kos = $request->kos;
                     $user->name = $request->name;
                     $user->campus = $request->campus;
-                    $user->campusid = $request->campusid;
+                    $user->school_year = substr($zz->start,0,4);
+                    $user->campusid = $zz->campusid;
                     $user->til = $request->til;
                     $user->mol = $request->mol;
                     $user->total = $total;
@@ -109,7 +112,7 @@ class ResultsController extends Controller
                 ->update(['status' => 'active','year' => 'active']);
                 $aa = Faculty::where('id', '=' ,$request->evaluator)
                 ->first();
-                 $zz = Schedule::where('id', '=' ,1)->first();
+                 $zz = Schedule::where('campusid', '=' ,$request->campusid)->first();
                     $user = new Results;
                     $user->evaluatee_id = $request->evaluatee;
                     $user->evaluator_id = $request->evaluator;
@@ -117,7 +120,8 @@ class ResultsController extends Controller
                     $user->kos = $request->kos;
                     $user->name = $request->name;
                     $user->campus = $request->campus;
-                    $user->campusid = $request->campusid;
+                    $user->school_year = substr($zz->start,0,4);
+                    $user->campusid = $zz->campusid;
                     $user->til = $request->til;
                     $user->mol = $request->mol;
                     $user->total = $total;
@@ -137,7 +141,7 @@ class ResultsController extends Controller
             ->update(['year' => 'active']);
             $aa = Faculty::where('id', '=' ,$request->evaluator)
             ->first();
-             $zz = Schedule::where('id', '=' ,1)->first();
+             $zz = Schedule::where('campusid', '=' ,$request->campusid)->first();
                 $user = new Results;
                 $user->evaluatee_id = $request->evaluatee;
                 $user->evaluator_id = $request->evaluator;
@@ -145,7 +149,8 @@ class ResultsController extends Controller
                 $user->kos = $request->kos;
                 $user->name = $request->name;
                 $user->campus = $request->campus;
-                $user->campusid = $request->campusid;
+                $user->school_year = substr($zz->start,0,4);
+                $user->campusid = $zz->campusid;
                 $user->til = $request->til;
                 $user->mol = $request->mol;
                 $user->total = $total;
@@ -244,7 +249,7 @@ class ResultsController extends Controller
         ]);
 
         $users = Results::where([['campus','=',$request->campus],['campusid','=',$request->campusid]])
-        ->select('evaluatee_id','a','b','c','d','e','year','semester')->distinct()->get();
+        ->get()->unique('name');;
         return response()->json([
                 'status' => $users
             ]);
