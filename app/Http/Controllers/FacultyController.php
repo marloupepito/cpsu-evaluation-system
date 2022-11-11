@@ -83,18 +83,23 @@ class FacultyController extends Controller
 
                 $loading = Faculty::where([['id','<>',$users->id],['campusid','=',$users->campusid],['department','=',$users->department]])->get();
 
-                $aaa = StudentSubjectLoading::where([['program', '=' ,null],['evaluator_id', '=' ,$users->id]])
-                    ->orWhere([['program', '<>' ,'active'],['evaluator_id', '=' ,$users->id]])
+                $aaa = StudentSubjectLoading::where([['campus', '=' ,null],['program', '=' ,null],['evaluator_id', '=' ,$users->id]])
+                    ->orWhere([['campus', '=' ,null],['program', '<>' ,'active'],['evaluator_id', '=' ,$users->id]])
+                    ->get();
+
+                $bbb = StudentSubjectLoading::where([['campusid', '=' ,$users->campusid],['campus', '<>' ,null],['program', '=' ,null],['evaluator_id', '=' ,$users->id]])
+                    ->orWhere([['campusid', '=' ,$users->campusid],['campus', '<>' ,null],['program', '<>' ,'active'],['evaluator_id', '=' ,$users->id]])
                     ->get();
                 
                 $subjectLoadingStudent = StudentSubjectLoading::where([['program', '=' ,null],['evaluator_id', '=' ,$users->id]])
                 ->orWhere([['program', '=' ,'active'],['evaluator_id', '=' ,$users->id]])
                 ->get();
 
+                $admin = User::where('id',$users->campusid)->first();
+
                 if(count($subjectLoadingStudent) === 0){
 
                      foreach ($loading as $load) {
-
                         StudentSubjectLoading::create([
                             'evaluator_id' => $users->id,
                             'id_number' => $load->id,
@@ -103,10 +108,24 @@ class FacultyController extends Controller
                         ]);
                     }
 
+                     StudentSubjectLoading::create([
+                            'evaluator_id' => $users->id,
+                            'id_number' =>$load->campusid,
+                            'campusid' => $load->campusid,
+                            'campus' => 'Campus Administrator',
+                        ]);
+
                    
                 }else{
 
-                    if(count($aaa) !== 0){
+                    if(count($bbb) !== 0){
+                            $faculty = User::where('id', '=',$users->campusid)->first();
+                             return response()->json([
+                                'status' => $bbb,
+                                'faculty' =>$faculty,
+                                'console' => $faculty
+                            ]);
+                    }else if(count($aaa) !== 0){
                              $faculty = Faculty::where('id', '=',$aaa[0]->id_number)->first();
                              return response()->json([
                                 'status' => $aaa,

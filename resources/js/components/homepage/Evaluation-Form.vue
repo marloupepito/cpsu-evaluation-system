@@ -625,6 +625,7 @@ import axios from 'axios'
 		     .then(result=>{
 			     	axios.post('/get_all_faculty')
 			    	 .then(res=>{
+			    	 	console.log(res.data.console)
 			     	if(res.data.status.length ===0){
 			     	//window.location ='/'
 			     		 this.$router.push({path:'/campuses'})

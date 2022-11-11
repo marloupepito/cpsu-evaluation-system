@@ -24,7 +24,7 @@ class ResultsController extends Controller
         ]);
         $total = ($request->commitment+$request->kos+$request->til+$request->mol) / 4;
         
-
+        
         StudentSubjectLoading::where('id', $request->id2)
       ->update(['program' => 'active']);
 

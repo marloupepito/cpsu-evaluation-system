@@ -80,7 +80,6 @@ class EvaluatorController extends Controller
                     ->get();
 
                    
-
                   
                     if(count($users) !== 0){
 
